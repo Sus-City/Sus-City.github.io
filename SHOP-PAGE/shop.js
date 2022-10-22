@@ -3,6 +3,11 @@ const usernameTag = document.querySelector(".Username");
 let username = localStorage.getItem("username");
 usernameTag.textContent = "Hello " + username + "!";
 
+//sound
+let buyingSound = new Audio("/SOUNDS/buyingitem.mp3");
+let bgmShop = new Audio("/SOUNDS/shopmusic.mp3");
+bgmShop.play();
+
 //Cost of items
 const costOfItems = [
   ["PineappleMan", 69],
@@ -44,6 +49,7 @@ function addToCart(btn) {
       if (greenpoints - costOfItems[i][1] >= 0) {
         //if the user has enough greenpoints to purchase the item
         greenpoints = greenpoints - costOfItems[i][1];
+        buyingSound.play();
         alert("Item purchased successfully.");
         GPointLabel.textContent = "Leaf Stickers:  " + String(greenpoints); //update greenpoint label
         switch (btn) {

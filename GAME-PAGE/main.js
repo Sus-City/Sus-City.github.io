@@ -1,3 +1,13 @@
+//Sounds
+//Sound from Zapsplat.com
+let build = new Audio("/SOUNDS/building.mp3");
+let onloadMusic = new Audio("/SOUNDS/onload.mp3");
+let bgm1 = new Audio("/SOUNDS/bgm.mp3");
+let bgm2 = new Audio("/SOUNDS/bgm 2.mp3");
+let bgm3 = new Audio("/SOUNDS/bgm 3.mp3");
+
+onloadMusic.play();
+
 //getting values from html
 const cityLayout = document.querySelector(".city-layout"); //the playfield
 const usernameTag = document.querySelector(".username");
@@ -376,7 +386,6 @@ function sendInput() {
 
       //display options
       for (let i = 1; i < 5; i++) {
-        let text = document.createElement("p");
         switch (i) {
           case 1:
             option = arrayOfQuestions[window.randomQn].option1;
@@ -445,6 +454,7 @@ function sendInput() {
         }
         favor = favor - 1;
         roadLevel += 1;
+        build.play();
         updateOverlay();
       } else if (roadLevel == 4) {
         sayText(noinnoText, "CAS");
@@ -482,6 +492,8 @@ function sendInput() {
         }
         favor -= 1;
         factoryLevel += 1;
+        build.play();
+
         updateOverlay();
       } else if (factoryLevel == 4) {
         sayText(noinnoText, "CAS");
@@ -523,6 +535,8 @@ function sendInput() {
         }
         favor -= 1;
         officesLevel += 1;
+        build.play();
+
         updateOverlay();
       } else if (officesLevel == 4) {
         sayText(noinnoText, "CAS");
@@ -567,6 +581,7 @@ function sendInput() {
         }
         favor -= 1;
         coastLevel += 1;
+        build.play();
         updateOverlay();
       } else if (coastLevel == 4) {
         sayText(noinnoText, "CAS"); //max level reached for coast
@@ -609,6 +624,7 @@ function sendInput() {
         }
         favor -= 1;
         landfillLevel += 1;
+        build.play();
         updateOverlay();
       } else if (landfillLevel == 4) {
         sayText(noinnoText, "CAS");
@@ -659,6 +675,7 @@ function sendInput() {
         }
         favor -= 1;
         gasstationLevel += 1;
+        build.play();
         updateOverlay();
       } else if (gasstationLevel == 4) {
         sayText(noinnoText, "CAS");
@@ -678,15 +695,17 @@ function sendInput() {
 
 //Chat History
 let chatHistory = "";
+let previousMessage = 0; //the number of times the arrow up button was pressed
 function saveChat() {
-  window.indexOfLast = eachCommand.length - 1;
   chatHistory += terminalInput += "||"; // || is the sign for separating chats
   localStorage.setItem("chat-history", chatHistory);
   console.log(localStorage.getItem("chat-history"));
 }
 function updateChat() {
   let chatHistoryUpdate = localStorage.getItem("chat-history"); //Getting updated value of chat history
-  window.eachCommand = chatHistoryUpdate.split("||"); //Creates an array of each command
+  if (chatHistoryUpdate != null) {
+    window.eachCommand = chatHistoryUpdate.split("||"); //Creates an array of each command
+  }
 }
 updateChat();
 
@@ -694,15 +713,15 @@ sendBtn.addEventListener("click", sendInput);
 document.addEventListener("keydown", function (e) {
   switch (e.key) {
     case "ArrowUp":
+      previousMessage += 1;
       updateChat();
-      window.indexOfLast > 0
-        ? (window.indexOfLast -= 1)
-        : (window.indexOfLast = 0); //toggles between the elements of the array
-      terminalTextInput.value = eachCommand[window.indexOfLast];
+      terminalTextInput.value =
+        eachCommand[window.eachCommand.length - 1 - previousMessage];
       break;
     case "Enter":
       sendInput();
       saveChat();
+      previousMessage = 0;
       break;
   }
 });
@@ -782,6 +801,7 @@ function checkForCorrectAns(terminalInput, randomQn) {
               break;
           }
           parkLevel += 1;
+          build.play();
         }
         levelProgress = 0; //RESETS THE LEVEL PROGRESS BAR
       } else {
@@ -829,6 +849,16 @@ shopBtn.addEventListener("click", () => {
 });
 
 //ON LOAD
+onloadMusic.addEventListener("ended", () => {
+  bgm1.play();
+});
+bgm1.addEventListener("ended", () => {
+  bgm2.play();
+});
+bgm2.addEventListener("ended", () => {
+  bgm3.play();
+});
+
 updateOverlay();
 sayText("CAS is online", "CAS");
 sayText("POL is online", "POL");

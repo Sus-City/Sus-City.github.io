@@ -36,7 +36,7 @@ body {
 
 .Container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   background-color: #f3e3ca;
   /* padding-bottom: 22.701475595913735vh; */
   height: 65.81296758104739vh;
@@ -117,11 +117,11 @@ body {
 }
 
 .dis {
-  padding: 20px;
-  padding-top: 0px;
+  padding: 30px;
+  padding-top: 2px;
   padding-bottom: 0;
   background-color: rgb(219, 206, 184);
-  height: 50vh;
+  height: 70vh;
 }
 
 .fa-solid {
@@ -152,4 +152,13 @@ body {
 img {
   /* width: 70%; */
   height: inherit;
+}
+
+.scrollCont {
+  display: flex;
+  flex-direction: row;
+}
+
+.desc {
+  font-size: medium;
 }

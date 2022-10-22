@@ -5,42 +5,51 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>World Pieces</title>
-  <link rel="part" sizes="image16x16=" Z/EASON-PIC.jpeg">
+  <!-- <link rel="part" sizes="image16x16=" Z/EASON-PIC.jpeg"> -->
   <!-- Style CSS -->
   <link rel="stylesheet" href="shop.css">
   <script src="https://kit.fontawesome.com/056eae0c7b.js" crossorigin="anonymous"></script>
 </head>
 
+<script>
+  let playSound = () => new Audio("/SOUNDS/menuclick.mp3").play();
+</script>
+
+
 <body>
   <header class="TopBorder">
-    <i class="fa-solid fa-angle-left"></i>
+    <button class="fa-solid fa-angle-left" onclick="playSound()"></button>
     <h1 class="Title">The World's Pieces</h1>
     <div class="GPoint"></div>
     <div class="Username">Hello,</div>
   </header>
   <div class="Container">
-    <div class="Productcont">
-      <div class="dis">
-        <div class="Name">Pineapple man</div>
-        <img src="/DEVELOPMENT-PROJ-SERVE/SHOP-DISPLAY-PINEAPPLE-MAN.png" alt="Pineapple Man"><img>
-      </div>
-      <div class="Info">
-        <div class="Dtail">
-          <div class="Price">Price: 69</div>
+    <div class="scrollCont">
+      <div class="Productcont">
+        <div class="dis">
+          <div class="Name">Pineapple man</div>
+          <div class="desc">COOL item</div>
+          <img src="/DEVELOPMENT-PROJ-SERVE/SHOP-DISPLAY-PINEAPPLE-MAN.png" alt="Pineapple Man"><img>
         </div>
-        <button class="Buybtn PineappleMan">Buy</button>
-      </div>
-    </div>
-    <div class="Productcont">
-      <div class="dis">
-        <div class="Name">Blimp</div>
-        <img src="/DEVELOPMENT-PROJ-SERVE/SHOP-DISPLAY-BLIMP.png" alt="blimp"><img>
-      </div>
-      <div class="Info">
-        <div class="Dtail">
-          <div class="Price">Price: 96</div>
+        <div class="Info">
+          <div class="Dtail">
+            <div class="Price">Price: 69</div>
+          </div>
+          <button class="Buybtn PineappleMan" onclick="playSound()">Buy</button>
         </div>
-        <button class="Buybtn Blimp">Buy</button>
+      </div>
+      <div class="Productcont">
+        <div class="dis">
+          <div class="Name">Blimp</div>
+          <div class="desc">COOL item</div>
+          <img src="/DEVELOPMENT-PROJ-SERVE/SHOP-DISPLAY-BLIMP.png" alt="blimp"><img>
+        </div>
+        <div class="Info">
+          <div class="Detail">
+            <div class="Price">Price: 96</div>
+          </div>
+          <button class="Buybtn Blimp" onclick="playSound()">Buy</button>
+        </div>
       </div>
     </div>
   </div>
