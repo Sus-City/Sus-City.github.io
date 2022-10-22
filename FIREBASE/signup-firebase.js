@@ -16,9 +16,9 @@ submitBtn.addEventListener("click", (e) => {
   signInAnonymously(auth) //creates account for authentication
     .then(() => {
       saveToFirebase();
-      // setTimeout(function () { window.location.href = "https://sus-city.github.io/GAME-PAGE/main.html" }, 500);
       setTimeout(function () {
-        window.location.href = "http://localhost:5500/GAME-PAGE/main.html";
+        // window.location.href = "http://localhost:5500/GAME-PAGE/main.html";
+        window.location.href = "https://sus-city.github.io/GAME-PAGE/main.html";
       }, 500);
     })
     .catch((error) => {

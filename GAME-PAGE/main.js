@@ -28,9 +28,6 @@ function imageOverlay(imageSource, imageElement) {
   imageElement.classList.add("overlay-image");
 }
 
-//ON LOAD
-updateOverlay();
-
 function updateOverlay() {
   //DISPLAY BLIMP OVERLAY IMAGES
   if (blimpBought == "true") {
@@ -361,6 +358,10 @@ function sendInput() {
         "Your final command is the [/develop] command! Everytime you level up, you receive enough SUS points to implement an environmental measure in an area. For example, simply enter [/develop /road] if you want to develop the road! The six areas you can develop are the road, factory, offices, watersource, landfill and gasstation.",
         "POL"
       );
+      sayText(
+        "Pro Tip: Pressing the up arrow allows you to view your command history.",
+        "POL"
+      );
       break;
     case "/question":
       window.isQuestionAnswered = false;
@@ -675,16 +676,34 @@ function sendInput() {
   updateValues();
 }
 
+//Chat History
+let chatHistory = "";
+function saveChat() {
+  window.indexOfLast = eachCommand.length - 1;
+  chatHistory += terminalInput += "||"; // || is the sign for separating chats
+  localStorage.setItem("chat-history", chatHistory);
+  console.log(localStorage.getItem("chat-history"));
+}
+function updateChat() {
+  let chatHistoryUpdate = localStorage.getItem("chat-history"); //Getting updated value of chat history
+  window.eachCommand = chatHistoryUpdate.split("||"); //Creates an array of each command
+}
+updateChat();
+
 sendBtn.addEventListener("click", sendInput);
-document.addEventListener("keypress", function (e) {
+document.addEventListener("keydown", function (e) {
   switch (e.key) {
+    case "ArrowUp":
+      updateChat();
+      window.indexOfLast > 0
+        ? (window.indexOfLast -= 1)
+        : (window.indexOfLast = 0); //toggles between the elements of the array
+      terminalTextInput.value = eachCommand[window.indexOfLast];
+      break;
     case "Enter":
       sendInput();
       saveChat();
-    //CODE FOR CHAT HISTORY
-    case "ArrowUp":
-      indexOfLast -= 1;
-      splitChat(indexOfLast);
+      break;
   }
 });
 
@@ -801,34 +820,15 @@ function updateGreenpoints() {
   updateValues();
 }
 
-//Shows the text on login
-if (levelProgress == 0 && level == 1) {
-  sayText("CAS is online", "CAS");
-  sayText("POL is online", "POL");
-}
-
 shopBtn.addEventListener("click", () => {
   updateValues();
   setTimeout(function () {
-    // window.location.href = "https://sus-city.github.io/SHOP-PAGE/shop.html";
-    window.location.href = "http://localhost:5500/SHOP-PAGE/shop.html";
-
-    //127.0.0.1
+    window.location.href = "https://sus-city.github.io/SHOP-PAGE/shop.html";
+    // window.location.href = "http://localhost:5500/SHOP-PAGE/shop.html";
   }, 1000);
 });
 
-//CODE FOR THE ARROW UP AND DOWN TO VIEW CHAT HISTORY THING
-let chatHistory = "";
-function saveChat() {
-  chatHistory += terminalInput += "||";
-  // || is the sign for separating chats
-  localStorage.setItem("chat-history", chatHistory);
-  console.log(localStorage.getItem("chat-history"));
-}
-
-// function splitChat(index) {
-//   const chatHistoryUpdate = localStorage.getItem("chat-history");
-//   let eachCommand = chatHistoryUpdate.split("||"); //Creates an array of each command
-//   let indexOfLast = eachCommand.length - 1;
-//   terminalTextInput.value = eachCommand[index];
-// }
+//ON LOAD
+updateOverlay();
+sayText("CAS is online", "CAS");
+sayText("POL is online", "POL");
