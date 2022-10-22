@@ -1,94 +1,3 @@
-// //Display username
-// const usernameTag = document.querySelector(".Username");
-// let username = localStorage.getItem("username");
-// usernameTag.textContent = "Hello " + username + "!";
-
-// //Cost of items
-// const costOfItems = [
-//   ["PineappleMan", 10],
-//   ["Blimp", 30],
-// ];
-// //Getting the variables from LocalStorage
-// let blimpBought = localStorage.getItem("blimpBought");
-// let PineappleManBought = localStorage.getItem("PineappleManBought");
-// let greenpoints = Number(localStorage.getItem("greenpoints"));
-
-// //Get elements from HTML
-// const buyButtonPineappleMan = document.querySelector(".PineappleMan"); //buy button for pineapple man
-// const buyButtonBlimp = document.querySelector(".Blimp"); //buy button for blimp
-// const cartCont = document.querySelector(".cartCont");
-// const totalCost = document.querySelector(".total-cost");
-// const GPointLabel = document.querySelector(".GPoint");
-// const backBtn = document.querySelector(".fa-angle-left");
-// //Set greenpoint (or leaf sticker) levels
-// GPointLabel.textContent = "Leaf Stickers:  " + greenpoints;
-
-// //Other variables
-// let itemPurchased = "";
-
-// //Pineapple Man Button
-// if (PineappleManBought == "true") {
-//   buyButtonPineappleMan.textContent = "Bought";
-//   buyButtonPineappleMan.style.backgroundColor = "red";
-//   buyButtonPineappleMan.removeEventListener("click", handleBuyPineappleMan);
-// } else {
-//   buyButtonPineappleMan.addEventListener("click", handleBuyPineappleMan);
-// }
-// function handleBuyPineappleMan() {
-//   itemPurchased = "PineappleMan";
-//   addToCart();
-// }
-
-// //Blimp Button
-// if (blimpBought == "true") {
-//   //if item is bought
-//   buyButtonBlimp.textContent = "Bought";
-//   buyButtonBlimp.style.backgroundColor = "red";
-//   buyButtonBlimp.removeEventListener("click", handleBuyBlimp);
-// } else {
-//   buyButtonBlimp.addEventListener("click", handleBuyBlimp);
-// }
-// buyButtonBlimp.addEventListener("click", handleBuyBlimp);
-// function handleBuyBlimp() {
-//   itemPurchased = "Blimp";
-//   addToCart();
-// }
-
-// function addToCart() {
-//   if (itemPurchased == "PineappleMan") {
-//     if (greenpoints - costOfItems[0][1] >= 0) {
-//       greenpoints = greenpoints - costOfItems[0][1];
-//       alert("Item purchased successfully.");
-//       GPointLabel.textContent = "Leaf Stickers:  " + String(greenpoints); //update greenpoint label
-//       PineappleManBought = "true";
-//       buyButtonPineappleMan.removeEventListener("click", handleBuyPineappleMan); //so that nothing will happen once this button is clicked
-//     } else {
-//       alert("You do not have enough greenpoints to purchase this item.");
-//     }
-//   } else if (itemPurchased == "Blimp") {
-//     if (greenpoints - costOfItems[1][1] >= 0) {
-//       greenpoints = greenpoints - costOfItems[1][1];
-//       alert("Item purchased successfully.");
-//       GPointLabel.textContent = "Leaf Stickers:  " + String(greenpoints); //update greenpoint label
-//       blimpBought = "true";
-//       buyButtonBlimp.removeEventListener("click", handleBuyBlimp); //so that nothing will happen once this button is clicked
-//     } else {
-//       alert("You do not have enough greenpoints to purchase this item.");
-//     }
-//   }
-//   localStorage.setItem("PineappleManBought", PineappleManBought);
-//   localStorage.setItem("blimpBought", blimpBought);
-// }
-
-// backBtn.addEventListener("click", () => {
-//   //update localStorage before leaving this page
-//   localStorage.setItem("greenpoints", greenpoints);
-//   localStorage.setItem("PineappleManBought", PineappleManBought);
-//   localStorage.setItem("blimpBought", blimpBought);
-//   setTimeout(function () {
-//     window.location.href = "https://sus-city.github.io/GAME-PAGE/main.html";
-//   }, 500);
-// });
 //Display username
 const usernameTag = document.querySelector(".Username");
 let username = localStorage.getItem("username");
@@ -96,8 +5,8 @@ usernameTag.textContent = "Hello " + username + "!";
 
 //Cost of items
 const costOfItems = [
-  ["PineappleMan", 10],
-  ["Blimp", 30],
+  ["PineappleMan", 69],
+  ["Blimp", 96],
 ];
 //Getting the variables from LocalStorage
 let blimpBought = localStorage.getItem("blimpBought");
@@ -178,6 +87,7 @@ backBtn.addEventListener("click", () => {
   localStorage.setItem("PineappleManBought", PineappleManBought);
   localStorage.setItem("blimpBought", blimpBought);
   setTimeout(function () {
-    window.location.href = "https://sus-city.github.io/GAME-PAGE/main.html";
+    // window.location.href = "https://sus-city.github.io/GAME-PAGE/main.html";
+    window.location.href = "http://localhost:5500/GAME-PAGE/main.html";
   }, 500);
 });

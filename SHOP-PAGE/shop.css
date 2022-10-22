@@ -25,6 +25,7 @@ body {
 
 .Title {
   font-size: 40px;
+  font-size: 2.9vw;
   /* margin-right: 22.701475595913735vh;
   margin-left: 2.2701475595913734vh; */
   opacity: 0.42;
@@ -92,6 +93,7 @@ body {
   padding: 3%;
   border-radius: 12px;
   font-size: 20px;
+  font-size: 1.3vw;
 }
 
 .DTail {
@@ -105,10 +107,12 @@ body {
   align-items: center;
   position: sticky;
   font-size: x-large;
+  font-size: 2.3vw;
 }
 
 .Price {
   font-size: 30px;
+  font-size: 2.3vw;
   color: rgb(0, 0, 0);
 }
 
@@ -136,6 +140,7 @@ body {
 .GPoint,
 .Username {
   font-size: 30px;
+  font-size: 1.7vw;
   /* margin-left: 40px; */
   margin-left: 10%;
 }
