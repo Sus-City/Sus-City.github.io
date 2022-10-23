@@ -17,9 +17,9 @@ submitBtn.addEventListener("click", (e) => {
     .then(() => {
       saveToFirebase();
       setTimeout(function () {
-        window.location.href = "http://localhost:5500/GAME-PAGE/main.html";
-        // window.location.href = "https://sus-city.github.io/GAME-PAGE/main.html";
-      }, 500);
+        // window.location.href = "http://localhost:5500/GAME-PAGE/main.html";
+        window.location.href = "https://sus-city.github.io/GAME-PAGE/main.html";
+      }, 700);
     })
     .catch((error) => {
       console.log(error);

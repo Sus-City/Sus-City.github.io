@@ -12,9 +12,9 @@ const returnBtn = document.getElementById("return");
 returnBtn.addEventListener("click", (e) => {
   updateToFirebase();
   setTimeout(function () {
-    // window.location.href = "https://sus-city.github.io/SIGNUP-PAGE/signup.html";
-    window.location.href = "http://127.0.0.1:5500/SIGNUP-PAGE/signup.html";
-  }, 500);
+    window.location.href = "https://sus-city.github.io/SIGNUP-PAGE/signup.html";
+    // window.location.href = "http://127.0.0.1:5500/SIGNUP-PAGE/signup.html";
+  }, 700);
 });
 
 function updateToFirebase() {

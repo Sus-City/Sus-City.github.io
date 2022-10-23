@@ -375,8 +375,6 @@ function sendInput() {
       break;
     case "/question":
       window.isQuestionAnswered = false;
-      let text = document.createElement("p");
-      let lineBreak = document.createElement("br");
       window.randomQn = Math.floor(Math.random() * arrayOfQuestions.length);
       //display question
       sayText(
@@ -715,8 +713,10 @@ document.addEventListener("keydown", function (e) {
     case "ArrowUp":
       previousMessage += 1;
       updateChat();
-      terminalTextInput.value =
-        eachCommand[window.eachCommand.length - 1 - previousMessage];
+      if (window.eachCommand.length - 1 - previousMessage >= 0) {
+        terminalTextInput.value =
+          eachCommand[window.eachCommand.length - 1 - previousMessage];
+      }
       break;
     case "Enter":
       sendInput();

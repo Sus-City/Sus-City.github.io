@@ -95,5 +95,5 @@ backBtn.addEventListener("click", () => {
   setTimeout(function () {
     window.location.href = "https://sus-city.github.io/GAME-PAGE/main.html";
     // window.location.href = "http://localhost:5500/GAME-PAGE/main.html";
-  }, 500);
+  }, 700);
 });
