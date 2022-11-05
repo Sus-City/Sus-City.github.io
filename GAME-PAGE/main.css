@@ -28,6 +28,7 @@ body {
   width: 6.090133982947624vh;
   height: 6.090133982947624vh;
   border-radius: 50%;
+  font-family: "Abel", sans-serif;
   font-size: 3.045066991473812vh;
   color: whitesmoke;
   display: flex;
@@ -87,6 +88,7 @@ body {
 .username,
 .GPoint,
 .favour {
+  font-family: "Abel", sans-serif;
   display: flex;
   font-size: 20px;
 }
@@ -125,6 +127,7 @@ body {
   color: #adadad;
   transform: translateY(-50%);
   font-size: 16px;
+  font-family: "Abel", sans-serif;
   pointer-events: none;
   transition: 0.5s;
 }
@@ -180,6 +183,7 @@ body {
 }
 #terminalResultsCont {
   color: green;
+  font-family: "Abel", sans-serif;
   font-size: 20px;
   padding-bottom: 18px;
   font-family: "Roboto Mono" monospace;
@@ -193,6 +197,7 @@ body {
   width: 100%;
   color: green;
   font-size: 20px;
+  font-family: "Abel", sans-serif;
   /* padding: 20px; */
   outline: none;
   font-family: "Roboto Mono" monospace;

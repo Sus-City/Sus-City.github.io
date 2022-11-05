@@ -17,40 +17,43 @@ submitBtn.addEventListener("click", (e) => {
     .then(() => {
       saveToFirebase();
       setTimeout(function () {
-        // window.location.href = "http://localhost:5500/GAME-PAGE/main.html";
-        window.location.href = "https://sus-city.github.io/GAME-PAGE/main.html";
-      }, 700);
+        window.location.href = "http://localhost:5500/GAME-PAGE/main.html";
+        // window.location.href = "https://sus-city.github.io/GAME-PAGE/main.html";
+      }, 800);
     })
     .catch((error) => {
       console.log(error);
     });
 });
 
+const userInformation = {
+  last_login: Date.now(),
+  level: 1,
+  greenpoints: 0,
+  favor: 0,
+  levelProgress: 0,
+  //building stuff
+  roadLevel: 2,
+  factoryLevel: 2,
+  parkLevel: 2,
+  officesLevel: 2,
+  landfillLevel: 2,
+  coastLevel: 2,
+  gasstationLevel: 2,
+  //shop
+  blimpBought: "false",
+  PineappleManBought: "false",
+  alienBought: "false",
+  floatBought: "false",
+  graffitiBought: "false",
+  umbrellasBought: "false",
+  windowBought: "false",
+};
+
 function saveToFirebase() {
   let user = auth.currentUser; //gets the information of current user
   let userUID = user.uid; //gets the UID of the current user
   localStorage.setItem("UID", userUID); //stores the uid of the current user to the firebase
-
-  //Sets the default user information if they don't have an account created
-  let userInformation = {
-    last_login: Date.now(),
-    level: 1,
-    greenpoints: 0,
-    favor: 0,
-    levelProgress: 0,
-    //building stuff
-    roadLevel: 2,
-    factoryLevel: 2,
-    parkLevel: 2,
-    officesLevel: 2,
-    landfillLevel: 2,
-    coastLevel: 2,
-    gasstationLevel: 2,
-    //shop
-    blimpBought: "false",
-    PineappleManBought: "false",
-  };
-
   const dbRef = ref(db);
   get(child(dbRef, "players/" + userUID)) //checks if the user account has been created
     .then((snapshot) => {
@@ -67,11 +70,17 @@ function saveToFirebase() {
         localStorage.setItem("landfillLevel", snapshot.val().landfillLevel);
         localStorage.setItem("coastLevel", snapshot.val().coastLevel);
         localStorage.setItem("gasstationLevel", snapshot.val().gasstationLevel);
+        //shop items
         localStorage.setItem("blimpBought", snapshot.val().blimpBought);
         localStorage.setItem(
           "PineappleManBought",
           snapshot.val().PineappleManBought
         );
+        localStorage.setItem("alienBought", snapshot.val().alienBought);
+        localStorage.setItem("floatBought", snapshot.val().floatBought);
+        localStorage.setItem("graffitiBought", snapshot.val().graffitiBought);
+        localStorage.setItem("umbrellasBought", snapshot.val().umbrellasBought);
+        localStorage.setItem("windowBought", snapshot.val().windowBought);
       } else {
         //sets the user information in firebase if account hasn't been created
         set(ref(db, "players/" + userUID), {
@@ -88,8 +97,14 @@ function saveToFirebase() {
           landfillLevel: userInformation.landfillLevel,
           coastLevel: userInformation.coastLevel,
           gasstationLevel: userInformation.gasstationLevel,
+          //shop items
           blimpBought: userInformation.blimpBought,
           PineappleManBought: userInformation.PineappleManBought,
+          alienBought: userInformation.alienBought,
+          floatBought: userInformation.floatBought,
+          graffitiBought: userInformation.graffitiBought,
+          umbrellasBought: userInformation.umbrellasBought,
+          windowBought: userInformation.windowBought,
         });
         localStorage.setItem("level", userInformation.level);
         localStorage.setItem("greenpoints", userInformation.greenpoints);
@@ -106,11 +121,20 @@ function saveToFirebase() {
           "gasstationLevel",
           userInformation.gasstationLevel
         );
+        //shop items
         localStorage.setItem("blimpBought", userInformation.blimpBought);
         localStorage.setItem(
           "PineappleManBought",
           userInformation.PineappleManBought
         );
+        localStorage.setItem("alienBought", userInformation.alienBought);
+        localStorage.setItem("floatBought", userInformation.floatBought);
+        localStorage.setItem("graffitiBought", userInformation.graffitiBought);
+        localStorage.setItem(
+          "umbrellasBought",
+          userInformation.umbrellasBought
+        );
+        localStorage.setItem("windowBought", userInformation.windowBought);
       }
     })
     .catch((error) => {

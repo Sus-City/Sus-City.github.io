@@ -1,4 +1,3 @@
-//Sounds
 //Sound from Zapsplat.com
 let build = new Audio("/SOUNDS/building.mp3");
 let onloadMusic = new Audio("/SOUNDS/onload.mp3");
@@ -16,14 +15,22 @@ const shopBtn = document.querySelector(".fa-shop");
 //Get user information
 let username = localStorage.getItem("username");
 usernameTag.innerHTML = "Hello " + username + "!";
+
 let level = Number(localStorage.getItem("level"));
 let greenpoints = Number(localStorage.getItem("greenpoints")); //LEAF STICKERS
 let favor = Number(localStorage.getItem("favor")); //SUS POINTS
 let levelProgress = Number(localStorage.getItem("levelProgress")); //PROGRESS BAR FOR LEVELLING UP
-let blimpBought = localStorage.getItem("blimpBought"); //SHOP ITEM
-let PineappleManBought = localStorage.getItem("PineappleManBought"); //SHOP ITEM
 
-//Get development level information from user
+//SHOP ITEMS
+let blimpBought = localStorage.getItem("blimpBought");
+let PineappleManBought = localStorage.getItem("PineappleManBought");
+let alienBought = localStorage.getItem("alienBought");
+let floatBought = localStorage.getItem("floatBought");
+let graffitiBought = localStorage.getItem("graffitiBought");
+let umbrellasBought = localStorage.getItem("umbrellasBought");
+let windowBought = localStorage.getItem("windowBought");
+
+// Get development level information from user
 let roadLevel = Number(localStorage.getItem("roadLevel"));
 let factoryLevel = Number(localStorage.getItem("factoryLevel"));
 let parkLevel = Number(localStorage.getItem("parkLevel"));
@@ -53,8 +60,43 @@ function updateOverlay() {
       document.createElement("img")
     );
   }
+  //DISPLAY PINEAPPLE MAN OVERLAY IMAGES
+  if (windowBought == "true") {
+    imageOverlay(
+      "/DEVELOPMENT-PROJ-SERVE/SHOP-WINDOW.png",
+      document.createElement("img")
+    );
+  }
+  //DISPLAY PINEAPPLE MAN OVERLAY IMAGES
+  if (alienBought == "true") {
+    imageOverlay(
+      "/DEVELOPMENT-PROJ-SERVE/SHOP-ALIEN.png",
+      document.createElement("img")
+    );
+  }
+  //DISPLAY PINEAPPLE MAN OVERLAY IMAGES
+  if (floatBought == "true") {
+    imageOverlay(
+      "/DEVELOPMENT-PROJ-SERVE/SHOP-FLOATIE.png",
+      document.createElement("img")
+    );
+  }
+  //DISPLAY PINEAPPLE MAN OVERLAY IMAGES
+  if (graffitiBought == "true") {
+    imageOverlay(
+      "/DEVELOPMENT-PROJ-SERVE/SHOP-GRAFFITI.png",
+      document.createElement("img")
+    );
+  }
+  //DISPLAY PINEAPPLE MAN OVERLAY IMAGES
+  if (umbrellasBought == "true") {
+    imageOverlay(
+      "/DEVELOPMENT-PROJ-SERVE/SHOP-UMBRELLAS.png",
+      document.createElement("img")
+    );
+  }
   //DISPLAYING ROAD OVERLAY IMAGES UPON LOADING
-  if (roadLevel >= 2) {
+  if (roadLevel > 2) {
     imageOverlay(
       "/DEVELOPMENT-PROJ-SERVE/DEV-COAST-1.png",
       document.createElement("img")
@@ -67,7 +109,7 @@ function updateOverlay() {
     );
   }
   //DISPLAYING FACTORY OVERLAY IMAGES UPON LOADING
-  if (factoryLevel >= 2) {
+  if (factoryLevel > 2) {
     imageOverlay(
       "/DEVELOPMENT-PROJ-SERVE/DEV-FACTORY-1.png",
       document.createElement("img")
@@ -80,7 +122,7 @@ function updateOverlay() {
     );
   }
   //DISPLAYING OFFICES OVERLAY IMAGES UPON LOADING
-  if (officesLevel >= 2) {
+  if (officesLevel > 2) {
     imageOverlay(
       "/DEVELOPMENT-PROJ-SERVE/DEV-OFFICES-1.png",
       document.createElement("img")
@@ -93,7 +135,7 @@ function updateOverlay() {
     );
   }
   //DISPLAYING COAST OVERLAY IMAGES UPON LOADING
-  if (coastLevel >= 2) {
+  if (coastLevel > 2) {
     imageOverlay(
       "/DEVELOPMENT-PROJ-SERVE/DEV-COAST-1.png",
       document.createElement("img")
@@ -106,7 +148,7 @@ function updateOverlay() {
     );
   }
   //DISPLAYING LANDFILL OVERLAY IMAGES UPON LOADING
-  if (landfillLevel >= 2) {
+  if (landfillLevel > 2) {
     imageOverlay(
       "/DEVELOPMENT-PROJ-SERVE/DEV-LANDFILL-1.png",
       document.createElement("img")
@@ -119,7 +161,7 @@ function updateOverlay() {
     );
   }
   //DISPLAYING GAS STATION OVERLAY IMAGES UPON LOADING
-  if (gasstationLevel >= 2) {
+  if (gasstationLevel > 2) {
     imageOverlay(
       "/DEVELOPMENT-PROJ-SERVE/DEV-GAS STATION-1.png",
       document.createElement("img")
@@ -132,7 +174,7 @@ function updateOverlay() {
     );
   }
   //DISPLAYING PARK OVERLAY IMAGES UPON LOADING
-  if (parkLevel >= 2) {
+  if (parkLevel > 2) {
     imageOverlay(
       "/DEVELOPMENT-PROJ-SERVE/PARK-stage 1.png",
       document.createElement("img")
@@ -361,19 +403,23 @@ function sendInput() {
     case "/help":
       //display all the commands
       sayText(
-        "To receive a question, enter: [/question]. To answer questions? Simple! Respective to the option you choose, enter: [/1, /2, /3 or /4].",
+        "To receive a question, enter: [/q]. To answer questions? Simple! Respective to the option you choose, enter: [/1, /2, /3 or /4].",
         "CAS"
       );
       sayText(
-        "Your final command is the [/develop] command! Everytime you level up, you receive enough SUS points to implement an environmental measure in an area. For example, simply enter [/develop /road] if you want to develop the road! The six areas you can develop are the road, factory, offices, watersource, landfill and gasstation.",
+        "Your final command is the [/develop] command! Everytime you level up, you receive enough SUS points to implement an environmental measure in an area. For example, simply enter [/develop /road] if you want to develop the road! The six areas you can develop are the road, factory, offices, coast, landfill and gasstation.",
         "POL"
+      );
+      sayText(
+        "Also, to view the developments in 3D after you've developed them, simply type [/3D] and insert the name of the development",
+        "CAS"
       );
       sayText(
         "Pro Tip: Pressing the up arrow allows you to view your command history.",
         "POL"
       );
       break;
-    case "/question":
+    case "/q":
       window.isQuestionAnswered = false;
       window.randomQn = Math.floor(Math.random() * arrayOfQuestions.length);
       //display question
@@ -448,6 +494,13 @@ function sendInput() {
               "The bicycles were fine, POL. Both work just the same in reducing the number of vehicles on the road. Then again, the bicycles are much more widespread. ERP gantries are more commonly found along central business districts such as Orchard Road and near retail shops such as the ION, Tangs, Wheelock Place and the Shaw Centre. ",
               "CAS"
             );
+            // var obj = {
+            //   video: {
+            //     value:
+            //       "<iframe title='YouTube video player' type=\"text/html\" width='640' height='390' src='http://www.youtube.com/embed/W-Q7RMpINVo' frameborder='0' allowFullScreen></iframe>",
+            //   },
+            // };
+            // document.write(obj.video.value);
             break;
         }
         favor = favor - 1;
@@ -681,6 +734,14 @@ function sendInput() {
         sayText(nofavorsText, "POL");
       }
       break;
+    case "/3D /coast":
+      if (coastLevel >= 2) {
+        window.location.href =
+          "http://127.0.0.1:5500/GAME-PAGE/3D/raincollection.html";
+      } else {
+        notAvailable();
+      }
+      break;
     case "":
       break;
     default:
@@ -697,7 +758,6 @@ let previousMessage = 0; //the number of times the arrow up button was pressed
 function saveChat() {
   chatHistory += terminalInput += "||"; // || is the sign for separating chats
   localStorage.setItem("chat-history", chatHistory);
-  console.log(localStorage.getItem("chat-history"));
 }
 function updateChat() {
   let chatHistoryUpdate = localStorage.getItem("chat-history"); //Getting updated value of chat history
@@ -711,11 +771,15 @@ sendBtn.addEventListener("click", sendInput);
 document.addEventListener("keydown", function (e) {
   switch (e.key) {
     case "ArrowUp":
-      previousMessage += 1;
-      updateChat();
-      if (window.eachCommand.length - 1 - previousMessage >= 0) {
-        terminalTextInput.value =
-          eachCommand[window.eachCommand.length - 1 - previousMessage];
+      if (previousMessage + 1 < window.eachCommand.length) {
+        previousMessage += 1;
+        terminalTextInput.value = eachCommand[previousMessage];
+      }
+      break;
+    case "ArrowDown":
+      if (previousMessage - 1 >= 0) {
+        previousMessage -= 1;
+        terminalTextInput.value = eachCommand[previousMessage];
       }
       break;
     case "Enter":
@@ -751,6 +815,10 @@ function dontUnderstand() {
     "POL"
   );
   updateValues();
+}
+
+function notAvailable() {
+  sayText("Unlock the development before you can view the 3D version!", "CAS");
 }
 
 function levelUp() {
@@ -843,8 +911,8 @@ function updateGreenpoints() {
 shopBtn.addEventListener("click", () => {
   updateValues();
   setTimeout(function () {
-    window.location.href = "https://sus-city.github.io/SHOP-PAGE/shop.html";
-    // window.location.href = "http://localhost:5500/SHOP-PAGE/shop.html";
+    // window.location.href = "https://sus-city.github.io/SHOP-PAGE/shop.html";
+    window.location.href = "http://localhost:5500/SHOP-PAGE/shop.html";
   }, 1000);
 });
 

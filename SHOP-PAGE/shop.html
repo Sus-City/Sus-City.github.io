@@ -2,59 +2,106 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>World Pieces</title>
-  <!-- <link rel="part" sizes="image16x16=" Z/EASON-PIC.jpeg"> -->
-  <!-- Style CSS -->
-  <link rel="stylesheet" href="shop.css">
-  <script src="https://kit.fontawesome.com/056eae0c7b.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>The World's Pieces</title>
+    <link rel="stylesheet" href="shop.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abel&family=Poppins&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/056eae0c7b.js" crossorigin="anonymous"></script>
 </head>
 
-<script>
-  let playSound = () => new Audio("/SOUNDS/menuclick.mp3").play();
-</script>
-
-
 <body>
-  <header class="TopBorder">
-    <button class="fa-solid fa-angle-left" onclick="playSound()"></button>
-    <h1 class="Title">The World's Pieces</h1>
-    <div class="GPoint"></div>
-    <div class="Username">Hello,</div>
-  </header>
-  <div class="Container">
-    <div class="scrollCont">
-      <div class="Productcont">
-        <div class="dis">
-          <div class="Name">Pineapple man</div>
-          <div class="desc">COOL item</div>
-          <img src="/DEVELOPMENT-PROJ-SERVE/SHOP-DISPLAY-PINEAPPLE-MAN.png" alt="Pineapple Man"><img>
-        </div>
-        <div class="Info">
-          <div class="Dtail">
-            <div class="Price">Price: 69</div>
-          </div>
-          <button class="Buybtn PineappleMan" onclick="playSound()">Buy</button>
-        </div>
-      </div>
-      <div class="Productcont">
-        <div class="dis">
-          <div class="Name">Blimp</div>
-          <div class="desc">COOL item</div>
-          <img src="/DEVELOPMENT-PROJ-SERVE/SHOP-DISPLAY-BLIMP.png" alt="blimp"><img>
-        </div>
-        <div class="Info">
-          <div class="Detail">
-            <div class="Price">Price: 96</div>
-          </div>
-          <button class="Buybtn Blimp" onclick="playSound()">Buy</button>
-        </div>
-      </div>
-    </div>
-  </div>
+    <header>
+        <button class="fa-solid fa-angle-left" onclick="playSound()"></button>
+        <h1>The World's Pieces</h1>
+        <div class="GPoint"></div>
+        <div class="Username">Hello, </div>
+    </header>
 
-  <script src=" shop.js"></script>
+    <div class="MainProductContainer">
+        <div class="ProductCont">
+            <img class="ProductImage" src="/DEVELOPMENT-PROJ-SERVE/SHOP-DISPLAY-PINEAPPLE-MAN.png"
+                alt="Pineapple Man"><img>
+            <div class="ProductInfo">
+                <div class="TextContainer">
+                    <div class="Name">Pineapple man</div>
+                    <div class="Description">COOL item</div>
+                </div>
+                <div class="TextContainer Price">Price: 69</div>
+            </div>
+            <button class="Buybtn PineappleMan" onclick="playSound()">Buy</button>
+        </div>
+        <div class="ProductCont">
+            <img class="ProductImage" src="/DEVELOPMENT-PROJ-SERVE/SHOP-DISPLAY-BLIMP.png" alt="blimp"><img>
+            <div class="ProductInfo">
+                <div class="TextContainer">
+                    <div class="Name">Blimp</div>
+                    <div class="Description">COOL item</div>
+                </div>
+                <div class="TextContainer Price">Price: 96</div>
+            </div>
+            <button class="Buybtn Blimp" onclick="playSound()">Buy</button>
+        </div>
+        <div class="ProductCont">
+            <img class="ProductImage" src="/DEVELOPMENT-PROJ-SERVE/SHOP-DISPLAY-WINDOW.png"
+                alt="Window Decoration"><img>
+            <div class="ProductInfo">
+                <div class="TextContainer">
+                    <div class="Name">Window</div>
+                    <div class="Description">COOL item</div>
+                </div>
+                <div class="TextContainer Price">Price: 420</div>
+            </div>
+            <button class="Buybtn WindowDeco" onclick="playSound()">Buy</button>
+        </div>
+        <div class="ProductCont">
+            <img class="ProductImage" src="/DEVELOPMENT-PROJ-SERVE/SHOP-DISPLAY-ALIEN.png" alt="Alien"><img>
+            <div class="ProductInfo">
+                <div class="TextContainer">
+                    <div class="Name">Alien</div>
+                    <div class="Description">COOL item</div>
+                </div>
+                <div class="TextContainer Price">Price: 169</div>
+            </div>
+            <button class="Buybtn Alien" onclick="playSound()">Buy</button>
+        </div>
+        <div class="ProductCont">
+            <img class="ProductImage" src="/DEVELOPMENT-PROJ-SERVE/SHOP-DISPLAY-FLOATIE.png" alt="Floatie"><img>
+            <div class="ProductInfo">
+                <div class="TextContainer">
+                    <div class="Name">Floatie</div>
+                    <div class="Description">COOL item</div>
+                </div>
+                <div class="TextContainer Price">Price: 47</div>
+            </div>
+            <button class="Buybtn Floatie" onclick="playSound()">Buy</button>
+        </div>
+        <div class="ProductCont">
+            <img class="ProductImage" src="/DEVELOPMENT-PROJ-SERVE/SHOP-DISPLAY-GRAFFITI.png" alt="Graffiti"><img>
+            <div class="ProductInfo">
+                <div class="TextContainer">
+                    <div class="Name">Graffiti</div>
+                    <div class="Description">COOL item</div>
+                </div>
+                <div class="TextContainer Price">Price: 216</div>
+            </div>
+            <button class="Buybtn Graffiti" onclick="playSound()">Buy</button>
+        </div>
+        <div class="ProductCont">
+            <img class="ProductImage" src="/DEVELOPMENT-PROJ-SERVE/SHOP-DISPLAY-UMBRELLAS.png" alt="Umbrellas"><img>
+            <div class="ProductInfo">
+                <div class="TextContainer">
+                    <div class="Name">Umbrella</div>
+                    <div class="Description">COOL item</div>
+                </div>
+                <div class="TextContainer Price">Price: 124</div>
+            </div>
+            <button class="Buybtn Umbrella" onclick="playSound()">Buy</button>
+        </div>
+    </div>
+    <script src=" shop.js"></script>
 </body>
 
 </html>

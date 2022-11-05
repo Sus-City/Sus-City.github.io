@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--imports-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/0.5.0/aframe.min.js"></script>
+    <script src="https://rawgit.com/takahirox/aframe-rain/master/build/aframe-rain.min.js"></script>
+
+    <title>Rain Collection</title>
+</head>
+
+<body>
+    <a-scene rain>
+        <!--rain collection cylinders-->
+        <a-cylinder color="white" position="-11 1 2" height="4"></a-cylinder>
+        <a-cylinder color="white" position="-11 1 -0.5" height="4"></a-cylinder>
+        <a-cylinder color="white" position="-11 1 -3" height="4"></a-cylinder>
+
+        <!--wall surrounding pool-->
+        <a-box color="red" position="-9.5 0.5 2" width="1" depth="14" height="1"></a-box>
+        <a-box color="red" position="-0 0.5 8.5" width="19.5" depth="1" height="1"></a-box>
+
+        <!-- Pool -->
+        <a-box color="cyan" depth="10" height="0.5" width="19.5"></a-box>
+        <a-box color="yellow" depth="3" height="0.5" width="19.5" position="0 0 6.5"></a-box>
+
+        <!--sign board-->
+        <a-box color="lightgray" depth="0.2" height="2" width="0.2" position="-1 0.5 -4.5"></a-box>
+        <a-box color="lightgray" depth="0.2" height="2" width="0.2" position="-3 0.5 -4.5"></a-box>
+        <a-box color="white" depth="0.5" height="2.5" width="3" position="-2 2.5 -4.5"></a-box>
+
+        <a-sky color="black"></a-sky>
+    </a-scene>
+
+</body>
+
+</html>

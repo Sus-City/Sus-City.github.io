@@ -3,7 +3,10 @@ import { db } from "./config.js";
 import {
   set,
   ref,
+  get,
+  child,
 } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-database.js";
+
 let userUID = localStorage.getItem("UID");
 
 //Get input
@@ -12,8 +15,8 @@ const returnBtn = document.getElementById("return");
 returnBtn.addEventListener("click", (e) => {
   updateToFirebase();
   setTimeout(function () {
-    window.location.href = "https://sus-city.github.io/SIGNUP-PAGE/signup.html";
-    // window.location.href = "http://127.0.0.1:5500/SIGNUP-PAGE/signup.html";
+    // window.location.href = "https://sus-city.github.io/SIGNUP-PAGE/signup.html";
+    window.location.href = "http://127.0.0.1:5500/SIGNUP-PAGE/signup.html";
   }, 700);
 });
 
@@ -35,5 +38,10 @@ function updateToFirebase() {
     //SHOP ITEMS
     blimpBought: localStorage.getItem("blimpBought"),
     PineappleManBought: localStorage.getItem("PineappleManBought"),
+    alienBought: localStorage.getItem("alienBought"),
+    floatBought: localStorage.getItem("floatBought"),
+    graffitiBought: localStorage.getItem("graffitiBought"),
+    umbrellasBought: localStorage.getItem("umbrellasBought"),
+    windowBought: localStorage.getItem("windowBought"),
   });
 }
