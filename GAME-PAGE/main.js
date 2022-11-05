@@ -911,8 +911,8 @@ function updateGreenpoints() {
 shopBtn.addEventListener("click", () => {
   updateValues();
   setTimeout(function () {
-    // window.location.href = "https://sus-city.github.io/SHOP-PAGE/shop.html";
-    window.location.href = "http://localhost:5500/SHOP-PAGE/shop.html";
+    window.location.href = "https://sus-city.github.io/SHOP-PAGE/shop.html";
+    // window.location.href = "http://localhost:5500/SHOP-PAGE/shop.html";
   }, 1000);
 });
 
