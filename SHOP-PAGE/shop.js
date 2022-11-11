@@ -12,13 +12,13 @@ let playSound = () => new Audio("/SOUNDS/menuclick.mp3").play();
 // Item information
 const items = [
   //Class Name in button, cost, localStorage name
-  ["PineappleMan", 69, "PineappleManBought"],
-  ["Blimp", 96, "blimpBought"],
-  ["WindowDeco", 420, "windowBought"],
-  ["Alien", 169, "alienBought"],
-  ["Floatie", 47, "floatBought"],
-  ["Graffiti", 216, "graffitiBought"],
-  ["Umbrella", 124, "umbrellasBought"],
+  ["PineappleMan", 70, "PineappleManBought"],
+  ["Blimp", 100, "blimpBought"],
+  ["WindowDeco", 400, "windowBought"],
+  ["Alien", 170, "alienBought"],
+  ["Floatie", 50, "floatBought"],
+  ["Graffiti", 220, "graffitiBought"],
+  ["Umbrella", 125, "umbrellasBought"],
 ];
 //Getting the variables from LocalStorage
 let greenpoints = Number(localStorage.getItem("greenpoints"));
