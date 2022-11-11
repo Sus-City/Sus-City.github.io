@@ -1,4 +1,4 @@
-//Sound from Zapsplat.com 
+//Sound from Zapsplat.com
 let build = new Audio("/SOUNDS/building.mp3");
 let onloadMusic = new Audio("/SOUNDS/onload.mp3");
 let bgm1 = new Audio("/SOUNDS/bgm.mp3");
