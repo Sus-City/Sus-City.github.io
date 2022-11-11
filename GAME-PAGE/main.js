@@ -1,3 +1,7 @@
+//educational cutscene functions
+function redirectToYoutubeERP() {
+ window.open("https://www.youtube.com/watch?v=EE6sSf4QAsg");
+}
 //Sound from Zapsplat.com
 let build = new Audio("/SOUNDS/building.mp3");
 let onloadMusic = new Audio("/SOUNDS/onload.mp3");
@@ -98,7 +102,7 @@ function updateOverlay() {
   //DISPLAYING ROAD OVERLAY IMAGES UPON LOADING
   if (roadLevel > 2) {
     imageOverlay(
-      "/DEVELOPMENT-PROJ-SERVE/DEV-COAST-1.png",
+      "/DEVELOPMENT-PROJ-SERVE/DEV-ROAD-1.png",
       document.createElement("img")
     );
   }
@@ -834,6 +838,7 @@ function sendInput() {
               "The bicycles were fine, POL. Both work just the same in reducing the number of vehicles on the road. Then again, the bicycles are much more widespread. ERP gantries are more commonly found along central business districts such as Orchard Road and near retail shops such as the ION, Tangs, Wheelock Place and the Shaw Centre. ",
               "CAS"
             );
+            redirectToYoutubeERP()
             // var obj = {
             //   video: {
             //     value:
