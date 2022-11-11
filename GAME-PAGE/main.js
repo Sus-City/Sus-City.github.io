@@ -102,7 +102,7 @@ function updateOverlay() {
       document.createElement("img")
     );
   }
-  if (roadLevel >= 3) {
+  if (roadLevel > 3) {
     imageOverlay(
       "/DEVELOPMENT-PROJ-SERVE/DEV-ROAD-2.png",
       document.createElement("img")
@@ -115,7 +115,7 @@ function updateOverlay() {
       document.createElement("img")
     );
   }
-  if (factoryLevel >= 3) {
+  if (factoryLevel > 3) {
     imageOverlay(
       "/DEVELOPMENT-PROJ-SERVE/DEV-FACTORY-2.png",
       document.createElement("img")
@@ -128,7 +128,7 @@ function updateOverlay() {
       document.createElement("img")
     );
   }
-  if (officesLevel >= 3) {
+  if (officesLevel > 3) {
     imageOverlay(
       "/DEVELOPMENT-PROJ-SERVE/DEV-OFFICES-2.png",
       document.createElement("img")
@@ -141,7 +141,7 @@ function updateOverlay() {
       document.createElement("img")
     );
   }
-  if (coastLevel >= 3) {
+  if (coastLevel > 3) {
     imageOverlay(
       "/DEVELOPMENT-PROJ-SERVE/DEV-COAST-2.png",
       document.createElement("img")
@@ -154,7 +154,7 @@ function updateOverlay() {
       document.createElement("img")
     );
   }
-  if (landfillLevel >= 3) {
+  if (landfillLevel > 3) {
     imageOverlay(
       "/DEVELOPMENT-PROJ-SERVE/DEV-LANDFILL-2.png",
       document.createElement("img")
@@ -167,7 +167,7 @@ function updateOverlay() {
       document.createElement("img")
     );
   }
-  if (gasstationLevel >= 3) {
+  if (gasstationLevel > 3) {
     imageOverlay(
       "/DEVELOPMENT-PROJ-SERVE/DEV-GAS STATION-2.png",
       document.createElement("img")
@@ -180,7 +180,7 @@ function updateOverlay() {
       document.createElement("img")
     );
   }
-  if (parkLevel >= 3) {
+  if (parkLevel > 3) {
     imageOverlay(
       "/DEVELOPMENT-PROJ-SERVE/PARK-stage 2.png",
       document.createElement("img")
