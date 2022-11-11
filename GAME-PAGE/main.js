@@ -737,7 +737,7 @@ function sendInput() {
     case "/3D /coast":
       if (coastLevel >= 2) {
         window.location.href =
-          "http://127.0.0.1:5500/GAME-PAGE/3D/raincollection.html";
+          "https://sus-city.github.io/GAME-PAGE/3D/raincollection.html";
       } else {
         notAvailable();
       }
