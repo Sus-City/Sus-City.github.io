@@ -1,6 +1,6 @@
 //educational cutscene functions
 function redirectToYoutubeERP() {
- window.open("https://www.youtube.com/watch?v=EE6sSf4QAsg");
+  window.open("https://www.youtube.com/watch?v=EE6sSf4QAsg");
 }
 //Sound from Zapsplat.com
 let build = new Audio("/SOUNDS/building.mp3");
@@ -234,38 +234,524 @@ function sayText(theTextContent, character) {
 
 //questions stuff
 class Question {
-  constructor({question, option1, option2, option3, option4, correctanswer}) {
+  constructor({ question, option1, option2, option3, option4, correctanswer }) {
     this.question = question;
-    let optionsArray = []
-    
+    let optionsArray = [];
+
     this.option1 = option1;
-    optionsArray.push(option1)
-    
+    optionsArray.push(option1);
+
     this.option2 = option2;
-    optionsArray.push(option2)
-    
+    optionsArray.push(option2);
+
     if (typeof option3 !== "undefined") {
       this.option3 = option3;
-      optionsArray.push(option3)
+      optionsArray.push(option3);
     }
-    
+
     if (typeof option4 !== "undefined") {
       this.option4 = option4;
-      optionsArray.push(option4)
+      optionsArray.push(option4);
     }
-    
+
     this.correctanswer = correctanswer;
-    this.optionsLength = optionsArray.length
+    this.optionsLength = optionsArray.length;
   }
 }
 
 const arrayOfQuestions = [
-  //Questions
   new Question({
-    question: "Hello Big Test",
-    option1: "1",
-    option2: "2",
+    question: "Which of the following is not a Transport Node?",
+    option1: "Bus interchange",
+    option2: "MRT Station",
+    option3: "Roads",
+    option4: "Shipping Port",
+    correctanswer: 3,
+  }),
+
+  //new question
+  new Question({
+    question: "Which of the following is a Transport Route?",
+    option1: "Home",
+    option2: "Airport",
+    option3: "Ocean",
+    option4: "Carparks",
+    correctanswer: 3,
+  }),
+
+  //new question
+  new Question({
+    question: "What is the Purpose of Transportation?",
+    option1: "Allow mobility for commuters",
+    option2: "Allow accessibility for commuters",
+    option3: "Provide Opportunities for Economic Purposes",
+    option4: "All of the above",
+    correctanswer: 4,
+  }),
+
+  //new question
+  new Question({
+    question: "What problems does Singapore face?",
+    option1: "Scarcity of Land",
+    option2: "Lack of Economic Opportunities",
+    option3: "Decreasing Population",
+    option4: "Water Shortages",
+    correctanswer: 1,
+  }),
+
+  //new question
+  new Question({
+    question: "What is Mobility?",
+    option1: "Speed of Movement from one place to another",
+    option2: "Type of Movement from one place to another",
+    option3: "Efficiency of Movement from one place to another",
+    option4: "All of the above",
     correctanswer: 2,
+  }),
+
+  //new question
+  new Question({
+    question: "What is Accessibility?",
+    option1: "Movement of People, Goods and Services",
+    option2: "Movement of Goods and Services",
+    option3: "Ease of Movement of Goods and Services",
+    option4: "Ease of Movement of People, Goods and Services",
+    correctanswer: 4,
+  }),
+
+  //new question
+  new Question({
+    question: "What is Transport Network Density?",
+    option1:
+      "area coverage of transport system / length of distance travelled VS length of routes/nodes",
+    option2:
+      "area coverage of transport system / length of distance travelled VS no. of routes / nodes",
+    option3:
+      "area coverage of transport system / length of routes/nodes VS length of distance travelled",
+    option4:
+      "area coverage of transport system / no. of routes/nodes VS length of distance travelled",
+    correctanswer: 2,
+  }),
+
+  //new question
+  new Question({
+    question:
+      "What is an advantage of Intermodal Transport over Unimodal Transport?",
+    option1: "Shorter travel time for indirect destinations",
+    option2: "Shorter travel time for direct destinations",
+    option3: "Lower Cost",
+    option4: "Faster speed of vehicles",
+    correctanswer: 1,
+  }),
+
+  //new question
+  new Question({
+    question:
+      "Which of the following are factors affecting Transport Infrastructure?",
+    option1: "Reliability",
+    option2: "Frequency",
+    option3: "Capacity",
+    option4: "All of the above",
+    correctanswer: 4,
+  }),
+
+  //new question
+  new Question({
+    question:
+      "Which of the following shows the disadvantages of a city with poor public transport networks?",
+    option1: "Traffic Congestion",
+    option2: "Increased Carbon Footprint",
+    option3: "Insufficient Vehicle Fleets",
+    option4: "All of the above",
+    correctanswer: 4,
+  }),
+
+  //new question
+  new Question({
+    question: "Which of the following is true?",
+    option1: "birth rate < death rate = population increase",
+    option2: "immigration = Emigration = net population growth",
+    option3: "birth rate > death rate = population decrease",
+    option4: "immigration > Emigration = population decrease",
+    correctanswer: 2,
+  }),
+
+  //new question
+  new Question({
+    question: "City A has a large population density, which means…",
+    option1: "there is a small population occupying a large area",
+    option2: "there is a large population occupying a small area",
+    option3: "there is a small population occupying a small area",
+    option4: "there is a large population occupying a large area",
+    correctanswer: 2,
+  }),
+
+  //new question
+  new Question({
+    question: "What does the CBD stand for?",
+    option1: "Central Buyers District",
+    option2: "Collective Businessmen Dictatorship",
+    option3: "Central Business District",
+    option4: "Central Bollywood District",
+    correctanswer: 3,
+  }),
+
+  //new question
+  new Question({
+    question:
+      "What is required for the establishment of a well connected transport network?",
+    option1: "Low mobility, acceleration, connectivity",
+    option2: "High creativity, speed, strength",
+    option3: "High Connectivity, accessibility, mobility",
+    option4: "Non-flammable, Strength, Foundation",
+    correctanswer: 3,
+  }),
+
+  //new question
+  new Question({
+    question: "How is Private Transport different from Public Transport?",
+    option1: "More Cost-efficient",
+    option2: "More Convenient",
+    option3: "Increased Speed",
+    option4: "More Energy-saving",
+    correctanswer: 2,
+  }),
+
+  //new question
+  new Question({
+    question: "What is the benefit of going to Central Business Districts?",
+    option1: "More Interactions",
+    option2: "More Congestion",
+    option3: "More Economic Activities",
+    option4: "More Art Galleries",
+    correctanswer: 3,
+  }),
+
+  //new question
+  new Question({
+    question:
+      "Why is there a need for the establishment of a well-connected transport network?",
+    option1: "Reduction of Congestion in heavy traffic areas",
+    option2: "Increase in sales for retail stores in CBD",
+    option3: "Reduction of accidents",
+    option4: "To not spend money to redo the transport network",
+    correctanswer: 1,
+  }),
+
+  //new question
+  new Question({
+    question:
+      "Which of the following is not a disadvantage of traffic congestion?",
+    option1: "Direct drivers to other roads",
+    option2: "Longer travelling times for road users",
+    option3: "More combustion of fossil fuels & carbon emissions",
+    option4: "Commuters get frustrated",
+    correctanswer: 1,
+  }),
+
+  //new question
+  new Question({
+    question: "What is an example of natural landscapes?",
+    option1: "Farms",
+    option2: "Housing",
+    option3: "Public Facilities",
+    option4: "City",
+    correctanswer: 1,
+  }),
+
+  //new question
+  new Question({
+    question:
+      "Which of the following is a consequence of altering the natural ecosystem?",
+    option1: "Increase survival chances of animals",
+    option2: "Increase animal population",
+    option3: "Animals get run over",
+    option4: "None of the above",
+    correctanswer: 3,
+  }),
+
+  //new question
+  new Question({
+    question: "What is not an advantage of wildlife corridors?",
+    option1: "Conserve ecosystem",
+    option2: "Protect wildlife genetic pools",
+    option3: "Raise wildlife survival chances",
+    option4: "Train wildlife survival skills",
+    correctanswer: 4,
+  }),
+
+  //new question
+  new Question({
+    question: "What is false about traffic congestion?",
+    option1: "increases number of vehicles on the road",
+    option2: "increases speed of vehicles",
+    option3: "increases driver frustration",
+    option4: "increases carbon footprint",
+    correctanswer: 2,
+  }),
+
+  //new question
+  new Question({
+    question: "What is true about carpooling?",
+    option1: "It is a public transport mode",
+    option2: "Increases number of vehicles on the road",
+    option3: "Lower combustion of fossil fuels",
+    option4: "None of the above",
+    correctanswer: 3,
+  }),
+
+  //new question
+  new Question({
+    question: "What is smog made of?",
+    option1: "Pollen",
+    option2: "Microfibre",
+    option3: "Hair/Fur",
+    option4: "Dirt",
+    correctanswer: 1,
+  }),
+
+  //new question
+  new Question({
+    question:
+      "What are the side effects Humans face from prolonged exposure to polluted air?",
+    option1: "High Blood Pressure",
+    option2: "Muscle Pain",
+    option3: "1 and 2",
+    option4: "Low Blood Pressure",
+    correctanswer: 4,
+  }),
+
+  //new question
+  new Question({
+    question: "What is a consequence of Noise Pollution?",
+    option1: "Short Sightedness",
+    option2: "Improved Sleep Conditions",
+    option3: "Reduced work productivity",
+    option4: "None of the above",
+    correctanswer: 3,
+  }),
+
+  //new question
+  new Question({
+    question:
+      "What is the average loudness limit for human hearing(in decibels)?",
+    option1: "69",
+    option2: "54",
+    option3: "59",
+    option4: "53",
+    correctanswer: 4,
+  }),
+
+  //new question
+  new Question({
+    question:
+      "What is the main reasons are trees being planted in place of sound barriers?",
+    option1: "Reduced greenhouse gasses",
+    option2: "Increased greenery",
+    option3: "Cost Efficient",
+    option4: "All of the above",
+    correctanswer: 4,
+  }),
+
+  //new question
+  new Question({
+    question: "Which of the following is a result of road accidents?",
+    option1: "Damage of personal property",
+    option2: "Incur penalty fees",
+    option3: "1 and 2",
+    option4: "None of the above",
+    correctanswer: 3,
+  }),
+
+  //new question
+  new Question({
+    question:
+      "On which date did the Singapore Road Safety Council start to run public campaigns to promote awareness for road safety?",
+    option1: "2006",
+    option2: "2011",
+    option3: "2012",
+    option4: "2013",
+    correctanswer: 4,
+  }),
+
+  //new question
+  new Question({
+    question:
+      "What is the percentage of greenhouse gasses produced by transport systems?",
+    option1: "15 to 20",
+    option2: "20 to 25",
+    option3: "25 to 30",
+    option4: "30 to 35",
+    correctanswer: 3,
+  }),
+
+  //new question
+  new Question({
+    question: "Land is precious to humanity as the lithosphere of earth is…",
+    option1: "20%",
+    option2: "30%",
+    option3: "40%",
+    option4: "50%",
+    correctanswer: 2,
+  }),
+
+  //new question
+  new Question({
+    question:
+      "Which of the following is true in this format in the scenario of high crime rate during peak hours: [amount of commuters],[cramped/spacious],[personal safety concerns]",
+    option1: "High, Cramped, Reduced",
+    option2: "High, Cramped, Increased",
+    option3: "Low, Cramped, Reduced",
+    option4: "Low, Spacious, Increased",
+    correctanswer: 2,
+  }),
+
+  //new question
+  new Question({
+    question:
+      "Which of the following is an initiative implemented to aid in mobility of the Elderly?",
+    option1: "Ergonomic Seats",
+    option2: "Green Man +",
+    option3: "Support Railings",
+    option4: "All of the above",
+    correctanswer: 4,
+  }),
+
+  //new question
+  new Question({
+    question:
+      "Which of the following are initiatives implemented to aid PwDs, specifically people with Visual Impairment?",
+    option1: "Low Profile Bus Ramps",
+    option2: "Green Man +",
+    option3: "Textured Paths",
+    option4: "2 and 3",
+    correctanswer: 4,
+  }),
+
+  //new question
+  new Question({
+    question:
+      "Which of the following is true in this format: (date of which) [LTA introducing tactile guiding systems in two pilot phases], [full implementation of the feature], [all bus stops and MRT stations implementing the system]",
+    option1: "2005, 2010, 2013",
+    option2: "2000, 2003, 2006",
+    option3: "2002, 2004, 2007",
+    option4: "1995, 1998, 2003",
+    correctanswer: 4,
+  }),
+
+  //new question
+  new Question({
+    question:
+      "Which of the following is not a challenge of transport planning?",
+    option1: "Lack of Contractors",
+    option2: "Topography",
+    option3: "Building Layout",
+    option4: "High Monetary Investments",
+    correctanswer: 1,
+  }),
+
+  //new question
+  new Question({
+    question:
+      "What are some diverse mobility needs the transport system will cater to?",
+    option1: "Elderly",
+    option2: "Bus Drivers",
+    option3: "1 and 2",
+    option4: "None of the above",
+    correctanswer: 1,
+  }),
+
+  //new question
+  new Question({
+    question: "How do EVs reduce Noise Pollution?",
+    option1: "Lack of Internal Combustion Engines",
+    option2: "Travel at Slower Speeds",
+    option3: "EVs do not produce Noise Pollution",
+    option4: "Noise Dampeners",
+    correctanswer: 1,
+  }),
+
+  //new question
+  new Question({
+    question: "What does the EV not need to run?",
+    option1: "Electricity",
+    option2: "Electric Motor",
+    option3: "Oil",
+    option4: "Battery Pack",
+    correctanswer: 3,
+  }),
+
+  //new question
+  new Question({
+    question:
+      "What do special features in transport provide for people with diverse mobility needs?",
+    option1: "More time",
+    option2: "More space",
+    option3: "More assistance",
+    option4: "All of the above",
+    correctanswer: 4,
+  }),
+
+  //new question
+  new Question({
+    question: "What does an AV require to run?",
+    option1: "Semiconductor",
+    option2: "Combustion Engine",
+    option3: "Photovolatic Cells",
+    option4: "None of the above",
+    correctanswer: 1,
+  }),
+
+  //new question
+  new Question({
+    question: "What does the Video Camera do in an AV?",
+    option1: "Record you for your TikTok",
+    option2: "Reads traffic light signals",
+    option3: "Reads Road Signs",
+    option4: "All of the above",
+    correctanswer: 3,
+  }),
+
+  //new question
+  new Question({
+    question: "What are some disasvantages of AVs",
+    option1: "Increased road accidents",
+    option2: "More time spent travelling",
+    option3: "Increased air pollution",
+    option4: "Higher cost to manufacture",
+    correctanswer: 4,
+  }),
+
+  //new question
+  new Question({
+    question:
+      "How many charging points will be available in Singapore by 2030?",
+    option1: "30,000",
+    option2: "40,000",
+    option3: "50,000",
+    option4: "60,000",
+    correctanswer: 4,
+  }),
+
+  //new question
+  new Question({
+    question: "How big will Singapore’s rail network be by 2030?",
+    option1: "240km",
+    option2: "300km",
+    option3: "360km",
+    option4: "420km",
+    correctanswer: 3,
+  }),
+
+  //new question
+  new Question({
+    question:
+      "What is Singapore's goal for transportation efficiency according to the LTA Master Plan 2040?",
+    option1: "30min city, 10 min towns",
+    option2: "40min city, 15 min towns",
+    option3: "35min city, 15 min towns",
+    option4: "45min city, 20 min towns",
+    correctanswer: 4,
   }),
 ];
 
@@ -326,8 +812,11 @@ function sendInput() {
       );
 
       //display options
-      for (let i = 1; i < arrayOfQuestions[window.randomQn].optionsLength + 1; i++) {
-        
+      for (
+        let i = 1;
+        i < arrayOfQuestions[window.randomQn].optionsLength + 1;
+        i++
+      ) {
         switch (i) {
           case 1:
             option = arrayOfQuestions[window.randomQn].option1;
@@ -392,7 +881,7 @@ function sendInput() {
               "The bicycles were fine, POL. Both work just the same in reducing the number of vehicles on the road. Then again, the bicycles are much more widespread. ERP gantries are more commonly found along central business districts such as Orchard Road and near retail shops such as the ION, Tangs, Wheelock Place and the Shaw Centre. ",
               "CAS"
             );
-            redirectToYoutubeERP()
+            redirectToYoutubeERP();
             // var obj = {
             //   video: {
             //     value:
@@ -830,4 +1319,3 @@ bgm2.addEventListener("ended", () => {
 updateOverlay();
 sayText("CAS is online", "CAS");
 sayText("POL is online", "POL");
-
