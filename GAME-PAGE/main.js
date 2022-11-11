@@ -103,7 +103,7 @@ function updateOverlay() {
   //DISPLAYING ROAD OVERLAY IMAGES UPON LOADING
   if (roadLevel > 2) {
     imageOverlay(
-      "/DEVELOPMENT-PROJ-SERVE/DEV-COAST-1.png",
+      "/DEVELOPMENT-PROJ-SERVE/DEV-ROAD-1.png",
       document.createElement("img")
     );
   }
