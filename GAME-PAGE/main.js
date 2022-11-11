@@ -1213,7 +1213,8 @@ function checkForCorrectAns(terminalInput, randomQn) {
         }
         levelProgress = 0; //RESETS THE LEVEL PROGRESS BAR
       } else {
-        levelProgress == 75 ? (levelProgress += 99) : (levelProgress += 100);
+        // levelProgress == 75 ? (levelProgress += 99) : (levelProgress += 99);
+        levelProgress += 99;
       }
     } else {
       level = 12; //max level
