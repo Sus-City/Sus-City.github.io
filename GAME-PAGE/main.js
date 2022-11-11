@@ -1,7 +1,6 @@
 //educational cutscene functions
 function redirectToYoutubeERP() {
-  const url = "https://www.youtube.com/watch?v=EE6sSf4QAsg"
-  location.replace(url)
+ window.open("https://www.youtube.com/watch?v=EE6sSf4QAsg");
 }
 //Sound from Zapsplat.com
 let build = new Audio("/SOUNDS/building.mp3");
