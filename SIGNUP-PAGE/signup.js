@@ -7,6 +7,7 @@ const state = {
   size: 10
 };
 
+
 const gui = new datGui.GUI();
 const fpsCtrl = gui.add(state, "fps").min(1).max(120).step(1);
 gui.addColor(state, "color");
