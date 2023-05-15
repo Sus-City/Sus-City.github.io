@@ -1,145 +1,150 @@
 //Importing the firebase methods
-import { db } from "./config.js";
-import { auth } from "./config.js";
-import { signInAnonymously } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-auth.js";
+import {
+  signInWithEmailAndPassword,
+  getAuth,
+  createUserWithEmailAndPassword,
+} from "https://www.gstatic.com/firebasejs/9.9.4/firebase-auth.js";
 import {
   set,
   ref,
   get,
-  child,
+  getDatabase,
+  update,
 } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-database.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-app.js";
 
 //Get inputs from HTML
 const submitBtn = document.querySelector("#submit_btn");
 
+function validateEmail(email) {
+  const re = /\S+\S+\.\S+/;
+  return re.test(email);
+}
+
+function validatePassword(password) {
+  const hasNumeric = /\d/.test(password);
+  const hasAlphabetical = /[a-zA-Z]/.test(password);
+  const hasSpecial = /[^a-zA-Z0-9]/.test(password);
+  if (!hasNumeric) {
+    return "Please include at least one numeric character in your password.";
+  }
+  if (!hasAlphabetical) {
+    return "Please include at least one alphabetical character in your password.";
+  }
+  if (!hasSpecial) {
+    return "Please include at least one special character in your password.";
+  }
+  if (!(password.length >= 6)) {
+    return "Please have at least 6 characters in your password";
+  }
+  return "";
+}
+
 submitBtn.addEventListener("click", (e) => {
-  signInAnonymously(auth) //creates account for authentication
-    .then(() => {
-      saveToFirebase();
-      setTimeout(function () {
-        // window.location.href = "http://localhost:5500/GAME-PAGE/main.html";
-        window.location.href = "https://sus-city.github.io/GAME-PAGE/main.html";
-      }, 800);
+  let email = document.getElementById("email").value;
+  let password = document.getElementById("password").value;
+  localStorage.setItem("URL", "http://localhost:5500"); //https://sus-city.github.io
+  localStorage.setItem("test", "testing");
+
+  if (!validateEmail(email)) {
+    alert("Please enter a valid email.");
+    return;
+  }
+  const passwordValidationMessage = validatePassword(password);
+  if (passwordValidationMessage) {
+    alert(passwordValidationMessage);
+    return;
+  }
+  signUp(email, password);
+});
+
+function signUp(email, password) {
+  axios({
+    method: "get",
+    url: decodeURIComponent(
+      "https%3A%2F%2Fstorage-api-qazw.onrender.com%2Fconfig"
+    ),
+  })
+    .then(function (response) {
+      const app = initializeApp(response.data);
+      const db = getDatabase();
+      const auth = getAuth(app);
+
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          var lgDate = new Date();
+          update(ref(db, "users/" + user.uid), {
+            last_login: lgDate,
+          }).then(() => {
+            get(ref(db, "users/" + user.uid), user.uid).then((snapshot) => {
+              navigateGame(user.uid, snapshot.val());
+            });
+          });
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          if (errorCode === "auth/user-not-found") {
+            createUserWithEmailAndPassword(auth, email, password)
+              .then((userCredential) => {
+                const user = userCredential.user;
+                var lgDate = new Date();
+                const defaultUser = {
+                  last_login: lgDate,
+                  email: email,
+                  password: password,
+                  level: 1,
+                  greenpoints: 0,
+                  favor: 0,
+                  levelProgress: 0,
+                  roadLevel: 2,
+                  factoryLevel: 2,
+                  parkLevel: 2,
+                  officesLevel: 2,
+                  landfillLevel: 2,
+                  coastLevel: 2,
+                  gasstationLevel: 2,
+                  shopItems: [""],
+                };
+                set(ref(db, "users/" + user.uid), defaultUser).then(() => {
+                  // TODO: LOADING ICON
+                  navigateGame(user.uid, defaultUser);
+                });
+              })
+              .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                switch (errorCode) {
+                  case "auth/invalid-email":
+                    alert("Please enter a valid email.");
+                    break;
+                  case "auth/weak-password":
+                    alert(
+                      "Please enter a stronger password, with a minimum of 6 characters."
+                    );
+                    break;
+                  default:
+                    alert("Please enter a valid email and password.");
+                }
+                console.log(errorMessage);
+              });
+          }
+        });
     })
     .catch((error) => {
       console.log(error);
     });
-});
-
-const userInformation = {
-  last_login: Date.now(),
-  level: 1,
-  greenpoints: 0,
-  favor: 0,
-  levelProgress: 0,
-  //building stuff
-  roadLevel: 2,
-  factoryLevel: 2,
-  parkLevel: 2,
-  officesLevel: 2,
-  landfillLevel: 2,
-  coastLevel: 2,
-  gasstationLevel: 2,
-  //shop
-  blimpBought: "false",
-  PineappleManBought: "false",
-  alienBought: "false",
-  floatBought: "false",
-  graffitiBought: "false",
-  umbrellasBought: "false",
-  windowBought: "false",
-};
-
-function saveToFirebase() {
-  let user = auth.currentUser; //gets the information of current user
-  let userUID = user.uid; //gets the UID of the current user
-  localStorage.setItem("UID", userUID); //stores the uid of the current user to the firebase
-  const dbRef = ref(db);
-  get(child(dbRef, "players/" + userUID)) //checks if the user account has been created
-    .then((snapshot) => {
-      if (snapshot.exists()) {
-        //gets the user information from firebase
-        localStorage.setItem("level", snapshot.val().level);
-        localStorage.setItem("greenpoints", snapshot.val().greenpoints);
-        localStorage.setItem("favor", snapshot.val().favor);
-        //the building variables
-        localStorage.setItem("roadLevel", snapshot.val().roadLevel);
-        localStorage.setItem("factoryLevel", snapshot.val().factoryLevel);
-        localStorage.setItem("parkLevel", snapshot.val().parkLevel);
-        localStorage.setItem("officesLevel", snapshot.val().officesLevel);
-        localStorage.setItem("landfillLevel", snapshot.val().landfillLevel);
-        localStorage.setItem("coastLevel", snapshot.val().coastLevel);
-        localStorage.setItem("gasstationLevel", snapshot.val().gasstationLevel);
-        //shop items
-        localStorage.setItem("blimpBought", snapshot.val().blimpBought);
-        localStorage.setItem(
-          "PineappleManBought",
-          snapshot.val().PineappleManBought
-        );
-        localStorage.setItem("alienBought", snapshot.val().alienBought);
-        localStorage.setItem("floatBought", snapshot.val().floatBought);
-        localStorage.setItem("graffitiBought", snapshot.val().graffitiBought);
-        localStorage.setItem("umbrellasBought", snapshot.val().umbrellasBought);
-        localStorage.setItem("windowBought", snapshot.val().windowBought);
-      } else {
-        //sets the user information in firebase if account hasn't been created
-        set(ref(db, "players/" + userUID), {
-          last_login: userInformation.last_login,
-          level: userInformation.level,
-          greenpoints: userInformation.greenpoints,
-          favor: userInformation.favor,
-          levelProgress: userInformation.levelProgress,
-          //building stuff
-          roadLevel: userInformation.roadLevel,
-          factoryLevel: userInformation.factoryLevel,
-          parkLevel: userInformation.parkLevel,
-          officesLevel: userInformation.officesLevel,
-          landfillLevel: userInformation.landfillLevel,
-          coastLevel: userInformation.coastLevel,
-          gasstationLevel: userInformation.gasstationLevel,
-          //shop items
-          blimpBought: userInformation.blimpBought,
-          PineappleManBought: userInformation.PineappleManBought,
-          alienBought: userInformation.alienBought,
-          floatBought: userInformation.floatBought,
-          graffitiBought: userInformation.graffitiBought,
-          umbrellasBought: userInformation.umbrellasBought,
-          windowBought: userInformation.windowBought,
-        });
-        localStorage.setItem("level", userInformation.level);
-        localStorage.setItem("greenpoints", userInformation.greenpoints);
-        localStorage.setItem("favor", userInformation.favor);
-        localStorage.setItem("levelProgress", userInformation.levelProgress);
-        //building variables
-        localStorage.setItem("roadLevel", userInformation.roadLevel);
-        localStorage.setItem("factoryLevel", userInformation.factoryLevel);
-        localStorage.setItem("parkLevel", userInformation.parkLevel);
-        localStorage.setItem("officesLevel", userInformation.officesLevel);
-        localStorage.setItem("landfillLevel", userInformation.landfillLevel);
-        localStorage.setItem("coastLevel", userInformation.coastLevel);
-        localStorage.setItem(
-          "gasstationLevel",
-          userInformation.gasstationLevel
-        );
-        //shop items
-        localStorage.setItem("blimpBought", userInformation.blimpBought);
-        localStorage.setItem(
-          "PineappleManBought",
-          userInformation.PineappleManBought
-        );
-        localStorage.setItem("alienBought", userInformation.alienBought);
-        localStorage.setItem("floatBought", userInformation.floatBought);
-        localStorage.setItem("graffitiBought", userInformation.graffitiBought);
-        localStorage.setItem(
-          "umbrellasBought",
-          userInformation.umbrellasBought
-        );
-        localStorage.setItem("windowBought", userInformation.windowBought);
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-
-  localStorage.setItem("username", document.getElementById("username").value); //sets the username (won't be saved in firebase)
+}
+function navigateGame(uid, snapshot) {
+  console.log("Start Saving");
+  localStorage.setItem("UID", uid);
+  localStorage.setItem("user", JSON.stringify(snapshot));
+  console.log("End Saving");
+  if (
+    localStorage.getItem("user") &&
+    localStorage.getItem("db") &&
+    localStorage.getItem("UID")
+  ) {
+    window.location.href = localStorage.getItem("URL") + "/GAME-PAGE/main.html";
+  }
 }

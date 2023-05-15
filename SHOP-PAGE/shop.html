@@ -17,7 +17,6 @@
         <button class="fa-solid fa-angle-left" onclick="playSound()"></button>
         <h1>The World's Pieces</h1>
         <div class="GPoint"></div>
-        <div class="Username">Hello, </div>
     </header>
 
     <div class="MainProductContainer">
@@ -101,7 +100,12 @@
             <button class="Buybtn Umbrella" onclick="playSound()">Buy</button>
         </div>
     </div>
-    <script src=" shop.js"></script>
+    <script>
+        let playSound = () => new Audio("/SOUNDS/menuclick.mp3").play();
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script type="module" src="shop.js"></script>
+    <!-- <script></script> -->
 </body>
 
 </html>

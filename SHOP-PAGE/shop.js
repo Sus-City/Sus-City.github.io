@@ -1,7 +1,4 @@
-//Display username
-const usernameTag = document.querySelector(".Username");
-let username = localStorage.getItem("username");
-usernameTag.textContent = "Hello " + username + "!";
+import { userInfo, save } from "../GAME-PAGE/main.js";
 
 //sound
 let buyingSound = new Audio("/SOUNDS/buyingitem.mp3");
@@ -20,20 +17,20 @@ const items = [
   ["Graffiti", 220, "graffitiBought"],
   ["Umbrella", 125, "umbrellasBought"],
 ];
-//Getting the variables from LocalStorage
-let greenpoints = Number(localStorage.getItem("greenpoints"));
 
 const GPointLabel = document.querySelector(".GPoint");
 const backBtn = document.querySelector(".fa-angle-left");
+
 //Set greenpoint (or leaf sticker) levels
-GPointLabel.textContent = "Leaf Stickers:  " + greenpoints;
+
+GPointLabel.textContent = "Leaf Stickers:  " + userInfo.greenpoints;
 
 const buttons = document.querySelectorAll(".Buybtn");
 
 checkStyles();
 function checkStyles() {
   for (let i = 0; i < items.length; i++) {
-    if (localStorage.getItem(items[i][2]) == "true") {
+    if (userInfo.shopItems.includes(items[i][2])) {
       //if item is bought, change styling
       buttons[i].textContent = "Bought";
       buttons[i].style.backgroundColor = "red";
@@ -42,7 +39,7 @@ function checkStyles() {
       buttons[i].textContent = "Buy";
       buttons[i].style.backgroundColor = "green";
       buttons[i].addEventListener("click", function (event) {
-        buyItem(event.path[0]);
+        buyItem(buttons[i]); //event.path[0]
       });
     }
   }
@@ -52,26 +49,25 @@ function buyItem(buyButton) {
   //loop through each item in the array to check for same name -> aka item being purchased
   for (let i = 0; i < buttons.length; i++) {
     if (buyButton.classList.contains(items[i][0])) {
-      if (greenpoints - items[i][1] >= 0) {
-        greenpoints -= items[i][1];
+      if (userInfo.greenpoints - items[i][1] >= 0) {
+        userInfo.greenpoints -= items[i][1];
         buyingSound.play();
         alert("Item purchased successfully.");
-        GPointLabel.textContent = "Leaf Stickers:  " + String(greenpoints); //update greenpoint label
+        GPointLabel.textContent =
+          "Leaf Stickers:  " + String(userInfo.greenpoints); //update greenpoint label
         //Update localStorage Variables
-        localStorage.setItem(items[i][2], "true");
-        localStorage.setItem("greenpoints", greenpoints);
+        userInfo.shopItems.push(items[i][2]);
         checkStyles();
         buttons[i].removeEventListener("click", buyItem);
       } else {
-        alert("You do not have enough greenpoints to purchase this item.");
+        alert(
+          "You do not have enough userInfo.greenpoints to purchase this item."
+        );
       }
     }
   }
 }
 
 backBtn.addEventListener("click", () => {
-  setTimeout(function () {
-    window.location.href = "https://sus-city.github.io/GAME-PAGE/main.html";
-    // window.location.href = "http://localhost:5500/GAME-PAGE/main.html";
-  }, 700);
+  save("game");
 });

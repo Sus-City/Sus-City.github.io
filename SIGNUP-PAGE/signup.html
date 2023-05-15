@@ -12,7 +12,7 @@
 </script>
 
 <body>
-  <div class="center">
+  <!-- <div class="center">
     <h1>Sign Up</h1>
     <div class="txt_field">
       <input type="text" id="username" required />
@@ -21,7 +21,30 @@
     </div>
     <button id="submit_btn" onclick="playSound()">Sign up</button>
     <script type="module" src="/FIREBASE/signup-firebase.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+  </div> -->
+  <div class="signup-body">
+    <div class="center">
+      <h1>Sign Up</h1>
+      <div class="txt_field">
+        <input type="email" id="email" required />
+        <!-- onchange={changeEmail} value={email} -->
+        <span></span>
+        <label>email</label>
+      </div>
+      <div class="txt_field">
+        <input type="password" id="password" required />
+        <!-- onchange={changePassword} value={password}  -->
+        <span></span>
+        <label>password</label>
+      </div>
+      <button id="submit_btn">
+        Sign up
+      </button>
+    </div>
   </div>
+  <script type="module" src="/FIREBASE/signup-firebase.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
 </body>
 
 </html>

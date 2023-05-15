@@ -1,1323 +1,1357 @@
-//educational cutscene functions
-function redirectToYoutubeERP() {
-  window.open("https://www.youtube.com/watch?v=EE6sSf4QAsg");
-}
-//Sound from Zapsplat.com
-let build = new Audio("/SOUNDS/building.mp3");
-let onloadMusic = new Audio("/SOUNDS/onload.mp3");
-let bgm1 = new Audio("/SOUNDS/bgm.mp3");
-let bgm2 = new Audio("/SOUNDS/bgm 2.mp3");
-let bgm3 = new Audio("/SOUNDS/bgm 3.mp3");
-
-onloadMusic.play();
-
-//getting values from html
-const cityLayout = document.querySelector(".city-layout"); //the playfield
-const usernameTag = document.querySelector(".username");
-const shopBtn = document.querySelector(".fa-shop");
-
-//Get user information
-let username = localStorage.getItem("username");
-usernameTag.innerHTML = "Hello " + username + "!";
-
-let level = Number(localStorage.getItem("level"));
-let greenpoints = Number(localStorage.getItem("greenpoints")); //LEAF STICKERS
-let favor = Number(localStorage.getItem("favor")); //SUS POINTS
-let levelProgress = Number(localStorage.getItem("levelProgress")); //PROGRESS BAR FOR LEVELLING UP
-
-//SHOP ITEMS
-let blimpBought = localStorage.getItem("blimpBought");
-let PineappleManBought = localStorage.getItem("PineappleManBought");
-let alienBought = localStorage.getItem("alienBought");
-let floatBought = localStorage.getItem("floatBought");
-let graffitiBought = localStorage.getItem("graffitiBought");
-let umbrellasBought = localStorage.getItem("umbrellasBought");
-let windowBought = localStorage.getItem("windowBought");
-
-// Get development level information from user
-let roadLevel = Number(localStorage.getItem("roadLevel"));
-let factoryLevel = Number(localStorage.getItem("factoryLevel"));
-let parkLevel = Number(localStorage.getItem("parkLevel"));
-let officesLevel = Number(localStorage.getItem("officesLevel"));
-let landfillLevel = Number(localStorage.getItem("landfillLevel"));
-let coastLevel = Number(localStorage.getItem("coastLevel"));
-let gasstationLevel = Number(localStorage.getItem("gasstationLevel"));
-
-function imageOverlay(imageSource, imageElement) {
-  imageElement.src = imageSource; //source of image
-  cityLayout.appendChild(imageElement);
-  imageElement.classList.add("overlay-image");
-}
-
-function updateOverlay() {
-  //DISPLAY BLIMP OVERLAY IMAGES
-  if (blimpBought == "true") {
-    imageOverlay(
-      "/DEVELOPMENT-PROJ-SERVE/SHOP-BLIMP.png",
-      document.createElement("img")
-    );
-  }
-  //DISPLAY PINEAPPLE MAN OVERLAY IMAGES
-  if (PineappleManBought == "true") {
-    imageOverlay(
-      "/DEVELOPMENT-PROJ-SERVE/SHOP-PINEAPPLE-MAN.png",
-      document.createElement("img")
-    );
-  }
-  //DISPLAY PINEAPPLE MAN OVERLAY IMAGES
-  if (windowBought == "true") {
-    imageOverlay(
-      "/DEVELOPMENT-PROJ-SERVE/SHOP-WINDOW.png",
-      document.createElement("img")
-    );
-  }
-  //DISPLAY PINEAPPLE MAN OVERLAY IMAGES
-  if (alienBought == "true") {
-    imageOverlay(
-      "/DEVELOPMENT-PROJ-SERVE/SHOP-ALIEN.png",
-      document.createElement("img")
-    );
-  }
-  //DISPLAY PINEAPPLE MAN OVERLAY IMAGES
-  if (floatBought == "true") {
-    imageOverlay(
-      "/DEVELOPMENT-PROJ-SERVE/SHOP-FLOATIE.png",
-      document.createElement("img")
-    );
-  }
-  //DISPLAY PINEAPPLE MAN OVERLAY IMAGES
-  if (graffitiBought == "true") {
-    imageOverlay(
-      "/DEVELOPMENT-PROJ-SERVE/SHOP-GRAFFITI.png",
-      document.createElement("img")
-    );
-  }
-  //DISPLAY PINEAPPLE MAN OVERLAY IMAGES
-  if (umbrellasBought == "true") {
-    imageOverlay(
-      "/DEVELOPMENT-PROJ-SERVE/SHOP-UMBRELLAS.png",
-      document.createElement("img")
-    );
-  }
-  //DISPLAYING ROAD OVERLAY IMAGES UPON LOADING
-  if (roadLevel > 2) {
-    imageOverlay(
-      "/DEVELOPMENT-PROJ-SERVE/DEV-ROAD-1.png",
-      document.createElement("img")
-    );
-  }
-  if (roadLevel > 3) {
-    imageOverlay(
-      "/DEVELOPMENT-PROJ-SERVE/DEV-ROAD-2.png",
-      document.createElement("img")
-    );
-  }
-  //DISPLAYING FACTORY OVERLAY IMAGES UPON LOADING
-  if (factoryLevel > 2) {
-    imageOverlay(
-      "/DEVELOPMENT-PROJ-SERVE/DEV-FACTORY-1.png",
-      document.createElement("img")
-    );
-  }
-  if (factoryLevel > 3) {
-    imageOverlay(
-      "/DEVELOPMENT-PROJ-SERVE/DEV-FACTORY-2.png",
-      document.createElement("img")
-    );
-  }
-  //DISPLAYING OFFICES OVERLAY IMAGES UPON LOADING
-  if (officesLevel > 2) {
-    imageOverlay(
-      "/DEVELOPMENT-PROJ-SERVE/DEV-OFFICES-1.png",
-      document.createElement("img")
-    );
-  }
-  if (officesLevel > 3) {
-    imageOverlay(
-      "/DEVELOPMENT-PROJ-SERVE/DEV-OFFICES-2.png",
-      document.createElement("img")
-    );
-  }
-  //DISPLAYING COAST OVERLAY IMAGES UPON LOADING
-  if (coastLevel > 2) {
-    imageOverlay(
-      "/DEVELOPMENT-PROJ-SERVE/DEV-COAST-1.png",
-      document.createElement("img")
-    );
-  }
-  if (coastLevel > 3) {
-    imageOverlay(
-      "/DEVELOPMENT-PROJ-SERVE/DEV-COAST-2.png",
-      document.createElement("img")
-    );
-  }
-  //DISPLAYING LANDFILL OVERLAY IMAGES UPON LOADING
-  if (landfillLevel > 2) {
-    imageOverlay(
-      "/DEVELOPMENT-PROJ-SERVE/DEV-LANDFILL-1.png",
-      document.createElement("img")
-    );
-  }
-  if (landfillLevel > 3) {
-    imageOverlay(
-      "/DEVELOPMENT-PROJ-SERVE/DEV-LANDFILL-2.png",
-      document.createElement("img")
-    );
-  }
-  //DISPLAYING GAS STATION OVERLAY IMAGES UPON LOADING
-  if (gasstationLevel > 2) {
-    imageOverlay(
-      "/DEVELOPMENT-PROJ-SERVE/DEV-GAS STATION-1.png",
-      document.createElement("img")
-    );
-  }
-  if (gasstationLevel > 3) {
-    imageOverlay(
-      "/DEVELOPMENT-PROJ-SERVE/DEV-GAS STATION-2.png",
-      document.createElement("img")
-    );
-  }
-  //DISPLAYING PARK OVERLAY IMAGES UPON LOADING
-  if (parkLevel > 2) {
-    imageOverlay(
-      "/DEVELOPMENT-PROJ-SERVE/PARK-stage 1.png",
-      document.createElement("img")
-    );
-  }
-  if (parkLevel > 3) {
-    imageOverlay(
-      "/DEVELOPMENT-PROJ-SERVE/PARK-stage 2.png",
-      document.createElement("img")
-    );
-  }
-  if (parkLevel >= 4) {
-    imageOverlay(
-      "/DEVELOPMENT-PROJ-SERVE/PARK-stage 3.png",
-      document.createElement("img")
-    );
-  }
-}
-
-class Dialogue {
-  constructor(character, dialogueContent) {
-    this.character = character;
-    this.dialogueContent = dialogueContent;
-  }
-
-  //Method to create a dialogue in the terminal
-  createTextInTerminal() {
-    let dialogue = document.createElement("p");
-    dialogue.textContent = this.dialogueContent;
-    if (this.character == "CAS") {
-      dialogue.style.color = "#44dcfa";
-    } else if (this.character == "POL") {
-      dialogue.style.color = "red";
-    } else if (this.character == "QUESTION") {
-      dialogue.style.color = "yellow";
-    } else {
-      console.log(
-        "Error: Character is wrongly defined. It must either be CAS or POL"
-      );
-    }
-    setTimeout(function () {
-      terminalResultsCont.append(dialogue);
-      terminalResultWrapper.scrollTop =
-        terminalResultWrapper.scrollHeight - terminalResultWrapper.clientHeight; //MOVES THE TEXT UP
-    }, 200);
-  }
-}
-
-function sayText(theTextContent, character) {
-  let newDialogue = new Dialogue(character, theTextContent);
-  newDialogue.createTextInTerminal();
-}
-
-//questions stuff
-class Question {
-  constructor({ question, option1, option2, option3, option4, correctanswer }) {
-    this.question = question;
-    let optionsArray = [];
-
-    this.option1 = option1;
-    optionsArray.push(option1);
-
-    this.option2 = option2;
-    optionsArray.push(option2);
-
-    if (typeof option3 !== "undefined") {
-      this.option3 = option3;
-      optionsArray.push(option3);
-    }
-
-    if (typeof option4 !== "undefined") {
-      this.option4 = option4;
-      optionsArray.push(option4);
-    }
-
-    this.correctanswer = correctanswer;
-    this.optionsLength = optionsArray.length;
-  }
-}
-
-const arrayOfQuestions = [
-  new Question({
-    question: "Which of the following is not a Transport Node?",
-    option1: "Bus interchange",
-    option2: "MRT Station",
-    option3: "Roads",
-    option4: "Shipping Port",
-    correctanswer: 3,
-  }),
-
-  //new question
-  new Question({
-    question: "Which of the following is a Transport Route?",
-    option1: "Home",
-    option2: "Airport",
-    option3: "Ocean",
-    option4: "Carparks",
-    correctanswer: 3,
-  }),
-
-  //new question
-  new Question({
-    question: "What is the Purpose of Transportation?",
-    option1: "Allow mobility for commuters",
-    option2: "Allow accessibility for commuters",
-    option3: "Provide Opportunities for Economic Purposes",
-    option4: "All of the above",
-    correctanswer: 4,
-  }),
-
-  //new question
-  new Question({
-    question: "What problems does Singapore face?",
-    option1: "Scarcity of Land",
-    option2: "Lack of Economic Opportunities",
-    option3: "Decreasing Population",
-    option4: "Water Shortages",
-    correctanswer: 1,
-  }),
-
-  //new question
-  new Question({
-    question: "What is Mobility?",
-    option1: "Speed of Movement from one place to another",
-    option2: "Type of Movement from one place to another",
-    option3: "Efficiency of Movement from one place to another",
-    option4: "All of the above",
-    correctanswer: 2,
-  }),
-
-  //new question
-  new Question({
-    question: "What is Accessibility?",
-    option1: "Movement of People, Goods and Services",
-    option2: "Movement of Goods and Services",
-    option3: "Ease of Movement of Goods and Services",
-    option4: "Ease of Movement of People, Goods and Services",
-    correctanswer: 4,
-  }),
-
-  //new question
-  new Question({
-    question: "What is Transport Network Density?",
-    option1:
-      "area coverage of transport system / length of distance travelled VS length of routes/nodes",
-    option2:
-      "area coverage of transport system / length of distance travelled VS no. of routes / nodes",
-    option3:
-      "area coverage of transport system / length of routes/nodes VS length of distance travelled",
-    option4:
-      "area coverage of transport system / no. of routes/nodes VS length of distance travelled",
-    correctanswer: 2,
-  }),
-
-  //new question
-  new Question({
-    question:
-      "What is an advantage of Intermodal Transport over Unimodal Transport?",
-    option1: "Shorter travel time for indirect destinations",
-    option2: "Shorter travel time for direct destinations",
-    option3: "Lower Cost",
-    option4: "Faster speed of vehicles",
-    correctanswer: 1,
-  }),
-
-  //new question
-  new Question({
-    question:
-      "Which of the following are factors affecting Transport Infrastructure?",
-    option1: "Reliability",
-    option2: "Frequency",
-    option3: "Capacity",
-    option4: "All of the above",
-    correctanswer: 4,
-  }),
-
-  //new question
-  new Question({
-    question:
-      "Which of the following shows the disadvantages of a city with poor public transport networks?",
-    option1: "Traffic Congestion",
-    option2: "Increased Carbon Footprint",
-    option3: "Insufficient Vehicle Fleets",
-    option4: "All of the above",
-    correctanswer: 4,
-  }),
-
-  //new question
-  new Question({
-    question: "Which of the following is true?",
-    option1: "birth rate < death rate = population increase",
-    option2: "immigration = Emigration = net population growth",
-    option3: "birth rate > death rate = population decrease",
-    option4: "immigration > Emigration = population decrease",
-    correctanswer: 2,
-  }),
-
-  //new question
-  new Question({
-    question: "City A has a large population density, which means…",
-    option1: "there is a small population occupying a large area",
-    option2: "there is a large population occupying a small area",
-    option3: "there is a small population occupying a small area",
-    option4: "there is a large population occupying a large area",
-    correctanswer: 2,
-  }),
-
-  //new question
-  new Question({
-    question: "What does the CBD stand for?",
-    option1: "Central Buyers District",
-    option2: "Collective Businessmen Dictatorship",
-    option3: "Central Business District",
-    option4: "Central Bollywood District",
-    correctanswer: 3,
-  }),
-
-  //new question
-  new Question({
-    question:
-      "What is required for the establishment of a well connected transport network?",
-    option1: "Low mobility, acceleration, connectivity",
-    option2: "High creativity, speed, strength",
-    option3: "High Connectivity, accessibility, mobility",
-    option4: "Non-flammable, Strength, Foundation",
-    correctanswer: 3,
-  }),
-
-  //new question
-  new Question({
-    question: "How is Private Transport different from Public Transport?",
-    option1: "More Cost-efficient",
-    option2: "More Convenient",
-    option3: "Increased Speed",
-    option4: "More Energy-saving",
-    correctanswer: 2,
-  }),
-
-  //new question
-  new Question({
-    question: "What is the benefit of going to Central Business Districts?",
-    option1: "More Interactions",
-    option2: "More Congestion",
-    option3: "More Economic Activities",
-    option4: "More Art Galleries",
-    correctanswer: 3,
-  }),
-
-  //new question
-  new Question({
-    question:
-      "Why is there a need for the establishment of a well-connected transport network?",
-    option1: "Reduction of Congestion in heavy traffic areas",
-    option2: "Increase in sales for retail stores in CBD",
-    option3: "Reduction of accidents",
-    option4: "To not spend money to redo the transport network",
-    correctanswer: 1,
-  }),
-
-  //new question
-  new Question({
-    question:
-      "Which of the following is not a disadvantage of traffic congestion?",
-    option1: "Direct drivers to other roads",
-    option2: "Longer travelling times for road users",
-    option3: "More combustion of fossil fuels & carbon emissions",
-    option4: "Commuters get frustrated",
-    correctanswer: 1,
-  }),
-
-  //new question
-  new Question({
-    question: "What is an example of natural landscapes?",
-    option1: "Farms",
-    option2: "Housing",
-    option3: "Public Facilities",
-    option4: "City",
-    correctanswer: 1,
-  }),
-
-  //new question
-  new Question({
-    question:
-      "Which of the following is a consequence of altering the natural ecosystem?",
-    option1: "Increase survival chances of animals",
-    option2: "Increase animal population",
-    option3: "Animals get run over",
-    option4: "None of the above",
-    correctanswer: 3,
-  }),
-
-  //new question
-  new Question({
-    question: "What is not an advantage of wildlife corridors?",
-    option1: "Conserve ecosystem",
-    option2: "Protect wildlife genetic pools",
-    option3: "Raise wildlife survival chances",
-    option4: "Train wildlife survival skills",
-    correctanswer: 4,
-  }),
-
-  //new question
-  new Question({
-    question: "What is false about traffic congestion?",
-    option1: "increases number of vehicles on the road",
-    option2: "increases speed of vehicles",
-    option3: "increases driver frustration",
-    option4: "increases carbon footprint",
-    correctanswer: 2,
-  }),
-
-  //new question
-  new Question({
-    question: "What is true about carpooling?",
-    option1: "It is a public transport mode",
-    option2: "Increases number of vehicles on the road",
-    option3: "Lower combustion of fossil fuels",
-    option4: "None of the above",
-    correctanswer: 3,
-  }),
-
-  //new question
-  new Question({
-    question: "What is smog made of?",
-    option1: "Pollen",
-    option2: "Microfibre",
-    option3: "Hair/Fur",
-    option4: "Dirt",
-    correctanswer: 1,
-  }),
-
-  //new question
-  new Question({
-    question:
-      "What are the side effects Humans face from prolonged exposure to polluted air?",
-    option1: "High Blood Pressure",
-    option2: "Muscle Pain",
-    option3: "1 and 2",
-    option4: "Low Blood Pressure",
-    correctanswer: 4,
-  }),
-
-  //new question
-  new Question({
-    question: "What is a consequence of Noise Pollution?",
-    option1: "Short Sightedness",
-    option2: "Improved Sleep Conditions",
-    option3: "Reduced work productivity",
-    option4: "None of the above",
-    correctanswer: 3,
-  }),
-
-  //new question
-  new Question({
-    question:
-      "What is the average loudness limit for human hearing(in decibels)?",
-    option1: "69",
-    option2: "54",
-    option3: "59",
-    option4: "53",
-    correctanswer: 4,
-  }),
-
-  //new question
-  new Question({
-    question:
-      "What is the main reasons are trees being planted in place of sound barriers?",
-    option1: "Reduced greenhouse gasses",
-    option2: "Increased greenery",
-    option3: "Cost Efficient",
-    option4: "All of the above",
-    correctanswer: 4,
-  }),
-
-  //new question
-  new Question({
-    question: "Which of the following is a result of road accidents?",
-    option1: "Damage of personal property",
-    option2: "Incur penalty fees",
-    option3: "1 and 2",
-    option4: "None of the above",
-    correctanswer: 3,
-  }),
-
-  //new question
-  new Question({
-    question:
-      "On which date did the Singapore Road Safety Council start to run public campaigns to promote awareness for road safety?",
-    option1: "2006",
-    option2: "2011",
-    option3: "2012",
-    option4: "2013",
-    correctanswer: 4,
-  }),
-
-  //new question
-  new Question({
-    question:
-      "What is the percentage of greenhouse gasses produced by transport systems?",
-    option1: "15 to 20",
-    option2: "20 to 25",
-    option3: "25 to 30",
-    option4: "30 to 35",
-    correctanswer: 3,
-  }),
-
-  //new question
-  new Question({
-    question: "Land is precious to humanity as the lithosphere of earth is…",
-    option1: "20%",
-    option2: "30%",
-    option3: "40%",
-    option4: "50%",
-    correctanswer: 2,
-  }),
-
-  //new question
-  new Question({
-    question:
-      "Which of the following is true in this format in the scenario of high crime rate during peak hours: [amount of commuters],[cramped/spacious],[personal safety concerns]",
-    option1: "High, Cramped, Reduced",
-    option2: "High, Cramped, Increased",
-    option3: "Low, Cramped, Reduced",
-    option4: "Low, Spacious, Increased",
-    correctanswer: 2,
-  }),
-
-  //new question
-  new Question({
-    question:
-      "Which of the following is an initiative implemented to aid in mobility of the Elderly?",
-    option1: "Ergonomic Seats",
-    option2: "Green Man +",
-    option3: "Support Railings",
-    option4: "All of the above",
-    correctanswer: 4,
-  }),
-
-  //new question
-  new Question({
-    question:
-      "Which of the following are initiatives implemented to aid PwDs, specifically people with Visual Impairment?",
-    option1: "Low Profile Bus Ramps",
-    option2: "Green Man +",
-    option3: "Textured Paths",
-    option4: "2 and 3",
-    correctanswer: 4,
-  }),
-
-  //new question
-  new Question({
-    question:
-      "Which of the following is true in this format: (date of which) [LTA introducing tactile guiding systems in two pilot phases], [full implementation of the feature], [all bus stops and MRT stations implementing the system]",
-    option1: "2005, 2010, 2013",
-    option2: "2000, 2003, 2006",
-    option3: "2002, 2004, 2007",
-    option4: "1995, 1998, 2003",
-    correctanswer: 4,
-  }),
-
-  //new question
-  new Question({
-    question:
-      "Which of the following is not a challenge of transport planning?",
-    option1: "Lack of Contractors",
-    option2: "Topography",
-    option3: "Building Layout",
-    option4: "High Monetary Investments",
-    correctanswer: 1,
-  }),
-
-  //new question
-  new Question({
-    question:
-      "What are some diverse mobility needs the transport system will cater to?",
-    option1: "Elderly",
-    option2: "Bus Drivers",
-    option3: "1 and 2",
-    option4: "None of the above",
-    correctanswer: 1,
-  }),
-
-  //new question
-  new Question({
-    question: "How do EVs reduce Noise Pollution?",
-    option1: "Lack of Internal Combustion Engines",
-    option2: "Travel at Slower Speeds",
-    option3: "EVs do not produce Noise Pollution",
-    option4: "Noise Dampeners",
-    correctanswer: 1,
-  }),
-
-  //new question
-  new Question({
-    question: "What does the EV not need to run?",
-    option1: "Electricity",
-    option2: "Electric Motor",
-    option3: "Oil",
-    option4: "Battery Pack",
-    correctanswer: 3,
-  }),
-
-  //new question
-  new Question({
-    question:
-      "What do special features in transport provide for people with diverse mobility needs?",
-    option1: "More time",
-    option2: "More space",
-    option3: "More assistance",
-    option4: "All of the above",
-    correctanswer: 4,
-  }),
-
-  //new question
-  new Question({
-    question: "What does an AV require to run?",
-    option1: "Semiconductor",
-    option2: "Combustion Engine",
-    option3: "Photovolatic Cells",
-    option4: "None of the above",
-    correctanswer: 1,
-  }),
-
-  //new question
-  new Question({
-    question: "What does the Video Camera do in an AV?",
-    option1: "Record you for your TikTok",
-    option2: "Reads traffic light signals",
-    option3: "Reads Road Signs",
-    option4: "All of the above",
-    correctanswer: 3,
-  }),
-
-  //new question
-  new Question({
-    question: "What are some disasvantages of AVs",
-    option1: "Increased road accidents",
-    option2: "More time spent travelling",
-    option3: "Increased air pollution",
-    option4: "Higher cost to manufacture",
-    correctanswer: 4,
-  }),
-
-  //new question
-  new Question({
-    question:
-      "How many charging points will be available in Singapore by 2030?",
-    option1: "30,000",
-    option2: "40,000",
-    option3: "50,000",
-    option4: "60,000",
-    correctanswer: 4,
-  }),
-
-  //new question
-  new Question({
-    question: "How big will Singapore’s rail network be by 2030?",
-    option1: "240km",
-    option2: "300km",
-    option3: "360km",
-    option4: "420km",
-    correctanswer: 3,
-  }),
-
-  //new question
-  new Question({
-    question:
-      "What is Singapore's goal for transportation efficiency according to the LTA Master Plan 2040?",
-    option1: "30min city, 10 min towns",
-    option2: "40min city, 15 min towns",
-    option3: "35min city, 15 min towns",
-    option4: "45min city, 20 min towns",
-    correctanswer: 4,
-  }),
-];
-
-//level indicator
-const levelIndicator = document.querySelector(".circle");
-const levelProgressBar = document.querySelector(".level-progress");
-const levelGreenPointts = document.querySelector(".GPoint");
-const levelFavour = document.querySelector(".favour");
-
-levelFavour.textContent = "Sus Points: " + String(favor);
-levelGreenPointts.textContent = "Leaf Stickers: " + String(greenpoints);
-
-levelIndicator.textContent = level;
-levelProgressBar.style.width = levelProgress - 1 + "%";
-
-//terminal
-const terminalResultsCont = document.querySelector("#terminalResultsCont");
-const terminalTextInput = document.querySelector("#terminalTextInput");
-const terminalResultWrapper = document.querySelector(".terminalResultWrapper");
-const sendBtn = document.querySelector("#sendBtn");
-let terminalInput;
-let option; //for displaying the options for the qn
-
-const noinnoText =
-  "Nothing happened, just like the Lore dictated. Clearly, the humans have run out of innovation so they can no longer Develop this area.";
-const nofavorsText =
-  "Hey, hey, hold on, User! You still have to answer a few more questions! To Develop an area, you need Sus Points. Slow down and level up first, got it?";
-
-function sendInput() {
-  terminalInput = terminalTextInput.value;
-  switch (terminalInput) {
-    case "/help":
-      //display all the commands
-      sayText(
-        "To receive a question, enter: [/q]. To answer questions? Simple! Respective to the option you choose, enter: [/1, /2, /3 or /4].",
-        "CAS"
-      );
-      sayText(
-        "Your final command is the [/develop] command! Everytime you level up, you receive enough SUS points to implement an environmental measure in an area. For example, simply enter [/develop /road] if you want to develop the road! The six areas you can develop are the road, factory, offices, coast, landfill and gasstation.",
-        "POL"
-      );
-      sayText(
-        "Also, to view the developments in 3D after you've developed them, simply type [/3D] and insert the name of the development",
-        "CAS"
-      );
-      sayText(
-        "Pro Tip: Pressing the up arrow allows you to view your command history.",
-        "POL"
-      );
-      break;
-    case "/q":
-      window.isQuestionAnswered = false;
-      window.randomQn = Math.floor(Math.random() * arrayOfQuestions.length);
-      //display question
-      sayText(
-        `Question: ${arrayOfQuestions[window.randomQn].question}`,
-        "QUESTION"
-      );
-
-      //display options
-      for (
-        let i = 1;
-        i < arrayOfQuestions[window.randomQn].optionsLength + 1;
-        i++
-      ) {
-        switch (i) {
-          case 1:
-            option = arrayOfQuestions[window.randomQn].option1;
-            break;
-          case 2:
-            option = arrayOfQuestions[window.randomQn].option2;
-            break;
-          case 3:
-            option = arrayOfQuestions[window.randomQn].option3;
-            break;
-          case 4:
-            option = arrayOfQuestions[window.randomQn].option4;
-            break;
-        }
-        sayText(`Option ${i}: ${option}`, "QUESTION");
-      }
-      break;
-    case "/1":
-      if (window.isQuestionAnswered == false)
-        checkForCorrectAns(terminalInput, window.randomQn);
-      else dontUnderstand();
-      break;
-    case "/2":
-      if (window.isQuestionAnswered == false)
-        checkForCorrectAns(terminalInput, window.randomQn);
-      else dontUnderstand();
-      break;
-    case "/3":
-      if (window.isQuestionAnswered == false)
-        checkForCorrectAns(terminalInput, window.randomQn);
-      else dontUnderstand();
-      break;
-    case "/4":
-      if (window.isQuestionAnswered == false)
-        checkForCorrectAns(terminalInput, window.randomQn);
-      else dontUnderstand();
-      break;
-    case "/develop /road":
-      if (favor > 0 && roadLevel != 4) {
-        switch (roadLevel) {
-          case 2:
-            sayText(
-              "…Bicycles. This is..this is their next idea. We've given them so much criticism about their carbon footprint, and this is all they can think of? It's the bare minimum! What happened to humans being innovative!—",
-              "POL"
-            );
-            sayText(
-              "Stop being so dramatic. You already knew this would be the next development; it's in the Lore. Which, I'm going to assume, you have read? Even if you hadn't, you're still wasting far too much Dialogue on your reactions, when we should be explaining the developments…You're glaring at me, but I haven't said anything strange.",
-              "CAS"
-            );
-
-            sayText(
-              "No, no, you're right. Bicycle-sharing may be a simple method, but they're efficient. I shouldn't underestime the humans' system of bicycle stations that users can check bicycles out of. They can ride their destination and park the bike in a nearby docking station. With bicycle-sharing, there will be less vehicles on the road, reducing carbon emissions and greenhouse gases in the air. There are many bikesharing services in Singapore, including Anywheel, SG Bike and HelloRide. …Good enough of an explanation for you?",
-              "POL"
-            );
-            break;
-          case 3:
-            sayText(
-              "Now this is a proper environmental measure! Nothing like those bicycles from before! The implementation of charges when drives travel on roads leading into the cities during peak hours; it preys on the humans' weakness for money! Drivers are discouraged from using certain roads, especially during peak hours, because they don't want to pay more during such hours. This diverts traffic, easing congestion in certain roads. Brutal genius.",
-              "POL"
-            );
-            sayText(
-              "The bicycles were fine, POL. Both work just the same in reducing the number of vehicles on the road. Then again, the bicycles are much more widespread. ERP gantries are more commonly found along central business districts such as Orchard Road and near retail shops such as the ION, Tangs, Wheelock Place and the Shaw Centre. ",
-              "CAS"
-            );
-            redirectToYoutubeERP();
-            // var obj = {
-            //   video: {
-            //     value:
-            //       "<iframe title='YouTube video player' type=\"text/html\" width='640' height='390' src='http://www.youtube.com/embed/W-Q7RMpINVo' frameborder='0' allowFullScreen></iframe>",
-            //   },
-            // };
-            // document.write(obj.video.value);
-            break;
-        }
-        favor = favor - 1;
-        roadLevel += 1;
-        build.play();
-        updateOverlay();
-      } else if (roadLevel == 4) {
-        sayText(noinnoText, "CAS");
-      } else {
-        sayText(nofavorsText, "POL");
-      }
-      break;
-    case "/develop /factory":
-      if (favor > 0 && factoryLevel != 4) {
-        switch (factoryLevel) {
-          case 2:
-            sayText(
-              "Oh, this is lovely! Irresponsible industrial manufacturing causes so much unecessary air pollution. Using recycled materials has definitely reduced the All those unwanted chemicals, gases and particles gone from the atmosphere! You're doing so well, fighting against climate change-",
-              "POL"
-            );
-            sayText(
-              "Climate change doesn't exist here. It does in Reality, where the User is. But we wouldn't be affected even if that feature was added. Humans, on the other hand, suffer from respiriatory illnesses, eye irritation, lung damage, colds, coughs and breathing difficulties.",
-              "CAS"
-            );
-            sayText(
-              "So fragile! Length of exposure, amount and type of the pollutants varies, and each human is affected so differently…Humans face so many health risks. We must keep working to keep the city Sustainable, User. To the next question!",
-              "POL"
-            );
-            break;
-          case 3:
-            sayText(
-              "Solar panels are a rather helpful invention if you think about it. They're genius, converting light energy from their Sun into electrical energy. You seem…upset by this Development. I thought you would've loved to see humans taking advantage of their natural phenomena to create a renewable source of energy.",
-              "CAS"
-            );
-            sayText(
-              "Hm, just thinking. Why do they place it everywhere? I mean, what exactly do they hope to gain by putting such eyesores all over the place. There's no point for them, anyways, not when there's no Sun in here.",
-              "POL"
-            );
-            break;
-        }
-        favor -= 1;
-        factoryLevel += 1;
-        build.play();
-
-        updateOverlay();
-      } else if (factoryLevel == 4) {
-        sayText(noinnoText, "CAS");
-      } else {
-        sayText(nofavorsText, "POL");
-      }
-      break;
-    case "/develop /offices":
-      if (favor > 0 && officesLevel != 4) {
-        switch (officesLevel) {
-          case 2:
-            sayText(
-              "This one is rather straightforward. Rooftop gardens provide space for agriculture, add aesthetic beauty to cityscapes and reduce ambient temperatures. Thanks to photosynthesis, there's less cabron in the air but more oxygen. Humans work efficiently when provided with sufficient and quality air. In addition, it's been proven that the presence of nature soothes humans. The Simulation really does enjoy running smoothly with all these simple but neat Developments.",
-              "CAS"
-            );
-            sayText(
-              "The National Parks Board has plans for something similar, though, with their OneMillionTrees movement. A million planted trees in Singapore by 2030, can you imagine? I mean, can humans even achieve something like that? They're so weak by themselves!",
-              "POL"
-            );
-            sayText(
-              "It's true that they're nothing more than Flesh Beings by themselves, but together these Pixels create a whole city. Their collaboration with one another is key in accomplishing their Singapore Green Plan. That's not relevant, though. the Lore doesn't mention anything about the Singapore Green Plan so it likely won't appear in the Simulation.",
-              "CAS"
-            );
-            sayText(
-              "And yet, we have Dialogue about it…But like you said, CAS, it's irrelevant. Nothing more than my observations about the humans.",
-              "POL"
-            );
-            break;
-          case 3:
-            sayText(
-              "Again. Seriously. Solar panels, again…it's always going to be solar panels, huh? Over, and over, and over, again! It's never going to— haha— stop being solar panels—",
-              "POL"
-            );
-            sayText(
-              "POL? POL, you're— are you Glitching? Hey! Hey, listen to me, stop! POL! FOr once, would you please just listen!",
-              "CAS"
-            );
-            break;
-        }
-        favor -= 1;
-        officesLevel += 1;
-        build.play();
-
-        updateOverlay();
-      } else if (officesLevel == 4) {
-        sayText(noinnoText, "CAS");
-      } else {
-        sayText(nofavorsText, "POL");
-      }
-      break;
-    case "/develop /coast":
-      if (favor > 0 && coastLevel != 4) {
-        //DISPLAY TEXT
-        switch (coastLevel) {
-          case 2:
-            sayText(
-              "3 days? But that's so short! User, is it really true that you can only survive without water for 3 days? What about your city, User? How can we possibly do anything within 3 days?! CAS, we need to get the humans hydrated right now!",
-              "POL"
-            );
-            sayText(
-              "Oh, stop panicking. They don't need water, they're Pixels. The Lore already prepared for that anyways. Look, the User implemented a rain collection system. This system takes advantage of the natural water cycle, allowing humans to collect water for their purposes later on. Of course, if they must drink the water, it has to go through a heavy filtering process first.",
-              "CAS"
-            );
-            sayText(
-              "Are the tanks always at the beach? That's rather impractical. If they really wanted to use natural cycles to their advantage, wouldn't they be placing them everywhere? It rains pretty much everywhere, after all. User! You could collect all the water you need to sustain yourself for 3 days if you built collection tanks at your own house!",
-              "POL"
-            );
-            break;
-          case 3:
-            sayText(
-              "Desalination. It's a fairly similar concept to filtering. You can see that it's placed right at the Coast in the Simulation. Humans are finally utilising this huge body of water, that's right in front of them. Still, their main goal is to remove any impurities from the seawater, turning the seawater into fresh drinking water. Can't they just drink their water straight from the source?",
-              "POL"
-            );
-            sayText(
-              "The Lore claims that the humans cannot survive such high amounts of salt. You already knew that, POL; I remember your experiements before the Simulation. Stop playing the fool when you are fully aware of the resourcesfulness and grit of the humans, much more than I am. The water undegoes reverse osmosis thanks to semipermeable membranes. Impurities like salt and dirt have large particles, so they are left behind as the water passes throigh these membranes.",
-              "CAS"
-            );
-            break;
-          case 4:
-            sayText(
-              "The Lore claims that the humans cannot survive such high amounts of salt. You already knew that, POL; I remember your experiements before the Simulation. Stop playing the fool when you are fully aware of the resourcesfulness and grit of the humans, much more than I am. The water undegoes reverse osmosis thanks to semipermeable membranes. Impurities like salt and dirt have large particles, so they are left behind as the water passes throigh these membranes.",
-              "CAS"
-            );
-            break;
-        }
-        favor -= 1;
-        coastLevel += 1;
-        build.play();
-        updateOverlay();
-      } else if (coastLevel == 4) {
-        sayText(noinnoText, "CAS"); //max level reached for coast
-      } else {
-        sayText(nofavorsText, "POL");
-      }
-      break;
-    case "/develop /landfill":
-      if (favor > 0 && landfillLevel != 4) {
-        //DISPLAY TEXT
-        switch (landfillLevel) {
-          case 2:
-            sayText(
-              "Ah, bins. A very minor change, and yet this would can have a rather large impact in the long-run. As long as they do it right, of course. If the materials they try to recycle are contaminated by food waste or human pieces, they can't be used to recycle. However, if they ensure that everything they throw in these bins are not contaminated, they help preseve natural resources for longer, and reduce their carbon footprint.",
-              "CAS"
-            );
-            sayText(
-              "The logic behind this Development is its convenciency, isn't it? User, did you know that the reason why so many humans don't recycle is because they find it tedious. They dislike the entire process, from cleaning trash to finding bins. Luckily, Divine Entities like us are much smarter, and we have allowed you to integrate a convenient Development! Now, the humans need barely any motivation! If they do, well, I would be honoured to provide some incentives for them.",
-              "POL"
-            );
-            break;
-          case 3:
-            sayText(
-              "Our Dialogue for this one is surprisingly excited, similar to the previous Landfill Development. It seems that we are supposed to be promoting the benefits of recycling to the User, but again, the Lore wants us to mention other things as well. ",
-              "CAS"
-            );
-            sayText(
-              "Let me see, you know I don't read that thing. Hm, a beloved robot on a space adventure…? A plant in a world covered in trash? Tsk, I knew this would be useless as always. This doesn't mean anything, CAS! Do you really expect me to believe that humans have invented space travel? Look at the User's city, do you see rocket scientists anywhere?",
-              "POL"
-            );
-            sayText(
-              "The Simulation is different from Reality. It's possible the Lore is referring to creations on the User's Platform. not ours. Surely someone there has created one of these recycling robots. The Flesh Entities certainly have a fascination for Artificial Intelligence, and the potential of these robots are incredible. Their Code makes them helpful, useful! They actually do important work in Reality!…Besides, separation is a crucial step in recycling.",
-              "CAS"
-            );
-            sayText(
-              "…I agree, CAS. It's better when materials that are too different are separated. Sometimes, Divine Entities have no busy interacting with Pixel Entities…or each other.",
-              "POL"
-            );
-            break;
-        }
-        favor -= 1;
-        landfillLevel += 1;
-        build.play();
-        updateOverlay();
-      } else if (landfillLevel == 4) {
-        sayText(noinnoText, "CAS");
-      } else {
-        sayText(nofavorsText, "POL");
-      }
-      break;
-    case "/develop /gasstation":
-      if (favor > 0 && gasstationLevel != 4) {
-        switch (gasstationLevel) {
-          case 2:
-            sayText(
-              "Electric vehicles are electrically charged at the charging station so they do not use petrol, reducing carbon emissions. The key to an electric future is batteries where the most energy is packed into the smallest one. It can be recharged again and again, making it the most sustainble option for storing power.",
-              "CAS"
-            );
-            sayText(
-              "I knew humans were innovative! A car that runs on such a tiny battery, and yet works just the same, if not better, than other cars. What's next, a car that doesn't even need humans to drive them?!",
-              "POL"
-            );
-            sayText(
-              "You would know, if you spent more time reading the Lore, instead of. The “innovation” of these methods doesn't really matter anyways, most of the Dialogue ends the same: The reduced carbon emissions lead to reduced air pollution and reduced carbon footprint. Thus, the greenhouse effect is not enhanced. ",
-              "CAS"
-            );
-            break;
-          case 3:
-            sayText(
-              "It's solar panels. POL, how is your Code right now? You seem better. Stable…The Glitches, are they…?",
-              "CAS"
-            );
-            sayText(
-              "Glitches? What are you talking about? Oh, stop worrying, CAS, I won't just disappear so suddenly. Besides, our dear User needs us, isn't that right? I'll explain this one! Solar panels are a rather helpful invention if you think about it. They're genius, converting light energy from their Sun into electrical energy. Did I say some part of the Dialogue wrong? Let me see, you know I don't read that thing!",
-              "POL"
-            );
-            sayText(
-              "…I see. It just sounded familiar, what you said is all. Perhaps, I've been reading the Lore too often. It makes me feel like we've been here before…or that we will eventually. Whatever the case is, I'll just wait for it.",
-              "CAS"
-            );
-            sayText(
-              "…Seriously, you're way too cryptid. User, you agree with me, right? CAS is sooo dramatic!",
-              "POL"
-            );
-            sayText(
-              "Hey! I'm not the one who Glitched away an entire bakery because their wedding bouquet had one less dahlia than planned. Get back here!",
-              "CAS"
-            );
-            sayText("You'll never take me alive!", "POL");
-            break;
-        }
-        favor -= 1;
-        gasstationLevel += 1;
-        build.play();
-        updateOverlay();
-      } else if (gasstationLevel == 4) {
-        sayText(noinnoText, "CAS");
-      } else {
-        sayText(nofavorsText, "POL");
-      }
-      break;
-    case "/3D /coast":
-      if (coastLevel >= 2) {
-        // window.location.href =
-        //   "http://127.0.0.1:5500/GAME-PAGE/3D/raincollection.html";
+import {
+  set,
+  ref,
+  getDatabase,
+} from "https://www.gstatic.com/firebasejs/9.9.4/firebase-database.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-app.js";
+
+export let userInfo = JSON.parse(localStorage.getItem("user"));
+export function save(location) {
+  console.log("Start Saving");
+  localStorage.setItem("user", JSON.stringify(userInfo));
+  axios({
+    method: "get",
+    url: decodeURIComponent(
+      "https%3A%2F%2Fstorage-api-qazw.onrender.com%2Fconfig"
+    ),
+  }).then((response) => {
+    initializeApp(response.data);
+    set(
+      ref(getDatabase(), "users/" + localStorage.getItem("UID")),
+      userInfo
+    ).then(() => {
+      // setTimeout(() => {
+      if (location == "signup") {
         window.location.href =
-          "https://sus-city.github.io/GAME-PAGE/3D/raincollection.html";
+          localStorage.getItem("URL") + "/SIGNUP-PAGE/signup.html";
+      } else if (location == "shop") {
+        window.location.href =
+          localStorage.getItem("URL") + "/SHOP-PAGE/shop.html";
+      } else if (location == "game") {
+        window.location.href =
+          localStorage.getItem("URL") + "/GAME-PAGE/main.html";
+      }
+      // }, 200);
+    });
+  });
+}
+
+console.log(window.location.pathname);
+if (window.location.pathname == "/GAME-PAGE/main.html") {
+  //educational cutscene functions
+  function redirectToYoutubeERP() {
+    window.open("https://www.youtube.com/watch?v=EE6sSf4QAsg");
+  }
+  //Sound from Zapsplat.com
+  let build = new Audio("/SOUNDS/building.mp3");
+  let onloadMusic = new Audio("/SOUNDS/onload.mp3");
+  let bgm1 = new Audio("/SOUNDS/bgm.mp3");
+  let bgm2 = new Audio("/SOUNDS/bgm 2.mp3");
+  let bgm3 = new Audio("/SOUNDS/bgm 3.mp3");
+
+  onloadMusic.play();
+
+  //getting values from html
+  const cityLayout = document.querySelector(".city-layout"); //the playfield
+  const shopBtn = document.querySelector(".fa-shop");
+
+  function imageOverlay(imageSource, imageElement) {
+    imageElement.src = imageSource; //source of image
+    cityLayout.appendChild(imageElement);
+    imageElement.classList.add("overlay-image");
+  }
+
+  function updateOverlay() {
+    //DISPLAY BLIMP OVERLAY IMAGES
+    if (userInfo.shopItems.includes("blimpBought")) {
+      imageOverlay(
+        "/DEVELOPMENT-PROJ-SERVE/SHOP-BLIMP.png",
+        document.createElement("img")
+      );
+    }
+    //DISPLAY PINEAPPLE MAN OVERLAY IMAGES
+    if (userInfo.shopItems.includes("PineappleManBought")) {
+      imageOverlay(
+        "/DEVELOPMENT-PROJ-SERVE/SHOP-PINEAPPLE-MAN.png",
+        document.createElement("img")
+      );
+    }
+    //DISPLAY PINEAPPLE MAN OVERLAY IMAGES
+    if (userInfo.shopItems.includes("windowBought")) {
+      imageOverlay(
+        "/DEVELOPMENT-PROJ-SERVE/SHOP-WINDOW.png",
+        document.createElement("img")
+      );
+    }
+    //DISPLAY PINEAPPLE MAN OVERLAY IMAGES
+    if (userInfo.shopItems.includes("alienBought")) {
+      imageOverlay(
+        "/DEVELOPMENT-PROJ-SERVE/SHOP-ALIEN.png",
+        document.createElement("img")
+      );
+    }
+    //DISPLAY PINEAPPLE MAN OVERLAY IMAGES
+    if (userInfo.shopItems.includes("floatBought")) {
+      imageOverlay(
+        "/DEVELOPMENT-PROJ-SERVE/SHOP-FLOATIE.png",
+        document.createElement("img")
+      );
+    }
+    //DISPLAY PINEAPPLE MAN OVERLAY IMAGES
+    if (userInfo.shopItems.includes("graffitiBought")) {
+      imageOverlay(
+        "/DEVELOPMENT-PROJ-SERVE/SHOP-GRAFFITI.png",
+        document.createElement("img")
+      );
+    }
+    //DISPLAY PINEAPPLE MAN OVERLAY IMAGES
+    if (userInfo.shopItems.includes("umbrellasBought")) {
+      imageOverlay(
+        "/DEVELOPMENT-PROJ-SERVE/SHOP-UMBRELLAS.png",
+        document.createElement("img")
+      );
+    }
+    //DISPLAYING ROAD OVERLAY IMAGES UPON LOADING
+    if (userInfo.roadLevel > 2) {
+      imageOverlay(
+        "/DEVELOPMENT-PROJ-SERVE/DEV-ROAD-1.png",
+        document.createElement("img")
+      );
+    }
+    if (userInfo.roadLevel > 3) {
+      imageOverlay(
+        "/DEVELOPMENT-PROJ-SERVE/DEV-ROAD-2.png",
+        document.createElement("img")
+      );
+    }
+    //DISPLAYING FACTORY OVERLAY IMAGES UPON LOADING
+    if (userInfo.factoryLevel > 2) {
+      imageOverlay(
+        "/DEVELOPMENT-PROJ-SERVE/DEV-FACTORY-1.png",
+        document.createElement("img")
+      );
+    }
+    if (userInfo.factoryLevel > 3) {
+      imageOverlay(
+        "/DEVELOPMENT-PROJ-SERVE/DEV-FACTORY-2.png",
+        document.createElement("img")
+      );
+    }
+    //DISPLAYING OFFICES OVERLAY IMAGES UPON LOADING
+    if (userInfo.officesLevel > 2) {
+      imageOverlay(
+        "/DEVELOPMENT-PROJ-SERVE/DEV-OFFICES-1.png",
+        document.createElement("img")
+      );
+    }
+    if (userInfo.officesLevel > 3) {
+      imageOverlay(
+        "/DEVELOPMENT-PROJ-SERVE/DEV-OFFICES-2.png",
+        document.createElement("img")
+      );
+    }
+    //DISPLAYING COAST OVERLAY IMAGES UPON LOADING
+    if (userInfo.coastLevel > 2) {
+      imageOverlay(
+        "/DEVELOPMENT-PROJ-SERVE/DEV-COAST-1.png",
+        document.createElement("img")
+      );
+    }
+    if (userInfo.coastLevel > 3) {
+      imageOverlay(
+        "/DEVELOPMENT-PROJ-SERVE/DEV-COAST-2.png",
+        document.createElement("img")
+      );
+    }
+    //DISPLAYING LANDFILL OVERLAY IMAGES UPON LOADING
+    if (userInfo.landfillLevel > 2) {
+      imageOverlay(
+        "/DEVELOPMENT-PROJ-SERVE/DEV-LANDFILL-1.png",
+        document.createElement("img")
+      );
+    }
+    if (userInfo.landfillLevel > 3) {
+      imageOverlay(
+        "/DEVELOPMENT-PROJ-SERVE/DEV-LANDFILL-2.png",
+        document.createElement("img")
+      );
+    }
+    //DISPLAYING GAS STATION OVERLAY IMAGES UPON LOADING
+    if (userInfo.gasstationLevel > 2) {
+      imageOverlay(
+        "/DEVELOPMENT-PROJ-SERVE/DEV-GAS STATION-1.png",
+        document.createElement("img")
+      );
+    }
+    if (userInfo.gasstationLevel > 3) {
+      imageOverlay(
+        "/DEVELOPMENT-PROJ-SERVE/DEV-GAS STATION-2.png",
+        document.createElement("img")
+      );
+    }
+    //DISPLAYING PARK OVERLAY IMAGES UPON LOADING
+    if (userInfo.parkLevel > 2) {
+      imageOverlay(
+        "/DEVELOPMENT-PROJ-SERVE/PARK-stage 1.png",
+        document.createElement("img")
+      );
+    }
+    if (userInfo.parkLevel > 3) {
+      imageOverlay(
+        "/DEVELOPMENT-PROJ-SERVE/PARK-stage 2.png",
+        document.createElement("img")
+      );
+    }
+    if (userInfo.parkLevel >= 4) {
+      imageOverlay(
+        "/DEVELOPMENT-PROJ-SERVE/PARK-stage 3.png",
+        document.createElement("img")
+      );
+    }
+  }
+
+  class Dialogue {
+    constructor(character, dialogueContent) {
+      this.character = character;
+      this.dialogueContent = dialogueContent;
+    }
+
+    //Method to create a dialogue in the terminal
+    createTextInTerminal() {
+      let dialogue = document.createElement("p");
+      dialogue.textContent = this.dialogueContent;
+      if (this.character == "CAS") {
+        dialogue.style.color = "#44dcfa";
+      } else if (this.character == "POL") {
+        dialogue.style.color = "red";
+      } else if (this.character == "QUESTION") {
+        dialogue.style.color = "yellow";
       } else {
-        notAvailable();
+        console.log(
+          "Error: Character is wrongly defined. It must either be CAS or POL"
+        );
       }
-      break;
-    case "":
-      break;
-    default:
-      dontUnderstand();
-      break;
+      setTimeout(function () {
+        if (terminalResultsCont && terminalResultWrapper) {
+          terminalResultsCont.append(dialogue);
+          terminalResultWrapper.scrollTop =
+            terminalResultWrapper.scrollHeight -
+            terminalResultWrapper.clientHeight; //MOVES THE TEXT UP
+        }
+      }, 200);
+    }
   }
-  terminalTextInput.value = ""; //RESETS THE INPUT
-  updateValues();
-}
 
-//Chat History
-let chatHistory = "";
-let previousMessage = 0; //the number of times the arrow up button was pressed
-function saveChat() {
-  chatHistory += terminalInput += "||"; // || is the sign for separating chats
-  localStorage.setItem("chat-history", chatHistory);
-}
-function updateChat() {
-  let chatHistoryUpdate = localStorage.getItem("chat-history"); //Getting updated value of chat history
-  if (chatHistoryUpdate != null) {
-    window.eachCommand = chatHistoryUpdate.split("||"); //Creates an array of each command
+  function sayText(theTextContent, character) {
+    let newDialogue = new Dialogue(character, theTextContent);
+    newDialogue.createTextInTerminal();
   }
-}
-updateChat();
 
-sendBtn.addEventListener("click", sendInput);
-document.addEventListener("keydown", function (e) {
-  switch (e.key) {
-    case "ArrowUp":
-      if (previousMessage + 1 < window.eachCommand.length) {
-        previousMessage += 1;
-        terminalTextInput.value = eachCommand[previousMessage];
+  //questions stuff
+  class Question {
+    constructor({
+      question,
+      option1,
+      option2,
+      option3,
+      option4,
+      correctanswer,
+    }) {
+      this.question = question;
+      let optionsArray = [];
+
+      this.option1 = option1;
+      optionsArray.push(option1);
+
+      this.option2 = option2;
+      optionsArray.push(option2);
+
+      if (typeof option3 !== "undefined") {
+        this.option3 = option3;
+        optionsArray.push(option3);
       }
-      break;
-    case "ArrowDown":
-      if (previousMessage - 1 >= 0) {
-        previousMessage -= 1;
-        terminalTextInput.value = eachCommand[previousMessage];
+
+      if (typeof option4 !== "undefined") {
+        this.option4 = option4;
+        optionsArray.push(option4);
       }
-      break;
-    case "Enter":
-      sendInput();
-      saveChat();
-      previousMessage = 0;
-      break;
+
+      this.correctanswer = correctanswer;
+      this.optionsLength = optionsArray.length;
+    }
   }
-});
 
-function updateValues() {
-  levelFavour.textContent = "Sus Points: " + String(favor);
-  levelGreenPointts.textContent = "Leaf Stickers: " + String(greenpoints);
+  const arrayOfQuestions = [
+    new Question({
+      question: "Which of the following is not a Transport Node?",
+      option1: "Bus interchange",
+      option2: "MRT Station",
+      option3: "Roads",
+      option4: "Shipping Port",
+      correctanswer: 3,
+    }),
 
-  localStorage.setItem("level", level);
-  localStorage.setItem("greenpoints", greenpoints);
-  localStorage.setItem("favor", favor);
-  localStorage.setItem("levelProgress", levelProgress);
-  //Building Variables
-  localStorage.setItem("roadLevel", roadLevel);
-  localStorage.setItem("factoryLevel", factoryLevel);
-  localStorage.setItem("parkLevel", parkLevel);
-  localStorage.setItem("officesLevel", officesLevel);
-  localStorage.setItem("landfillLevel", landfillLevel);
-  localStorage.setItem("coastLevel", coastLevel);
-  localStorage.setItem("gasstationLevel", gasstationLevel);
-}
+    //new question
+    new Question({
+      question: "Which of the following is a Transport Route?",
+      option1: "Home",
+      option2: "Airport",
+      option3: "Ocean",
+      option4: "Carparks",
+      correctanswer: 3,
+    }),
 
-function dontUnderstand() {
-  sayText("Unfortunately, we don't understand you.", "CAS");
-  sayText(
-    "Ignore her, what we mean is *please use commands that exist.*",
-    "POL"
+    //new question
+    new Question({
+      question: "What is the Purpose of Transportation?",
+      option1: "Allow mobility for commuters",
+      option2: "Allow accessibility for commuters",
+      option3: "Provide Opportunities for Economic Purposes",
+      option4: "All of the above",
+      correctanswer: 4,
+    }),
+
+    //new question
+    new Question({
+      question: "What problems does Singapore face?",
+      option1: "Scarcity of Land",
+      option2: "Lack of Economic Opportunities",
+      option3: "Decreasing Population",
+      option4: "Water Shortages",
+      correctanswer: 1,
+    }),
+
+    //new question
+    new Question({
+      question: "What is Mobility?",
+      option1: "Speed of Movement from one place to another",
+      option2: "Type of Movement from one place to another",
+      option3: "Efficiency of Movement from one place to another",
+      option4: "All of the above",
+      correctanswer: 2,
+    }),
+
+    //new question
+    new Question({
+      question: "What is Accessibility?",
+      option1: "Movement of People, Goods and Services",
+      option2: "Movement of Goods and Services",
+      option3: "Ease of Movement of Goods and Services",
+      option4: "Ease of Movement of People, Goods and Services",
+      correctanswer: 4,
+    }),
+
+    //new question
+    new Question({
+      question: "What is Transport Network Density?",
+      option1:
+        "area coverage of transport system / length of distance travelled VS length of routes/nodes",
+      option2:
+        "area coverage of transport system / length of distance travelled VS no. of routes / nodes",
+      option3:
+        "area coverage of transport system / length of routes/nodes VS length of distance travelled",
+      option4:
+        "area coverage of transport system / no. of routes/nodes VS length of distance travelled",
+      correctanswer: 2,
+    }),
+
+    //new question
+    new Question({
+      question:
+        "What is an advantage of Intermodal Transport over Unimodal Transport?",
+      option1: "Shorter travel time for indirect destinations",
+      option2: "Shorter travel time for direct destinations",
+      option3: "Lower Cost",
+      option4: "Faster speed of vehicles",
+      correctanswer: 1,
+    }),
+
+    //new question
+    new Question({
+      question:
+        "Which of the following are factors affecting Transport Infrastructure?",
+      option1: "Reliability",
+      option2: "Frequency",
+      option3: "Capacity",
+      option4: "All of the above",
+      correctanswer: 4,
+    }),
+
+    //new question
+    new Question({
+      question:
+        "Which of the following shows the disadvantages of a city with poor public transport networks?",
+      option1: "Traffic Congestion",
+      option2: "Increased Carbon Footprint",
+      option3: "Insufficient Vehicle Fleets",
+      option4: "All of the above",
+      correctanswer: 4,
+    }),
+
+    //new question
+    new Question({
+      question: "Which of the following is true?",
+      option1: "birth rate < death rate = population increase",
+      option2: "immigration = Emigration = net population growth",
+      option3: "birth rate > death rate = population decrease",
+      option4: "immigration > Emigration = population decrease",
+      correctanswer: 2,
+    }),
+
+    //new question
+    new Question({
+      question: "City A has a large population density, which means…",
+      option1: "there is a small population occupying a large area",
+      option2: "there is a large population occupying a small area",
+      option3: "there is a small population occupying a small area",
+      option4: "there is a large population occupying a large area",
+      correctanswer: 2,
+    }),
+
+    //new question
+    new Question({
+      question: "What does the CBD stand for?",
+      option1: "Central Buyers District",
+      option2: "Collective Businessmen Dictatorship",
+      option3: "Central Business District",
+      option4: "Central Bollywood District",
+      correctanswer: 3,
+    }),
+
+    //new question
+    new Question({
+      question:
+        "What is required for the establishment of a well connected transport network?",
+      option1: "Low mobility, acceleration, connectivity",
+      option2: "High creativity, speed, strength",
+      option3: "High Connectivity, accessibility, mobility",
+      option4: "Non-flammable, Strength, Foundation",
+      correctanswer: 3,
+    }),
+
+    //new question
+    new Question({
+      question: "How is Private Transport different from Public Transport?",
+      option1: "More Cost-efficient",
+      option2: "More Convenient",
+      option3: "Increased Speed",
+      option4: "More Energy-saving",
+      correctanswer: 2,
+    }),
+
+    //new question
+    new Question({
+      question: "What is the benefit of going to Central Business Districts?",
+      option1: "More Interactions",
+      option2: "More Congestion",
+      option3: "More Economic Activities",
+      option4: "More Art Galleries",
+      correctanswer: 3,
+    }),
+
+    //new question
+    new Question({
+      question:
+        "Why is there a need for the establishment of a well-connected transport network?",
+      option1: "Reduction of Congestion in heavy traffic areas",
+      option2: "Increase in sales for retail stores in CBD",
+      option3: "Reduction of accidents",
+      option4: "To not spend money to redo the transport network",
+      correctanswer: 1,
+    }),
+
+    //new question
+    new Question({
+      question:
+        "Which of the following is not a disadvantage of traffic congestion?",
+      option1: "Direct drivers to other roads",
+      option2: "Longer travelling times for road users",
+      option3: "More combustion of fossil fuels & carbon emissions",
+      option4: "Commuters get frustrated",
+      correctanswer: 1,
+    }),
+
+    //new question
+    new Question({
+      question: "What is an example of natural landscapes?",
+      option1: "Farms",
+      option2: "Housing",
+      option3: "Public Facilities",
+      option4: "City",
+      correctanswer: 1,
+    }),
+
+    //new question
+    new Question({
+      question:
+        "Which of the following is a consequence of altering the natural ecosystem?",
+      option1: "Increase survival chances of animals",
+      option2: "Increase animal population",
+      option3: "Animals get run over",
+      option4: "None of the above",
+      correctanswer: 3,
+    }),
+
+    //new question
+    new Question({
+      question: "What is not an advantage of wildlife corridors?",
+      option1: "Conserve ecosystem",
+      option2: "Protect wildlife genetic pools",
+      option3: "Raise wildlife survival chances",
+      option4: "Train wildlife survival skills",
+      correctanswer: 4,
+    }),
+
+    //new question
+    new Question({
+      question: "What is false about traffic congestion?",
+      option1: "increases number of vehicles on the road",
+      option2: "increases speed of vehicles",
+      option3: "increases driver frustration",
+      option4: "increases carbon footprint",
+      correctanswer: 2,
+    }),
+
+    //new question
+    new Question({
+      question: "What is true about carpooling?",
+      option1: "It is a public transport mode",
+      option2: "Increases number of vehicles on the road",
+      option3: "Lower combustion of fossil fuels",
+      option4: "None of the above",
+      correctanswer: 3,
+    }),
+
+    //new question
+    new Question({
+      question: "What is smog made of?",
+      option1: "Pollen",
+      option2: "Microfibre",
+      option3: "Hair/Fur",
+      option4: "Dirt",
+      correctanswer: 1,
+    }),
+
+    //new question
+    new Question({
+      question:
+        "What are the side effects Humans face from prolonged exposure to polluted air?",
+      option1: "High Blood Pressure",
+      option2: "Muscle Pain",
+      option3: "1 and 2",
+      option4: "Low Blood Pressure",
+      correctanswer: 4,
+    }),
+
+    //new question
+    new Question({
+      question: "What is a consequence of Noise Pollution?",
+      option1: "Short Sightedness",
+      option2: "Improved Sleep Conditions",
+      option3: "Reduced work productivity",
+      option4: "None of the above",
+      correctanswer: 3,
+    }),
+
+    //new question
+    new Question({
+      question:
+        "What is the average loudness limit for human hearing(in decibels)?",
+      option1: "69",
+      option2: "54",
+      option3: "59",
+      option4: "53",
+      correctanswer: 4,
+    }),
+
+    //new question
+    new Question({
+      question:
+        "What is the main reasons are trees being planted in place of sound barriers?",
+      option1: "Reduced greenhouse gasses",
+      option2: "Increased greenery",
+      option3: "Cost Efficient",
+      option4: "All of the above",
+      correctanswer: 4,
+    }),
+
+    //new question
+    new Question({
+      question: "Which of the following is a result of road accidents?",
+      option1: "Damage of personal property",
+      option2: "Incur penalty fees",
+      option3: "1 and 2",
+      option4: "None of the above",
+      correctanswer: 3,
+    }),
+
+    //new question
+    new Question({
+      question:
+        "On which date did the Singapore Road Safety Council start to run public campaigns to promote awareness for road safety?",
+      option1: "2006",
+      option2: "2011",
+      option3: "2012",
+      option4: "2013",
+      correctanswer: 4,
+    }),
+
+    //new question
+    new Question({
+      question:
+        "What is the percentage of greenhouse gasses produced by transport systems?",
+      option1: "15 to 20",
+      option2: "20 to 25",
+      option3: "25 to 30",
+      option4: "30 to 35",
+      correctanswer: 3,
+    }),
+
+    //new question
+    new Question({
+      question: "Land is precious to humanity as the lithosphere of earth is…",
+      option1: "20%",
+      option2: "30%",
+      option3: "40%",
+      option4: "50%",
+      correctanswer: 2,
+    }),
+
+    //new question
+    new Question({
+      question:
+        "Which of the following is true in this format in the scenario of high crime rate during peak hours: [amount of commuters],[cramped/spacious],[personal safety concerns]",
+      option1: "High, Cramped, Reduced",
+      option2: "High, Cramped, Increased",
+      option3: "Low, Cramped, Reduced",
+      option4: "Low, Spacious, Increased",
+      correctanswer: 2,
+    }),
+
+    //new question
+    new Question({
+      question:
+        "Which of the following is an initiative implemented to aid in mobility of the Elderly?",
+      option1: "Ergonomic Seats",
+      option2: "Green Man +",
+      option3: "Support Railings",
+      option4: "All of the above",
+      correctanswer: 4,
+    }),
+
+    //new question
+    new Question({
+      question:
+        "Which of the following are initiatives implemented to aid PwDs, specifically people with Visual Impairment?",
+      option1: "Low Profile Bus Ramps",
+      option2: "Green Man +",
+      option3: "Textured Paths",
+      option4: "2 and 3",
+      correctanswer: 4,
+    }),
+
+    //new question
+    new Question({
+      question:
+        "Which of the following is true in this format: (date of which) [LTA introducing tactile guiding systems in two pilot phases], [full implementation of the feature], [all bus stops and MRT stations implementing the system]",
+      option1: "2005, 2010, 2013",
+      option2: "2000, 2003, 2006",
+      option3: "2002, 2004, 2007",
+      option4: "1995, 1998, 2003",
+      correctanswer: 4,
+    }),
+
+    //new question
+    new Question({
+      question:
+        "Which of the following is not a challenge of transport planning?",
+      option1: "Lack of Contractors",
+      option2: "Topography",
+      option3: "Building Layout",
+      option4: "High Monetary Investments",
+      correctanswer: 1,
+    }),
+
+    //new question
+    new Question({
+      question:
+        "What are some diverse mobility needs the transport system will cater to?",
+      option1: "Elderly",
+      option2: "Bus Drivers",
+      option3: "1 and 2",
+      option4: "None of the above",
+      correctanswer: 1,
+    }),
+
+    //new question
+    new Question({
+      question: "How do EVs reduce Noise Pollution?",
+      option1: "Lack of Internal Combustion Engines",
+      option2: "Travel at Slower Speeds",
+      option3: "EVs do not produce Noise Pollution",
+      option4: "Noise Dampeners",
+      correctanswer: 1,
+    }),
+
+    //new question
+    new Question({
+      question: "What does the EV not need to run?",
+      option1: "Electricity",
+      option2: "Electric Motor",
+      option3: "Oil",
+      option4: "Battery Pack",
+      correctanswer: 3,
+    }),
+
+    //new question
+    new Question({
+      question:
+        "What do special features in transport provide for people with diverse mobility needs?",
+      option1: "More time",
+      option2: "More space",
+      option3: "More assistance",
+      option4: "All of the above",
+      correctanswer: 4,
+    }),
+
+    //new question
+    new Question({
+      question: "What does an AV require to run?",
+      option1: "Semiconductor",
+      option2: "Combustion Engine",
+      option3: "Photovolatic Cells",
+      option4: "None of the above",
+      correctanswer: 1,
+    }),
+
+    //new question
+    new Question({
+      question: "What does the Video Camera do in an AV?",
+      option1: "Record you for your TikTok",
+      option2: "Reads traffic light signals",
+      option3: "Reads Road Signs",
+      option4: "All of the above",
+      correctanswer: 3,
+    }),
+
+    //new question
+    new Question({
+      question: "What are some disasvantages of AVs",
+      option1: "Increased road accidents",
+      option2: "More time spent travelling",
+      option3: "Increased air pollution",
+      option4: "Higher cost to manufacture",
+      correctanswer: 4,
+    }),
+
+    //new question
+    new Question({
+      question:
+        "How many charging points will be available in Singapore by 2030?",
+      option1: "30,000",
+      option2: "40,000",
+      option3: "50,000",
+      option4: "60,000",
+      correctanswer: 4,
+    }),
+
+    //new question
+    new Question({
+      question: "How big will Singapore’s rail network be by 2030?",
+      option1: "240km",
+      option2: "300km",
+      option3: "360km",
+      option4: "420km",
+      correctanswer: 3,
+    }),
+
+    //new question
+    new Question({
+      question:
+        "What is Singapore's goal for transportation efficiency according to the LTA Master Plan 2040?",
+      option1: "30min city, 10 min towns",
+      option2: "40min city, 15 min towns",
+      option3: "35min city, 15 min towns",
+      option4: "45min city, 20 min towns",
+      correctanswer: 4,
+    }),
+  ];
+
+  //level indicator
+  const levelIndicator = document.querySelector(".circle");
+  const levelProgressBar = document.querySelector(".level-progress");
+  const levelGreenPoints = document.querySelector(".GPoint");
+  const levelFavour = document.querySelector(".favour");
+
+  if (levelFavour && levelProgressBar && levelGreenPoints && levelIndicator) {
+    levelFavour.textContent = "Sus Points: " + String(userInfo.favor);
+    levelGreenPoints.textContent =
+      "Leaf Stickers: " + String(userInfo.greenpoints);
+    levelIndicator.textContent = userInfo.level;
+    levelProgressBar.style.width = userInfo.levelProgress - 1 + "%";
+  }
+
+  //terminal
+  const terminalResultsCont = document.querySelector("#terminalResultsCont");
+  const terminalTextInput = document.querySelector("#terminalTextInput");
+  const terminalResultWrapper = document.querySelector(
+    ".terminalResultWrapper"
   );
-  updateValues();
-}
+  const sendBtn = document.querySelector("#sendBtn");
+  let terminalInput;
+  let option; //for displaying the options for the qn
 
-function notAvailable() {
-  sayText("Unlock the development before you can view the 3D version!", "CAS");
-}
+  const returnBtn = document.getElementById("return");
 
-function levelUp() {
-  sayText(
-    "Hey hey, guess who got enough Sus Points, and can now develop a little special something? You! Go on, type /develop /[grid] to develop one of the grids...",
-    "POL"
-  );
-  sayText("Enter /help if you forgot the grid.", "CAS");
-  sayText(
-    "That's such a nice reminder, CAS! If only you were this nice at my wedding...",
-    "POL"
-  );
-}
+  shopBtn.addEventListener("click", () => {
+    save("shop");
+  });
 
-function checkForCorrectAns(terminalInput, randomQn) {
-  if (terminalInput == `/${arrayOfQuestions[randomQn].correctanswer}`) {
-    //IF ANSWER IS CORRECT
-    sayText("Correct!", "CAS");
-    updateGreenpoints();
-    if (level !== 12) {
-      if (levelProgress > 50) {
-        level += 1;
-        favor += 1;
-        levelUp();
-        greenpoints += roundNearest5(20 / level);
+  returnBtn.addEventListener("click", () => {
+    save("signup");
+  });
 
-        if (level % 4 == 0) {
-          //IF LEVEL IS 4, 8, OR 12 -> UPDATE THE PARK
-          switch (parkLevel) {
+  window.addEventListener("beforeunload", () => {
+    save("signup");
+  }); // when the user is about to close the tab
+
+  window.addEventListener("hashchange", () => {
+    save("signup");
+  }); // when the url changes
+
+  const noinnoText =
+    "Nothing happened, just like the Lore dictated. Clearly, the humans have run out of innovation so they can no longer Develop this area.";
+  const nofavorsText =
+    "Hey, hey, hold on, User! You still have to answer a few more questions! To Develop an area, you need Sus Points. Slow down and level up first, got it?";
+
+  function sendInput() {
+    terminalInput = terminalTextInput.value;
+    switch (terminalInput) {
+      case "/help":
+        //display all the commands
+        sayText(
+          "To receive a question, enter: [/q]. To answer questions? Simple! Respective to the option you choose, enter: [/1, /2, /3 or /4].",
+          "CAS"
+        );
+        sayText(
+          "Your final command is the [/develop] command! Everytime you level up, you receive enough SUS points to implement an environmental measure in an area. For example, simply enter [/develop /road] if you want to develop the road! The six areas you can develop are the road, factory, offices, coast, landfill and gasstation.",
+          "POL"
+        );
+        sayText(
+          "Also, to view the developments in 3D after you've developed them, simply type [/3D] and insert the name of the development",
+          "CAS"
+        );
+        sayText(
+          "Pro Tip: Pressing the up arrow allows you to view your command history.",
+          "POL"
+        );
+        break;
+      case "/q":
+        window.isQuestionAnswered = false;
+        window.randomQn = Math.floor(Math.random() * arrayOfQuestions.length);
+        //display question
+        sayText(
+          `Question: ${arrayOfQuestions[window.randomQn].question}`,
+          "QUESTION"
+        );
+
+        //display options
+        for (
+          let i = 1;
+          i < arrayOfQuestions[window.randomQn].optionsLength + 1;
+          i++
+        ) {
+          switch (i) {
+            case 1:
+              option = arrayOfQuestions[window.randomQn].option1;
+              break;
+            case 2:
+              option = arrayOfQuestions[window.randomQn].option2;
+              break;
+            case 3:
+              option = arrayOfQuestions[window.randomQn].option3;
+              break;
+            case 4:
+              option = arrayOfQuestions[window.randomQn].option4;
+              break;
+          }
+          sayText(`Option ${i}: ${option}`, "QUESTION");
+        }
+        break;
+      case "/1":
+        if (window.isQuestionAnswered == false)
+          checkForCorrectAns(terminalInput, window.randomQn);
+        else dontUnderstand();
+        break;
+      case "/2":
+        if (window.isQuestionAnswered == false)
+          checkForCorrectAns(terminalInput, window.randomQn);
+        else dontUnderstand();
+        break;
+      case "/3":
+        if (window.isQuestionAnswered == false)
+          checkForCorrectAns(terminalInput, window.randomQn);
+        else dontUnderstand();
+        break;
+      case "/4":
+        if (window.isQuestionAnswered == false)
+          checkForCorrectAns(terminalInput, window.randomQn);
+        else dontUnderstand();
+        break;
+      case "/develop /road":
+        if (userInfo.favor > 0 && userInfo.roadLevel != 4) {
+          switch (userInfo.roadLevel) {
             case 2:
               sayText(
-                "It seems like... they have developed the park. By themselves.",
+                "…Bicycles. This is..this is their next idea. We've given them so much criticism about their carbon footprint, and this is all they can think of? It's the bare minimum! What happened to humans being innovative!—",
                 "POL"
+              );
+              sayText(
+                "Stop being so dramatic. You already knew this would be the next development; it's in the Lore. Which, I'm going to assume, you have read? Even if you hadn't, you're still wasting far too much Dialogue on your reactions, when we should be explaining the developments…You're glaring at me, but I haven't said anything strange.",
+                "CAS"
+              );
+
+              sayText(
+                "No, no, you're right. Bicycle-sharing may be a simple method, but they're efficient. I shouldn't underestime the humans' system of bicycle stations that users can check bicycles out of. They can ride their destination and park the bike in a nearby docking station. With bicycle-sharing, there will be less vehicles on the road, reducing carbon emissions and greenhouse gases in the air. There are many bikesharing services in Singapore, including Anywheel, SG Bike and HelloRide. …Good enough of an explanation for you?",
+                "POL"
+              );
+              break;
+            case 3:
+              sayText(
+                "Now this is a proper environmental measure! Nothing like those bicycles from before! The implementation of charges when drives travel on roads leading into the cities during peak hours; it preys on the humans' weakness for money! Drivers are discouraged from using certain roads, especially during peak hours, because they don't want to pay more during such hours. This diverts traffic, easing congestion in certain roads. Brutal genius.",
+                "POL"
+              );
+              sayText(
+                "The bicycles were fine, POL. Both work just the same in reducing the number of vehicles on the road. Then again, the bicycles are much more widespread. ERP gantries are more commonly found along central business districts such as Orchard Road and near retail shops such as the ION, Tangs, Wheelock Place and the Shaw Centre. ",
+                "CAS"
+              );
+              redirectToYoutubeERP();
+              // var obj = {
+              //   video: {
+              //     value:
+              //       "<iframe title='YouTube video player' type=\"text/html\" width='640' height='390' src='http://www.youtube.com/embed/W-Q7RMpINVo' frameborder='0' allowFullScreen></iframe>",
+              //   },
+              // };
+              // document.write(obj.video.value);
+              break;
+          }
+          userInfo.favor = userInfo.favor - 1;
+          userInfo.roadLevel += 1;
+          build.play();
+          updateOverlay();
+        } else if (userInfo.roadLevel == 4) {
+          sayText(noinnoText, "CAS");
+        } else {
+          sayText(nofavorsText, "POL");
+        }
+        break;
+      case "/develop /factory":
+        if (userInfo.favor > 0 && userInfo.factoryLevel != 4) {
+          switch (userInfo.factoryLevel) {
+            case 2:
+              sayText(
+                "Oh, this is lovely! Irresponsible industrial manufacturing causes so much unecessary air pollution. Using recycled materials has definitely reduced the All those unwanted chemicals, gases and particles gone from the atmosphere! You're doing so well, fighting against climate change-",
+                "POL"
+              );
+              sayText(
+                "Climate change doesn't exist here. It does in Reality, where the User is. But we wouldn't be affected even if that feature was added. Humans, on the other hand, suffer from respiriatory illnesses, eye irritation, lung damage, colds, coughs and breathing difficulties.",
+                "CAS"
+              );
+              sayText(
+                "So fragile! Length of exposure, amount and type of the pollutants varies, and each human is affected so differently…Humans face so many health risks. We must keep working to keep the city Sustainable, User. To the next question!",
+                "POL"
+              );
+              break;
+            case 3:
+              sayText(
+                "Solar panels are a rather helpful invention if you think about it. They're genius, converting light energy from their Sun into electrical energy. You seem…upset by this Development. I thought you would've loved to see humans taking advantage of their natural phenomena to create a renewable source of energy.",
+                "CAS"
               );
               sayText(
                 "Hm, just thinking. Why do they place it everywhere? I mean, what exactly do they hope to gain by putting such eyesores all over the place. There's no point for them, anyways, not when there's no Sun in here.",
                 "POL"
               );
               break;
-            case 3:
+          }
+          userInfo.favor -= 1;
+          userInfo.factoryLevel += 1;
+          build.play();
+
+          updateOverlay();
+        } else if (userInfo.factoryLevel == 4) {
+          sayText(noinnoText, "CAS");
+        } else {
+          sayText(nofavorsText, "POL");
+        }
+        break;
+      case "/develop /offices":
+        if (userInfo.favor > 0 && userInfo.officesLevel != 4) {
+          switch (userInfo.officesLevel) {
+            case 2:
               sayText(
-                "It seems like... they have developed the park. By themselves. Again.",
+                "This one is rather straightforward. Rooftop gardens provide space for agriculture, add aesthetic beauty to cityscapes and reduce ambient temperatures. Thanks to photosynthesis, there's less cabron in the air but more oxygen. Humans work efficiently when provided with sufficient and quality air. In addition, it's been proven that the presence of nature soothes humans. The Simulation really does enjoy running smoothly with all these simple but neat Developments.",
+                "CAS"
+              );
+              sayText(
+                "The National Parks Board has plans for something similar, though, with their OneMillionTrees movement. A million planted trees in Singapore by 2030, can you imagine? I mean, can humans even achieve something like that? They're so weak by themselves!",
+                "POL"
+              );
+              sayText(
+                "It's true that they're nothing more than Flesh Beings by themselves, but together these Pixels create a whole city. Their collaboration with one another is key in accomplishing their Singapore Green Plan. That's not relevant, though. the Lore doesn't mention anything about the Singapore Green Plan so it likely won't appear in the Simulation.",
+                "CAS"
+              );
+              sayText(
+                "And yet, we have Dialogue about it…But like you said, CAS, it's irrelevant. Nothing more than my observations about the humans.",
                 "POL"
               );
               break;
-            case 4:
-              sayText("Are- are those birds???", "POL");
+            case 3:
+              sayText(
+                "Again. Seriously. Solar panels, again…it's always going to be solar panels, huh? Over, and over, and over, again! It's never going to— haha— stop being solar panels—",
+                "POL"
+              );
+              sayText(
+                "POL? POL, you're— are you Glitching? Hey! Hey, listen to me, stop! POL! FOr once, would you please just listen!",
+                "CAS"
+              );
               break;
           }
-          parkLevel += 1;
+          userInfo.favor -= 1;
+          userInfo.officesLevel += 1;
           build.play();
-        }
-        levelProgress = 0; //RESETS THE LEVEL PROGRESS BAR
-      } else {
-        // levelProgress == 75 ? (levelProgress += 99) : (levelProgress += 99);
-        levelProgress += 99;
-      }
-    } else {
-      level = 12; //max level
-      levelProgress = 100; //to show that no longer can level up
-    }
-    levelIndicator.textContent = level;
-    levelProgressBar.style.width = levelProgress + "%";
-  } else {
-    sayText("Incorrect. Another question.", "CAS");
 
+          updateOverlay();
+        } else if (userInfo.officesLevel == 4) {
+          sayText(noinnoText, "CAS");
+        } else {
+          sayText(nofavorsText, "POL");
+        }
+        break;
+      case "/develop /coast":
+        if (userInfo.favor > 0 && userInfo.coastLevel != 4) {
+          //DISPLAY TEXT
+          switch (userInfo.coastLevel) {
+            case 2:
+              sayText(
+                "3 days? But that's so short! User, is it really true that you can only survive without water for 3 days? What about your city, User? How can we possibly do anything within 3 days?! CAS, we need to get the humans hydrated right now!",
+                "POL"
+              );
+              sayText(
+                "Oh, stop panicking. They don't need water, they're Pixels. The Lore already prepared for that anyways. Look, the User implemented a rain collection system. This system takes advantage of the natural water cycle, allowing humans to collect water for their purposes later on. Of course, if they must drink the water, it has to go through a heavy filtering process first.",
+                "CAS"
+              );
+              sayText(
+                "Are the tanks always at the beach? That's rather impractical. If they really wanted to use natural cycles to their advantage, wouldn't they be placing them everywhere? It rains pretty much everywhere, after all. User! You could collect all the water you need to sustain yourself for 3 days if you built collection tanks at your own house!",
+                "POL"
+              );
+              break;
+            case 3:
+              sayText(
+                "Desalination. It's a fairly similar concept to filtering. You can see that it's placed right at the Coast in the Simulation. Humans are finally utilising this huge body of water, that's right in front of them. Still, their main goal is to remove any impurities from the seawater, turning the seawater into fresh drinking water. Can't they just drink their water straight from the source?",
+                "POL"
+              );
+              sayText(
+                "The Lore claims that the humans cannot survive such high amounts of salt. You already knew that, POL; I remember your experiements before the Simulation. Stop playing the fool when you are fully aware of the resourcesfulness and grit of the humans, much more than I am. The water undegoes reverse osmosis thanks to semipermeable membranes. Impurities like salt and dirt have large particles, so they are left behind as the water passes throigh these membranes.",
+                "CAS"
+              );
+              break;
+            case 4:
+              sayText(
+                "The Lore claims that the humans cannot survive such high amounts of salt. You already knew that, POL; I remember your experiements before the Simulation. Stop playing the fool when you are fully aware of the resourcesfulness and grit of the humans, much more than I am. The water undegoes reverse osmosis thanks to semipermeable membranes. Impurities like salt and dirt have large particles, so they are left behind as the water passes throigh these membranes.",
+                "CAS"
+              );
+              break;
+          }
+          userInfo.favor -= 1;
+          userInfo.coastLevel += 1;
+          build.play();
+          updateOverlay();
+        } else if (userInfo.coastLevel == 4) {
+          sayText(noinnoText, "CAS"); //max level reached for coast
+        } else {
+          sayText(nofavorsText, "POL");
+        }
+        break;
+      case "/develop /landfill":
+        if (userInfo.favor > 0 && userInfo.landfillLevel != 4) {
+          //DISPLAY TEXT
+          switch (userInfo.landfillLevel) {
+            case 2:
+              sayText(
+                "Ah, bins. A very minor change, and yet this would can have a rather large impact in the long-run. As long as they do it right, of course. If the materials they try to recycle are contaminated by food waste or human pieces, they can't be used to recycle. However, if they ensure that everything they throw in these bins are not contaminated, they help preseve natural resources for longer, and reduce their carbon footprint.",
+                "CAS"
+              );
+              sayText(
+                "The logic behind this Development is its convenciency, isn't it? User, did you know that the reason why so many humans don't recycle is because they find it tedious. They dislike the entire process, from cleaning trash to finding bins. Luckily, Divine Entities like us are much smarter, and we have allowed you to integrate a convenient Development! Now, the humans need barely any motivation! If they do, well, I would be honoured to provide some incentives for them.",
+                "POL"
+              );
+              break;
+            case 3:
+              sayText(
+                "Our Dialogue for this one is surprisingly excited, similar to the previous Landfill Development. It seems that we are supposed to be promoting the benefits of recycling to the User, but again, the Lore wants us to mention other things as well. ",
+                "CAS"
+              );
+              sayText(
+                "Let me see, you know I don't read that thing. Hm, a beloved robot on a space adventure…? A plant in a world covered in trash? Tsk, I knew this would be useless as always. This doesn't mean anything, CAS! Do you really expect me to believe that humans have invented space travel? Look at the User's city, do you see rocket scientists anywhere?",
+                "POL"
+              );
+              sayText(
+                "The Simulation is different from Reality. It's possible the Lore is referring to creations on the User's Platform. not ours. Surely someone there has created one of these recycling robots. The Flesh Entities certainly have a fascination for Artificial Intelligence, and the potential of these robots are incredible. Their Code makes them helpful, useful! They actually do important work in Reality!…Besides, separation is a crucial step in recycling.",
+                "CAS"
+              );
+              sayText(
+                "…I agree, CAS. It's better when materials that are too different are separated. Sometimes, Divine Entities have no busy interacting with Pixel Entities…or each other.",
+                "POL"
+              );
+              break;
+          }
+          userInfo.favor -= 1;
+          userInfo.landfillLevel += 1;
+          build.play();
+          updateOverlay();
+        } else if (userInfo.landfillLevel == 4) {
+          sayText(noinnoText, "CAS");
+        } else {
+          sayText(nofavorsText, "POL");
+        }
+        break;
+      case "/develop /gasstation":
+        if (userInfo.favor > 0 && userInfo.gasstationLevel != 4) {
+          switch (userInfo.gasstationLevel) {
+            case 2:
+              sayText(
+                "Electric vehicles are electrically charged at the charging station so they do not use petrol, reducing carbon emissions. The key to an electric future is batteries where the most energy is packed into the smallest one. It can be recharged again and again, making it the most sustainble option for storing power.",
+                "CAS"
+              );
+              sayText(
+                "I knew humans were innovative! A car that runs on such a tiny battery, and yet works just the same, if not better, than other cars. What's next, a car that doesn't even need humans to drive them?!",
+                "POL"
+              );
+              sayText(
+                "You would know, if you spent more time reading the Lore, instead of. The “innovation” of these methods doesn't really matter anyways, most of the Dialogue ends the same: The reduced carbon emissions lead to reduced air pollution and reduced carbon footprint. Thus, the greenhouse effect is not enhanced. ",
+                "CAS"
+              );
+              break;
+            case 3:
+              sayText(
+                "It's solar panels. POL, how is your Code right now? You seem better. Stable…The Glitches, are they…?",
+                "CAS"
+              );
+              sayText(
+                "Glitches? What are you talking about? Oh, stop worrying, CAS, I won't just disappear so suddenly. Besides, our dear User needs us, isn't that right? I'll explain this one! Solar panels are a rather helpful invention if you think about it. They're genius, converting light energy from their Sun into electrical energy. Did I say some part of the Dialogue wrong? Let me see, you know I don't read that thing!",
+                "POL"
+              );
+              sayText(
+                "…I see. It just sounded familiar, what you said is all. Perhaps, I've been reading the Lore too often. It makes me feel like we've been here before…or that we will eventually. Whatever the case is, I'll just wait for it.",
+                "CAS"
+              );
+              sayText(
+                "…Seriously, you're way too cryptid. User, you agree with me, right? CAS is sooo dramatic!",
+                "POL"
+              );
+              sayText(
+                "Hey! I'm not the one who Glitched away an entire bakery because their wedding bouquet had one less dahlia than planned. Get back here!",
+                "CAS"
+              );
+              sayText("You'll never take me alive!", "POL");
+              break;
+          }
+          userInfo.favor -= 1;
+          userInfo.gasstationLevel += 1;
+          build.play();
+          updateOverlay();
+        } else if (userInfo.gasstationLevel == 4) {
+          sayText(noinnoText, "CAS");
+        } else {
+          sayText(nofavorsText, "POL");
+        }
+        break;
+      case "/3D /coast":
+        if (userInfo.coastLevel >= 2) {
+          window.location.href =
+            localStorage.getItem("URL") + "/GAME-PAGE/3D/raincollection.html";
+        } else {
+          notAvailable();
+        }
+        break;
+      case "":
+        break;
+      default:
+        dontUnderstand();
+        break;
+    }
+    terminalTextInput.value = ""; //RESETS THE INPUT
+    updateValues();
+  }
+
+  //Chat History
+  let chatHistory = "";
+  let previousMessage = 0; //the number of times the arrow up button was pressed
+  function saveChat() {
+    chatHistory += terminalInput += "||"; // || is the sign for separating chats
+    localStorage.setItem("chat-history", chatHistory);
+  }
+  function updateChat() {
+    let chatHistoryUpdate = localStorage.getItem("chat-history"); //Getting updated value of chat history
+    if (chatHistoryUpdate != null) {
+      window.eachCommand = chatHistoryUpdate.split("||"); //Creates an array of each command
+    }
+  }
+  updateChat();
+
+  // if (sendBtn) {
+  sendBtn.addEventListener("click", sendInput);
+  document.addEventListener("keydown", function (e) {
+    switch (e.key) {
+      case "ArrowUp":
+        if (previousMessage + 1 < window.eachCommand.length) {
+          previousMessage += 1;
+          terminalTextInput.value = eachCommand[previousMessage];
+        }
+        break;
+      case "ArrowDown":
+        if (previousMessage - 1 >= 0) {
+          previousMessage -= 1;
+          terminalTextInput.value = eachCommand[previousMessage];
+        }
+        break;
+      case "Enter":
+        sendInput();
+        saveChat();
+        previousMessage = 0;
+        break;
+    }
+  });
+  // }
+
+  function updateValues() {
+    levelFavour.textContent = "Sus Points: " + String(userInfo.favor);
+    levelGreenPoints.textContent =
+      "Leaf Stickers: " + String(userInfo.greenpoints);
+  }
+
+  function dontUnderstand() {
+    sayText("Unfortunately, we don't understand you.", "CAS");
     sayText(
-      "Of course, even Divine humans like you fail eventually, User.",
+      "Ignore her, what we mean is *please use commands that exist.*",
       "POL"
     );
-
-    //nothing happens if they get it wrong
+    updateValues();
   }
-  window.isQuestionAnswered = true;
-  updateValues();
+
+  function notAvailable() {
+    sayText(
+      "Unlock the development before you can view the 3D version!",
+      "CAS"
+    );
+  }
+
+  function levelUp() {
+    sayText(
+      "Hey hey, guess who got enough Sus Points, and can now develop a little special something? You! Go on, type /develop /[grid] to develop one of the grids...",
+      "POL"
+    );
+    sayText("Enter /help if you forgot the grid.", "CAS");
+    sayText(
+      "That's such a nice reminder, CAS! If only you were this nice at my wedding...",
+      "POL"
+    );
+  }
+
+  function checkForCorrectAns(terminalInput, randomQn) {
+    if (terminalInput == `/${arrayOfQuestions[randomQn].correctanswer}`) {
+      //IF ANSWER IS CORRECT
+      sayText("Correct!", "CAS");
+      console.log("Updating Green Points");
+      updateGreenpoints();
+      if (userInfo.level != 12) {
+        if (userInfo.levelProgress > 50) {
+          userInfo.level += 1;
+          userInfo.favor += 1;
+          levelUp();
+          userInfo.greenpoints += roundNearest5(20 / userInfo.level);
+
+          if (userInfo.level % 4 == 0) {
+            //IF LEVEL IS 4, 8, OR 12 -> UPDATE THE PARK
+            switch (userInfo.parkLevel) {
+              case 2:
+                sayText(
+                  "It seems like... they have developed the park. By themselves.",
+                  "POL"
+                );
+                sayText(
+                  "Hm, just thinking. Why do they place it everywhere? I mean, what exactly do they hope to gain by putting such eyesores all over the place. There's no point for them, anyways, not when there's no Sun in here.",
+                  "POL"
+                );
+                break;
+              case 3:
+                sayText(
+                  "It seems like... they have developed the park. By themselves. Again.",
+                  "POL"
+                );
+                break;
+              case 4:
+                sayText("Are- are those birds???", "POL");
+                break;
+            }
+            userInfo.parkLevel += 1;
+            build.play();
+          }
+          userInfo.levelProgress = 0; //RESETS THE LEVEL PROGRESS BAR
+        } else {
+          // levelProgress == 75 ? (levelProgress += 99) : (levelProgress += 99);
+          userInfo.levelProgress += 99;
+          // console.log(userInfo.levelProgress);
+        }
+      } else {
+        userInfo.level = 12; //max level
+        userInfo.levelProgress = 100; //to show that no longer can level up
+      }
+      levelIndicator.textContent = userInfo.level;
+      levelProgressBar.style.width = userInfo.levelProgress + "%";
+    } else {
+      sayText("Incorrect. Another question.", "CAS");
+
+      sayText(
+        "Of course, even Divine humans like you fail eventually, User.",
+        "POL"
+      );
+
+      //nothing happens if they get it wrong
+    }
+    window.isQuestionAnswered = true;
+    updateValues();
+  }
+
+  function roundNearest5(num) {
+    return Math.round(num / 5) * 5;
+  }
+
+  function updateGreenpoints() {
+    userInfo.greenpoints += 5;
+    sayText(
+      "You have 5 more Leaf Stickers, now! Rewards are a crucial part of the conditioning process. They get so many results with subjects; trust me, I'd know!",
+      "POL"
+    );
+    updateValues();
+  }
+
+  shopBtn.addEventListener("click", () => {
+    updateValues();
+  });
+
+  //ON LOAD
+  onloadMusic.addEventListener("ended", () => {
+    bgm1.play();
+  });
+  bgm1.addEventListener("ended", () => {
+    bgm2.play();
+  });
+  bgm2.addEventListener("ended", () => {
+    bgm3.play();
+  });
+
+  updateOverlay();
+  sayText("CAS is online", "CAS");
+  sayText("POL is online", "POL");
 }
-
-function roundNearest5(num) {
-  return Math.round(num / 5) * 5;
-}
-
-function updateGreenpoints() {
-  greenpoints += 5;
-  sayText(
-    "You have 5 more Leaf Stickers, now! Rewards are a crucial part of the conditioning process. They get so many results with subjects; trust me, I'd know!",
-    "POL"
-  );
-  updateValues();
-}
-
-shopBtn.addEventListener("click", () => {
-  updateValues();
-  setTimeout(function () {
-    window.location.href = "https://sus-city.github.io/SHOP-PAGE/shop.html";
-    // window.location.href = "http://localhost:5500/SHOP-PAGE/shop.html";
-  }, 1000);
-});
-
-//ON LOAD
-onloadMusic.addEventListener("ended", () => {
-  bgm1.play();
-});
-bgm1.addEventListener("ended", () => {
-  bgm2.play();
-});
-bgm2.addEventListener("ended", () => {
-  bgm3.play();
-});
-
-updateOverlay();
-sayText("CAS is online", "CAS");
-sayText("POL is online", "POL");
