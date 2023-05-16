@@ -40,10 +40,10 @@ function validatePassword(password) {
   return "";
 }
 
-submitBtn.addEventListener("click", (e) => {
+submitBtn.addEventListener("click", function() {
   let email = document.getElementById("email").value;
   let password = document.getElementById("password").value;
-  localStorage.setItem("URL", "https://sus-city.github.io");
+  localStorage.setItem("URL", "https://nicoletanyt-friendly-space-cod-74pv4v95966267p-5500.preview.app.github.dev"); //https://sus-city.github.io
   localStorage.setItem("test", "testing");
 
   if (!validateEmail(email)) {
@@ -59,6 +59,7 @@ submitBtn.addEventListener("click", (e) => {
 });
 
 function signUp(email, password) {
+  console.log("Signing In")
   axios({
     method: "get",
     url: decodeURIComponent(
@@ -142,9 +143,9 @@ function navigateGame(uid, snapshot) {
   console.log("End Saving");
   if (
     localStorage.getItem("user") &&
-    localStorage.getItem("db") &&
     localStorage.getItem("UID")
   ) {
+    console.log("Changing URL")
     window.location.href = localStorage.getItem("URL") + "/GAME-PAGE/main.html";
   }
 }
