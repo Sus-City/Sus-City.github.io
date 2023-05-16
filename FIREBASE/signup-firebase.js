@@ -43,7 +43,7 @@ function validatePassword(password) {
 submitBtn.addEventListener("click", function() {
   let email = document.getElementById("email").value;
   let password = document.getElementById("password").value;
-  localStorage.setItem("URL", "//https://sus-city.github.io"); 
+  localStorage.setItem("URL", "https://sus-city.github.io"); 
   localStorage.setItem("test", "testing");
 
   if (!validateEmail(email)) {
