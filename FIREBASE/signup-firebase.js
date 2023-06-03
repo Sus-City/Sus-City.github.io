@@ -40,23 +40,24 @@ function validatePassword(password) {
   return "";
 }
 
-submitBtn.addEventListener("click", function() {
-  let email = document.getElementById("email").value;
-  let password = document.getElementById("password").value;
-  localStorage.setItem("URL", "https://sus-city.github.io"); 
-  localStorage.setItem("test", "testing");
-
-  if (!validateEmail(email)) {
-    alert("Please enter a valid email.");
-    return;
-  }
-  const passwordValidationMessage = validatePassword(password);
-  if (passwordValidationMessage) {
-    alert(passwordValidationMessage);
-    return;
-  }
-  signUp(email, password);
-});
+if (window.location.pathname == "/SIGNUP-PAGE/signup.html") {
+  submitBtn.addEventListener("click", function() {
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+    // localStorage.setItem("URL", "https://sus-city.github.io"); 
+  
+    if (!validateEmail(email)) {
+      alert("Please enter a valid email.");
+      return;
+    }
+    const passwordValidationMessage = validatePassword(password);
+    if (passwordValidationMessage) {
+      alert(passwordValidationMessage);
+      return;
+    }
+    signUp(email, password);
+  });
+}
 
 function signUp(email, password) {
   console.log("Signing In")
@@ -145,7 +146,7 @@ function navigateGame(uid, snapshot) {
     localStorage.getItem("user") &&
     localStorage.getItem("UID")
   ) {
-    console.log("Changing URL")
-    window.location.href = localStorage.getItem("URL") + "/GAME-PAGE/main.html";
+    console.log("Going to game")
+    window.location.pathname =  "/GAME-PAGE/main.html";
   }
 }
