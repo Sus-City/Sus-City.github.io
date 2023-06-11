@@ -201,8 +201,6 @@ body {
   animation: 
     typing 3.5s steps(40, end),
     blink-caret .75s step-end infinite;
-  
-
 }
 /* The typing effect */
 @keyframes typing {
