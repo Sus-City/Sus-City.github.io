@@ -155,6 +155,8 @@ body {
   float: right;
   height: 80vh;
   width: 37.05902777777778vw;
+  border-radius: 10px;
+
 }
 .mainCont h2 {
   display: inline-block;
@@ -180,6 +182,8 @@ body {
   flex-direction: column;
   justify-content: flex-end;
   overflow-y: auto;
+  border-radius: 10px;
+
 }
 #terminalResultsCont {
   color: green;
@@ -201,6 +205,7 @@ body {
   /* padding: 20px; */
   outline: none;
   font-family: "Roboto Mono" monospace;
+  resize: vertical;
 }
 #inputCont {
   display: flex;
@@ -230,6 +235,7 @@ body {
   height: inherit;
   position: absolute;
   z-index: 0;
+  max-width: 100%;
 }
 .overlay-image {
   position: absolute;
