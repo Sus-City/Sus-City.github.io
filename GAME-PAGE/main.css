@@ -155,6 +155,8 @@ body {
   float: right;
   height: 80vh;
   width: 37.05902777777778vw;
+  border-radius: 10px;
+
 }
 .mainCont h2 {
   display: inline-block;
@@ -180,6 +182,8 @@ body {
   flex-direction: column;
   justify-content: flex-end;
   overflow-y: auto;
+  border-radius: 10px;
+
 }
 #terminalResultsCont {
   color: green;
@@ -189,6 +193,23 @@ body {
   font-family: "Roboto Mono" monospace;
   line-height: 20px;
   width: inherit;
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .15em solid green; /* The typwriter cursor */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  animation: 
+    typing 3.5s steps(40, end),
+    blink-caret .75s step-end infinite;
+}
+/* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange; }
 }
 #terminalTextInput {
   background: inherit;
@@ -201,6 +222,7 @@ body {
   /* padding: 20px; */
   outline: none;
   font-family: "Roboto Mono" monospace;
+  resize: vertical;
 }
 #inputCont {
   display: flex;
@@ -230,6 +252,7 @@ body {
   height: inherit;
   position: absolute;
   z-index: 0;
+  max-width: 100%;
 }
 .overlay-image {
   position: absolute;
