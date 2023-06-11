@@ -9,12 +9,45 @@
 </head>
 
 
+<!-- 
 <script>
+  function showLoadingScreen() {
+  // Display the loading screen
+  document.getElementById("loading_screen").style.display = "block";
+  console.log("Hello, cocksuckers!")
+}
+
   let playSound = () => new Audio("/SOUNDS/menuclick.mp3").play();
-</script>
+
+  function showLoadingAndPlaySound() {
+  showLoadingScreen();
+  playSound();
+}
+
+</script> -->
 
 <body>
+  
+  <div class="center">
+    <div id="loading_screen">
+      <div class="spinner"></div>
+      <p>Loading...</p>
+    </div>
+    <h1>Sign Up</h1>
+    <div class="txt_field">
+      <input type="text" id="username" required />
+      <span></span>
+      <label>Type a fun username (changed on every login)</label>
+    </div>
+
+    <button id="submit_btn">Sign up</button>
+    
+    <script type="module" src="/FIREBASE/signup-firebase.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+  </div>
   <div class="signup-body">
+
+
     <body>
 
       <div class="glowing">
@@ -117,6 +150,7 @@
       </button>
     </div>
   </div>
+  
   <script type="module" src="/FIREBASE/signup-firebase.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
 </body>
