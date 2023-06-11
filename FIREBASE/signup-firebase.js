@@ -40,19 +40,6 @@ function validatePassword(password) {
   return "";
 }
 
-function showLoadingScreen() {
-  // Display the loading screen
-  document.getElementById("loading_screen").style.display = "block";
-  console.log("Hello, cocksuckers!")
-}
-
-let playSound = () => new Audio("/SOUNDS/menuclick.mp3").play();
-
-function showLoadingAndPlaySound() {
-  showLoadingScreen();
-  playSound();
-}
-
 if (window.location.pathname == "/SIGNUP-PAGE/signup.html") {
   submitBtn.addEventListener("click", function() {
     let email = document.getElementById("email").value;
@@ -74,7 +61,6 @@ if (window.location.pathname == "/SIGNUP-PAGE/signup.html") {
 
 function signUp(email, password) {
   console.log("Signing In")
-  showLoadingAndPlaySound();
   axios({
     method: "get",
     url: decodeURIComponent(
