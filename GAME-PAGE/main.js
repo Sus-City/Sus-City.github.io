@@ -252,28 +252,39 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
 
     //Method to create a dialogue in the terminal
     createTextInTerminal() {
-      let dialogue = document.createElement("p");
-      dialogue.textContent = this.dialogueContent;
-      if (this.character == "CAS") {
-        dialogue.style.color = "#44dcfa";
-      } else if (this.character == "POL") {
-        dialogue.style.color = "red";
-      } else if (this.character == "QUESTION") {
-        dialogue.style.color = "yellow";
-      } else {
-        console.log(
-          "Error: Character is wrongly defined. It must either be CAS or POL"
-        );
+      if (!this.dialogueContent) {
+        console.log("Error: Dialogue content is missing.");
+        return;
       }
-      setTimeout(function () {
-        if (terminalResultsCont && terminalResultWrapper) {
-          terminalResultsCont.append(dialogue);
-          terminalResultWrapper.scrollTop =
-            terminalResultWrapper.scrollHeight -
-            terminalResultWrapper.clientHeight; //MOVES THE TEXT UP
+    
+      const sentences = this.dialogueContent.split(". ");
+      const container = document.createElement("div");
+      container.id = "terminalResultsCont";
+    
+      sentences.forEach((sentence) => {
+        const span = document.createElement("span");
+        span.classList.add("sentence");
+        span.textContent = sentence;
+        container.appendChild(span);
+      });
+    
+      const terminalResultsCont = document.getElementById("terminalResultsCont");
+      if (terminalResultsCont) {
+        terminalResultsCont.parentNode.replaceChild(container, terminalResultsCont);
+      } else {
+        const terminalResultWrapper = document.getElementById("terminalResultWrapper");
+        if (terminalResultWrapper) {
+          terminalResultWrapper.appendChild(container);
         }
-      }, 200);
+      }
+    
+      const terminalResultWrapper = document.getElementById("terminalResultWrapper");
+      if (terminalResultWrapper) {
+        terminalResultWrapper.scrollTop =
+          terminalResultWrapper.scrollHeight - terminalResultWrapper.clientHeight;
+      }
     }
+    
   }
 
   function sayText(theTextContent, character) {
