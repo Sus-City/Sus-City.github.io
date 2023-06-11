@@ -252,39 +252,42 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
 
     //Method to create a dialogue in the terminal
     createTextInTerminal() {
-      if (!this.dialogueContent) {
-        console.log("Error: Dialogue content is missing.");
-        return;
+      let dialogue = document.createElement("p");
+      dialogue.textContent = this.dialogueContent;
+      if (this.character == "CAS") {
+        dialogue.style.color = "#44dcfa";
+      } else if (this.character == "POL") {
+        dialogue.style.color = "red";
+      } else if (this.character == "QUESTION") {
+        dialogue.style.color = "yellow";
+      } else {
+        console.log(
+          "Error: Character is wrongly defined. It must either be CAS or POL"
+        );
       }
-    
-      const sentences = this.dialogueContent.split(". ");
-      const container = document.createElement("div");
-      container.id = "terminalResultsCont";
-    
-      sentences.forEach((sentence) => {
+
+      // const sentences = this.dialogueContent.split(". ");
+      // dialogue.innerHTML = ""; // Clear the content of the dialogue element
+
+      sentences.forEach((sentence, index) => {
         const span = document.createElement("span");
         span.classList.add("sentence");
         span.textContent = sentence;
-        container.appendChild(span);
+
+        const delay = index * 200; // Delay each sentence by 200ms
+        setTimeout(function () {
+          dialogue.appendChild(span);
+        }, delay);
       });
-    
-      const terminalResultsCont = document.getElementById("terminalResultsCont");
-      if (terminalResultsCont) {
-        terminalResultsCont.parentNode.replaceChild(container, terminalResultsCont);
-      } else {
-        const terminalResultWrapper = document.getElementById("terminalResultWrapper");
-        if (terminalResultWrapper) {
-          terminalResultWrapper.appendChild(container);
+      setTimeout(function () {
+        if (terminalResultsCont && terminalResultWrapper) {
+          terminalResultsCont.append(dialogue);
+          terminalResultWrapper.scrollTop =
+            terminalResultWrapper.scrollHeight -
+            terminalResultWrapper.clientHeight; //MOVES THE TEXT UP
         }
-      }
-    
-      const terminalResultWrapper = document.getElementById("terminalResultWrapper");
-      if (terminalResultWrapper) {
-        terminalResultWrapper.scrollTop =
-          terminalResultWrapper.scrollHeight - terminalResultWrapper.clientHeight;
-      }
+      }, 200);
     }
-    
   }
 
   function sayText(theTextContent, character) {
