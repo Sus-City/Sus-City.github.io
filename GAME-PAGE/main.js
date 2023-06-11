@@ -265,20 +265,6 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
           "Error: Character is wrongly defined. It must either be CAS or POL"
         );
       }
-
-      // const sentences = this.dialogueContent.split(". ");
-      // dialogue.innerHTML = ""; // Clear the content of the dialogue element
-
-      sentences.forEach((sentence, index) => {
-        const span = document.createElement("span");
-        span.classList.add("sentence");
-        span.textContent = sentence;
-
-        const delay = index * 200; // Delay each sentence by 200ms
-        setTimeout(function () {
-          dialogue.appendChild(span);
-        }, delay);
-      });
       setTimeout(function () {
         if (terminalResultsCont && terminalResultWrapper) {
           terminalResultsCont.append(dialogue);
