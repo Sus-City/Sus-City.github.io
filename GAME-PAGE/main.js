@@ -10,6 +10,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.4/firebase
 export let userInfo = JSON.parse(localStorage.getItem("user"));
 export function save(location) {
   console.log("Start Saving");
+  
   localStorage.setItem("user", JSON.stringify(userInfo));
   axios({
     method: "get",
@@ -860,6 +861,16 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
     bgm3.play();
   });
   muteButton.addEventListener("click", toggleMute);
+  if (localStorage.getItem("mutePreference") === "false") {
+    // Apply the muted state to the background music tracks
+    bgm1.muted = true;
+    bgm2.muted = true;
+    bgm3.muted = true;
+  
+    // Update the text/content of the mute button
+    muteButton.classList.remove("fa-volume-high");
+    muteButton.classList.add("fa-volume-xmark");
+  }
 
   function toggleMute() {
       // Toggle the mute functionality for each background music track
@@ -873,14 +884,21 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
     // Replace the "fa-volume-xmark" class with the new icon class
     muteButton.classList.remove("fa-volume-xmark");
     muteButton.classList.add("fa-volume-high");
+    localStorage.setItem("mutePreference", "true");
+    
   } else {
     // Replace the "fa-volume-mute" class with the new icon class
     muteButton.classList.remove("fa-volume-high");
     muteButton.classList.add("fa-volume-xmark");
+    localStorage.setItem("mutePreference", "false");
+
+
   }
+  
 };
 
   updateOverlay();
   sayText("CAS is online", "CAS");
   sayText("POL is online", "POL");
 }
+
