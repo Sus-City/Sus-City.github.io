@@ -83,11 +83,14 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
   let bgm2 = new Audio("/SOUNDS/bgm 2.mp3");
   let bgm3 = new Audio("/SOUNDS/bgm 3.mp3");
 
+  onloadMusic.volume = 0.5
   onloadMusic.play();
 
   //getting values from html
   const cityLayout = document.querySelector(".city-layout"); //the playfield
   const shopBtn = document.querySelector(".fa-shop");
+  const icon = muteButton.querySelector("fa-volume-xmark");
+
 
   function imageOverlay(imageSource, imageElement) {
     imageElement.src = imageSource; //source of image
@@ -844,14 +847,38 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
 
   //ON LOAD
   onloadMusic.addEventListener("ended", () => {
+    bgm1.volume = 0.5;
     bgm1.play();
   });
   bgm1.addEventListener("ended", () => {
+    bgm2.volume = 0.5;
     bgm2.play();
   });
   bgm2.addEventListener("ended", () => {
+    bgm3.volume = 0.5;
+
     bgm3.play();
   });
+  muteButton.addEventListener("click", toggleMute);
+
+  function toggleMute() {
+      // Toggle the mute functionality for each background music track
+  bgm1.muted = !bgm1.muted;
+  bgm2.muted = !bgm2.muted;
+  bgm3.muted = !bgm3.muted;
+  // Define the icon variable here
+
+  // Update the text of the mute button
+  if (muteButton.classList.contains("fa-volume-xmark")) {
+    // Replace the "fa-volume-xmark" class with the new icon class
+    muteButton.classList.remove("fa-volume-xmark");
+    muteButton.classList.add("fa-volume-high");
+  } else {
+    // Replace the "fa-volume-mute" class with the new icon class
+    muteButton.classList.remove("fa-volume-high");
+    muteButton.classList.add("fa-volume-xmark");
+  }
+};
 
   updateOverlay();
   sayText("CAS is online", "CAS");
