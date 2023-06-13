@@ -41,11 +41,11 @@ function validatePassword(password) {
 }
 
 if (window.location.pathname == "/SIGNUP-PAGE/signup.html") {
-  submitBtn.addEventListener("click", function() {
+  submitBtn.addEventListener("click", function () {
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
-    // localStorage.setItem("URL", "https://sus-city.github.io"); 
-  
+    // localStorage.setItem("URL", "https://sus-city.github.io");
+
     if (!validateEmail(email)) {
       alert("Please enter a valid email.");
       return;
@@ -59,8 +59,15 @@ if (window.location.pathname == "/SIGNUP-PAGE/signup.html") {
   });
 }
 
+function showLoading() {
+  const loading = document.getElementById("loading");
+  loading.classList.add("ring");
+  document.querySelector(".signup-body").classList.add("blur");
+}
+
 function signUp(email, password) {
-  console.log("Signing In")
+  console.log("Signing In");
+  showLoading();
   axios({
     method: "get",
     url: decodeURIComponent(
@@ -142,11 +149,8 @@ function navigateGame(uid, snapshot) {
   localStorage.setItem("UID", uid);
   localStorage.setItem("user", JSON.stringify(snapshot));
   console.log("End Saving");
-  if (
-    localStorage.getItem("user") &&
-    localStorage.getItem("UID")
-  ) {
-    console.log("Going to game")
-    window.location.pathname =  "/GAME-PAGE/main.html";
+  if (localStorage.getItem("user") && localStorage.getItem("UID")) {
+    console.log("Going to game");
+    window.location.pathname = "/GAME-PAGE/main.html";
   }
 }
