@@ -15,6 +15,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.4/firebase
 
 //Get inputs from HTML
 const submitBtn = document.querySelector("#submit_btn");
+const loading = document.getElementById("loading");
 
 function validateEmail(email) {
   const re = /\S+\S+\.\S+/;
@@ -60,9 +61,13 @@ if (window.location.pathname == "/SIGNUP-PAGE/signup.html") {
 }
 
 function showLoading() {
-  const loading = document.getElementById("loading");
   loading.classList.add("ring");
   document.querySelector(".signup-body").classList.add("blur");
+}
+
+function dismissLoading() {
+  loading.classList.remove("ring");
+  document.querySelector(".signup-body").classList.remove("blur");
 }
 
 function signUp(email, password) {
@@ -93,51 +98,57 @@ function signUp(email, password) {
         })
         .catch((error) => {
           const errorCode = error.code;
-          if (errorCode === "auth/user-not-found") {
-            createUserWithEmailAndPassword(auth, email, password)
-              .then((userCredential) => {
-                const user = userCredential.user;
-                var lgDate = new Date();
-                const defaultUser = {
-                  last_login: lgDate,
-                  email: email,
-                  password: password,
-                  level: 1,
-                  greenpoints: 0,
-                  favor: 0,
-                  levelProgress: 0,
-                  roadLevel: 2,
-                  factoryLevel: 2,
-                  parkLevel: 2,
-                  officesLevel: 2,
-                  landfillLevel: 2,
-                  coastLevel: 2,
-                  gasstationLevel: 2,
-                  shopItems: [""],
-                };
-                set(ref(db, "users/" + user.uid), defaultUser).then(() => {
-                  // TODO: LOADING ICON
-                  navigateGame(user.uid, defaultUser);
+          switch (errorCode) {
+            case "auth/user-not-found":
+              createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                  const user = userCredential.user;
+                  var lgDate = new Date();
+                  const defaultUser = {
+                    last_login: lgDate,
+                    email: email,
+                    password: password,
+                    level: 1,
+                    greenpoints: 0,
+                    favor: 0,
+                    levelProgress: 0,
+                    roadLevel: 2,
+                    factoryLevel: 2,
+                    parkLevel: 2,
+                    officesLevel: 2,
+                    landfillLevel: 2,
+                    coastLevel: 2,
+                    gasstationLevel: 2,
+                    shopItems: [""],
+                  };
+                  set(ref(db, "users/" + user.uid), defaultUser).then(() => {
+                    navigateGame(user.uid, defaultUser);
+                  });
+                })
+                .catch((error) => {
+                  const errorCode = error.code;
+                  const errorMessage = error.message;
+                  switch (errorCode) {
+                    case "auth/invalid-email":
+                      alert("Please enter a valid email.");
+                      break;
+                    case "auth/weak-password":
+                      alert(
+                        "Please enter a stronger password, with a minimum of 6 characters."
+                      );
+                      break;
+                    default:
+                      alert("Please enter a valid email and password.");
+                  }
+                  console.log(errorMessage);
                 });
-              })
-              .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                switch (errorCode) {
-                  case "auth/invalid-email":
-                    alert("Please enter a valid email.");
-                    break;
-                  case "auth/weak-password":
-                    alert(
-                      "Please enter a stronger password, with a minimum of 6 characters."
-                    );
-                    break;
-                  default:
-                    alert("Please enter a valid email and password.");
-                }
-                console.log(errorMessage);
-              });
+              break;
+            case "auth/wrong-password":
+              alert("Your Password is wrong.");
+              dismissLoading();
+              break;
           }
+          console.log(errorCode);
         });
     })
     .catch((error) => {
