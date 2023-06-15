@@ -768,7 +768,7 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
       "CAS"
     );
     sayText(
-      "Yes, yes I must.",
+      "Yes, yes CAS I must.",
       "POL"
     );
   }
