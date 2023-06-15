@@ -6,6 +6,7 @@ import {
   child
 } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-database.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-app.js";
+import profanities from './badwords.js';
 
 export let userInfo = JSON.parse(localStorage.getItem("user"));
 export function save(location) {
@@ -685,8 +686,17 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
       case "":
         break;
       default:
+        const userInput = terminalInput; // Replaced with the user input string
+      
+        const hasProfanity = profanities.some(profanity => userInput.includes(profanity));
+      
+        if (hasProfanity) {
+          // Handle the presence of profanity
+          profanityDetected();
+        } else {
         dontUnderstand();
         break;
+        }
     }
     terminalTextInput.value = ""; //RESETS THE INPUT
     updateValues();
@@ -743,6 +753,22 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
       "POL"
     );
     updateValues();
+  }
+
+  function profanityDetected() {
+    sayText("HEY! Watch your language.", "CAS");
+    sayText(
+      "YOU BEST WATCH THAT MOUTH OF YOURS YOU PINK SWATTED-",
+      "POL"
+    );
+    sayText(
+      "Must you outdo me every time???",
+      "CAS"
+    );
+    sayText(
+      "Yes, yes CAS I must.",
+      "POL"
+    );
   }
 
   function notAvailable() {
