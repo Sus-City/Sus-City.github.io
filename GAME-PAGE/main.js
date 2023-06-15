@@ -792,6 +792,31 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
     );
   }
 
+  function gameEnd(){
+    if (confirm("Continue the time loop?")) {
+      userInfo.level = 0 ;
+      userInfo.favor = 0;
+      userInfo.greenpoints = 0;
+      while (cityLayout.firstChild) {
+        cityLayout.removeChild(cityLayout.firstChild);
+      }
+
+    } else {
+      alert("Alright, well - we can just, stone.");
+      if (confirm("Are you sure?")) {
+        alert("Alright, fine.");
+  
+      } else {
+        userInfo.level = 0 ;
+        userInfo.favor = 0;
+        userInfo.greenpoints = 0;
+        while (cityLayout.firstChild) {
+          cityLayout.removeChild(cityLayout.firstChild);
+        }
+      }
+    }
+  }
+
   function checkForCorrectAns(terminalInput, randomQn) {
     if (terminalInput == `/${arrayOfQuestions[randomQn].correctAnswer}`) {
       //IF ANSWER IS CORRECT
@@ -839,7 +864,8 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
         }
       } else {
         userInfo.level = 12; //max level
-        userInfo.levelProgress = 100; //to show that no longer can level up
+        userInfo.levelProgress = 100;
+        gameEnd() //to show that no longer can level up
       }
       levelIndicator.textContent = userInfo.level;
       levelProgressBar.style.width = userInfo.levelProgress + "%";
