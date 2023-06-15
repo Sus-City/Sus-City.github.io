@@ -6,6 +6,9 @@ import {
   child
 } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-database.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-app.js";
+import profanities from './profanities.js';
+
+
 
 export let userInfo = JSON.parse(localStorage.getItem("user"));
 export function save(location) {
@@ -685,8 +688,17 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
       case "":
         break;
       default:
+        const userInput = terminalInput; // Replaced with the user input string
+        const hasProfanity = profanities.some(profanity => userInput.includes(profanity));
+      
+        if (hasProfanity) {
+          // Handle the presence of profanity
+          
+          profanityDetected();
+        } else {
         dontUnderstand();
         break;
+        }
     }
     terminalTextInput.value = ""; //RESETS THE INPUT
     updateValues();
@@ -745,6 +757,22 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
     updateValues();
   }
 
+  function profanityDetected() {
+    sayText("HEY! Watch your language.", "CAS");
+    sayText(
+      "YOU BEST MIND THAT TONGUE OF YOURS, YOU ROGUISH RASCAL!",
+      "POL"
+    );
+    sayText(
+      "Must you outdo me every time???",
+      "CAS"
+    );
+    sayText(
+      "Yes, yes CAS I must.",
+      "POL"
+    );
+  }
+
   function notAvailable() {
     sayText(
       "Unlock the development before you can view the 3D version!",
@@ -762,6 +790,31 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
       "That's such a nice reminder, CAS! If only you were this nice at my wedding...",
       "POL"
     );
+  }
+
+  function gameEnd(){
+    if (confirm("Continue the time loop?")) {
+      userInfo.level = 0 ;
+      userInfo.favor = 0;
+      userInfo.greenpoints = 0;
+      while (cityLayout.firstChild) {
+        cityLayout.removeChild(cityLayout.firstChild);
+      }
+
+    } else {
+      alert("Alright, well - we can just, stone.");
+      if (confirm("Are you sure?")) {
+        alert("Alright, fine.");
+  
+      } else {
+        userInfo.level = 0 ;
+        userInfo.favor = 0;
+        userInfo.greenpoints = 0;
+        while (cityLayout.firstChild) {
+          cityLayout.removeChild(cityLayout.firstChild);
+        }
+      }
+    }
   }
 
   function checkForCorrectAns(terminalInput, randomQn) {
@@ -811,7 +864,8 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
         }
       } else {
         userInfo.level = 12; //max level
-        userInfo.levelProgress = 100; //to show that no longer can level up
+        userInfo.levelProgress = 100;
+        gameEnd() //to show that no longer can level up
       }
       levelIndicator.textContent = userInfo.level;
       levelProgressBar.style.width = userInfo.levelProgress + "%";
