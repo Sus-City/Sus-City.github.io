@@ -6,7 +6,9 @@ import {
   child
 } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-database.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-app.js";
-import profanities from './badwords.js';
+import profanities from './profanities.js';
+
+
 
 export let userInfo = JSON.parse(localStorage.getItem("user"));
 export function save(location) {
@@ -687,11 +689,11 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
         break;
       default:
         const userInput = terminalInput; // Replaced with the user input string
-      
         const hasProfanity = profanities.some(profanity => userInput.includes(profanity));
       
         if (hasProfanity) {
           // Handle the presence of profanity
+          
           profanityDetected();
         } else {
         dontUnderstand();
@@ -758,7 +760,7 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
   function profanityDetected() {
     sayText("HEY! Watch your language.", "CAS");
     sayText(
-      "YOU BEST WATCH THAT MOUTH OF YOURS YOU PINK SWATTED-",
+      "YOU BEST MIND THAT TONGUE OF YOURS, YOU ROGUISH RASCAL!",
       "POL"
     );
     sayText(
@@ -766,7 +768,7 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
       "CAS"
     );
     sayText(
-      "Yes, yes CAS I must.",
+      "Yes, yes I must.",
       "POL"
     );
   }
