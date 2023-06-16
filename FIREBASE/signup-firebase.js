@@ -3,6 +3,7 @@ import {
   signInWithEmailAndPassword,
   getAuth,
   createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
 } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-auth.js";
 import {
   set,
@@ -16,6 +17,50 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.4/firebase
 //Get inputs from HTML
 const submitBtn = document.querySelector("#submit_btn");
 const loading = document.getElementById("loading");
+const forgetBtn = document.getElementById("forget-link");
+
+let email;
+
+forgetBtn.addEventListener("click", function () {
+  email = window.prompt(
+    "Please enter an email for password recovery.",
+    "xxx@gmail.com"
+  );
+
+  while (!validateEmail(email)) {
+    email = window.prompt(
+      "That was not a valid email, please try again. ",
+      "xxx@gmail.com"
+    );
+  }
+  console.log(email);
+  forgetPassword(email);
+});
+
+function forgetPassword(email) {
+  console.log("Getting Firebase Info");
+  showLoading();
+  axios({
+    method: "get",
+    url: decodeURIComponent(
+      "https%3A%2F%2Fstorage-api-qazw.onrender.com%2Fconfig"
+    ),
+  }).then(function (response) {
+    const app = initializeApp(response.data);
+    const auth = getAuth(app);
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        dismissLoading();
+        alert(
+          "Password reset email sent! Please check your spam mail if you can't find it."
+        );
+      })
+      .catch(() => {
+        const errorCode = error.code;
+        console.log(errorCode);
+      });
+  });
+}
 
 function validateEmail(email) {
   const re = /\S+\S+\.\S+/;

@@ -297,3 +297,14 @@ body {
   filter: blur(4px);
   pointer-events: none;
 }
+#forget-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 5%;
+}
+#forget-link {
+  text-decoration: underline;
+  cursor: pointer;
+}
