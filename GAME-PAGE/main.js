@@ -3,17 +3,15 @@ import {
   ref,
   getDatabase,
   get,
-  child
+  child,
 } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-database.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-app.js";
-import profanities from './profanities.js';
-
-
+import profanities from "./profanities.js";
 
 export let userInfo = JSON.parse(localStorage.getItem("user"));
 export function save(location) {
   console.log("Start Saving");
-  
+
   localStorage.setItem("user", JSON.stringify(userInfo));
   axios({
     method: "get",
@@ -27,55 +25,56 @@ export function save(location) {
       userInfo
     ).then(() => {
       if (location == "signup") {
-        window.location.pathname = "/SIGNUP-PAGE/signup.html"
+        window.location.pathname = "/SIGNUP-PAGE/signup.html";
       } else if (location == "shop") {
-        window.location.pathname = "/SHOP-PAGE/shop.html"
+        window.location.pathname = "/SHOP-PAGE/shop.html";
         // window.location.href =
         //   localStorage.getItem("URL") + "";
       } else if (location == "game") {
-        window.location.pathname = "/GAME-PAGE/main.html"
+        window.location.pathname = "/GAME-PAGE/main.html";
       }
     });
   });
 }
 
 async function getAllQuestions() {
-  console.log("Getting Qns")
-  let getData = new Promise(function(resolve){
+  console.log("Getting Qns");
+  let getData = new Promise(function (resolve) {
     axios({
       method: "get",
       url: decodeURIComponent(
         "https%3A%2F%2Fstorage-api-qazw.onrender.com%2Fconfig"
       ),
     }).then((response) => {
-      console.log("Getting Data")
+      console.log("Getting Data");
       initializeApp(response.data);
       get(child(ref(getDatabase()), "questions"))
         .then((snapshot) => {
-          console.log("Done.")
+          console.log("Done.");
           // return Object.values(snapshot.val())
-          resolve(Object.values(snapshot.val()))
+          resolve(Object.values(snapshot.val()));
         })
         .catch((error) => {
           console.error("Error:", error);
         });
     });
-  })
-  let questions = await getData
-  return questions
+  });
+  let questions = await getData;
+  return questions;
 }
 
-if (window.location.pathname == "/GAME-PAGE/main.html") { 
-  let questionsDB = getAllQuestions()
+if (window.location.pathname == "/GAME-PAGE/main.html") {
+  let questionsDB = getAllQuestions();
   let arrayOfQuestions;
-  questionsDB.then(function(questions){
-    //QUESTIONS LOADED
-    console.log("Questions Loaded")
-    arrayOfQuestions = questions
-  })
-  .catch((error) => {
-    console.log(error)
-  })
+  questionsDB
+    .then(function (questions) {
+      //QUESTIONS LOADED
+      console.log("Questions Loaded");
+      arrayOfQuestions = questions;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   //educational cutscene functions
   function redirectToYoutubeERP() {
     window.open("https://www.youtube.com/watch?v=EE6sSf4QAsg");
@@ -87,14 +86,13 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
   let bgm2 = new Audio("/SOUNDS/bgm 2.mp3");
   let bgm3 = new Audio("/SOUNDS/bgm 3.mp3");
 
-  onloadMusic.volume = 0.5
+  onloadMusic.volume = 0.5;
   onloadMusic.play();
 
   //getting values from html
   const cityLayout = document.querySelector(".city-layout"); //the playfield
   const shopBtn = document.querySelector(".fa-shop");
   const icon = muteButton.querySelector("fa-volume-xmark");
-
 
   function imageOverlay(imageSource, imageElement) {
     imageElement.src = imageSource; //source of image
@@ -365,7 +363,7 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
           `Question: ${arrayOfQuestions[window.randomQn].question}`,
           "QUESTION"
         );
-        // console.log(arrayOfQuestions[window.randomQn].correctAnswer)
+        // console.log(arrayOfQuestions[window.randomQn].correctAnswer);
         //display options
         for (
           let i = 1;
@@ -689,15 +687,17 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
         break;
       default:
         const userInput = terminalInput; // Replaced with the user input string
-        const hasProfanity = profanities.some(profanity => userInput.includes(profanity));
-      
+        const hasProfanity = profanities.some((profanity) =>
+          userInput.includes(profanity)
+        );
+
         if (hasProfanity) {
           // Handle the presence of profanity
-          
+
           profanityDetected();
         } else {
-        dontUnderstand();
-        break;
+          dontUnderstand();
+          break;
         }
     }
     terminalTextInput.value = ""; //RESETS THE INPUT
@@ -759,18 +759,9 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
 
   function profanityDetected() {
     sayText("HEY! Watch your language.", "CAS");
-    sayText(
-      "YOU BEST MIND THAT TONGUE OF YOURS, YOU ROGUISH RASCAL!",
-      "POL"
-    );
-    sayText(
-      "Must you outdo me every time???",
-      "CAS"
-    );
-    sayText(
-      "Yes, yes CAS I must.",
-      "POL"
-    );
+    sayText("YOU BEST MIND THAT TONGUE OF YOURS, YOU ROGUISH RASCAL!", "POL");
+    sayText("Must you outdo me every time???", "CAS");
+    sayText("Yes, yes CAS I must.", "POL");
   }
 
   function notAvailable() {
@@ -790,29 +781,42 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
       "That's such a nice reminder, CAS! If only you were this nice at my wedding...",
       "POL"
     );
+    if (userInfo.level == 12) {
+      gameEnd(); //to show that no longer can level up
+    }
   }
 
-  function gameEnd(){
-    if (confirm("Continue the time loop?")) {
-      userInfo.level = 0 ;
-      userInfo.favor = 0;
-      userInfo.greenpoints = 0;
-      while (cityLayout.firstChild) {
-        cityLayout.removeChild(cityLayout.firstChild);
-      }
+  function resetGame() {
+    // Update Values
+    userInfo.level = 0;
+    userInfo.favor = 0;
+    userInfo.greenpoints = 0;
+    userInfo.levelProgress = 0;
+    terminalTextInput.value = "";
 
+    // Updates UI
+    levelIndicator.textContent = userInfo.level;
+    levelProgressBar.style.width = userInfo.levelProgress + "%";
+    updateValues();
+    while (cityLayout.children.length > 1) {
+      cityLayout.removeChild(cityLayout.lastChild);
+    }
+    // while (terminalResultsCont.children.length > 0) {
+    //   terminalResultsCont.removeChild(terminalResultsCont.lastChild);
+    // }
+    sayText("CAS is online", "CAS");
+    sayText("POL is online", "POL");
+  }
+
+  function gameEnd() {
+    if (confirm("Continue the time loop?")) {
+      resetGame();
     } else {
       alert("Alright, well - we can just, stone.");
       if (confirm("Are you sure?")) {
         alert("Alright, fine.");
-  
       } else {
-        userInfo.level = 0 ;
-        userInfo.favor = 0;
-        userInfo.greenpoints = 0;
-        while (cityLayout.firstChild) {
-          cityLayout.removeChild(cityLayout.firstChild);
-        }
+        resetGame();
       }
     }
   }
@@ -823,49 +827,43 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
       sayText("Correct!", "CAS");
       console.log("Updating Green Points");
       updateGreenpoints();
-      if (userInfo.level != 12) {
-        if (userInfo.levelProgress > 50) {
-          userInfo.level += 1;
-          userInfo.favor += 1;
-          levelUp();
-          userInfo.greenpoints += roundNearest5(20 / userInfo.level);
+      if (userInfo.levelProgress > 50) {
+        userInfo.level += 1;
+        userInfo.favor += 1;
+        levelUp();
+        userInfo.greenpoints += roundNearest5(20 / userInfo.level);
 
-          if (userInfo.level % 4 == 0) {
-            //IF LEVEL IS 4, 8, OR 12 -> UPDATE THE PARK
-            switch (userInfo.parkLevel) {
-              case 2:
-                sayText(
-                  "It seems like... they have developed the park. By themselves.",
-                  "POL"
-                );
-                sayText(
-                  "Hm, just thinking. Why do they place it everywhere? I mean, what exactly do they hope to gain by putting such eyesores all over the place. There's no point for them, anyways, not when there's no Sun in here.",
-                  "POL"
-                );
-                break;
-              case 3:
-                sayText(
-                  "It seems like... they have developed the park. By themselves. Again.",
-                  "POL"
-                );
-                break;
-              case 4:
-                sayText("Are- are those birds???", "POL");
-                break;
-            }
-            userInfo.parkLevel += 1;
-            build.play();
+        if (userInfo.level % 4 == 0) {
+          //IF LEVEL IS 4, 8, OR 12 -> UPDATE THE PARK
+          switch (userInfo.parkLevel) {
+            case 2:
+              sayText(
+                "It seems like... they have developed the park. By themselves.",
+                "POL"
+              );
+              sayText(
+                "Hm, just thinking. Why do they place it everywhere? I mean, what exactly do they hope to gain by putting such eyesores all over the place. There's no point for them, anyways, not when there's no Sun in here.",
+                "POL"
+              );
+              break;
+            case 3:
+              sayText(
+                "It seems like... they have developed the park. By themselves. Again.",
+                "POL"
+              );
+              break;
+            case 4:
+              sayText("Are- are those birds???", "POL");
+              break;
           }
-          userInfo.levelProgress = 0; //RESETS THE LEVEL PROGRESS BAR
-        } else {
-          // levelProgress == 75 ? (levelProgress += 99) : (levelProgress += 99);
-          userInfo.levelProgress += 99;
-          // console.log(userInfo.levelProgress);
+          userInfo.parkLevel += 1;
+          build.play();
         }
+        userInfo.levelProgress = 0; //RESETS THE LEVEL PROGRESS BAR
       } else {
-        userInfo.level = 12; //max level
-        userInfo.levelProgress = 100;
-        gameEnd() //to show that no longer can level up
+        // levelProgress == 75 ? (levelProgress += 99) : (levelProgress += 99);
+        userInfo.levelProgress += 99;
+        // console.log(userInfo.levelProgress);
       }
       levelIndicator.textContent = userInfo.level;
       levelProgressBar.style.width = userInfo.levelProgress + "%";
@@ -920,39 +918,34 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
     bgm1.muted = true;
     bgm2.muted = true;
     bgm3.muted = true;
-  
+
     // Update the text/content of the mute button
     muteButton.classList.remove("fa-volume-high");
     muteButton.classList.add("fa-volume-xmark");
   }
 
   function toggleMute() {
-      // Toggle the mute functionality for each background music track
-  bgm1.muted = !bgm1.muted;
-  bgm2.muted = !bgm2.muted;
-  bgm3.muted = !bgm3.muted;
-  // Define the icon variable here
+    // Toggle the mute functionality for each background music track
+    bgm1.muted = !bgm1.muted;
+    bgm2.muted = !bgm2.muted;
+    bgm3.muted = !bgm3.muted;
+    // Define the icon variable here
 
-  // Update the text of the mute button
-  if (muteButton.classList.contains("fa-volume-xmark")) {
-    // Replace the "fa-volume-xmark" class with the new icon class
-    muteButton.classList.remove("fa-volume-xmark");
-    muteButton.classList.add("fa-volume-high");
-    localStorage.setItem("mutePreference", "true");
-    
-  } else {
-    // Replace the "fa-volume-mute" class with the new icon class
-    muteButton.classList.remove("fa-volume-high");
-    muteButton.classList.add("fa-volume-xmark");
-    localStorage.setItem("mutePreference", "false");
-
-
+    // Update the text of the mute button
+    if (muteButton.classList.contains("fa-volume-xmark")) {
+      // Replace the "fa-volume-xmark" class with the new icon class
+      muteButton.classList.remove("fa-volume-xmark");
+      muteButton.classList.add("fa-volume-high");
+      localStorage.setItem("mutePreference", "true");
+    } else {
+      // Replace the "fa-volume-mute" class with the new icon class
+      muteButton.classList.remove("fa-volume-high");
+      muteButton.classList.add("fa-volume-xmark");
+      localStorage.setItem("mutePreference", "false");
+    }
   }
-  
-};
 
   updateOverlay();
   sayText("CAS is online", "CAS");
   sayText("POL is online", "POL");
 }
-
