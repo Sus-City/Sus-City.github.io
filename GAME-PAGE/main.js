@@ -309,6 +309,8 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
   const sendBtn = document.querySelector("#sendBtn");
   let terminalInput;
   let option; //for displaying the options for the qn
+  let alertIntervalCount = 0; //for counting the number of times user += suspoints so the alerts are not appearing that often
+  let developmentCount = 0;
 
   const returnBtn = document.getElementById("return");
 
@@ -440,8 +442,9 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
               // document.write(obj.video.value);
               break;
           }
-          userInfo.favor = userInfo.favor - 1;
+          userInfo.favor -= 1;
           userInfo.roadLevel += 1;
+          developmentCount += 1;
           build.play();
           updateOverlay();
         } else if (userInfo.roadLevel == 4) {
@@ -480,6 +483,7 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
           }
           userInfo.favor -= 1;
           userInfo.factoryLevel += 1;
+          developmentCount += 1;
           build.play();
 
           updateOverlay();
@@ -523,6 +527,7 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
           }
           userInfo.favor -= 1;
           userInfo.officesLevel += 1;
+          developmentCount += 1;
           build.play();
 
           updateOverlay();
@@ -569,6 +574,7 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
           }
           userInfo.favor -= 1;
           userInfo.coastLevel += 1;
+          developmentCount += 1;
           build.play();
           updateOverlay();
         } else if (userInfo.coastLevel == 4) {
@@ -612,6 +618,7 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
           }
           userInfo.favor -= 1;
           userInfo.landfillLevel += 1;
+          developmentCount += 1;
           build.play();
           updateOverlay();
         } else if (userInfo.landfillLevel == 4) {
@@ -663,6 +670,7 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
           }
           userInfo.favor -= 1;
           userInfo.gasstationLevel += 1;
+          developmentCount += 1;
           build.play();
           updateOverlay();
         } else if (userInfo.gasstationLevel == 4) {
@@ -690,6 +698,9 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
     }
     terminalTextInput.value = ""; //RESETS THE INPUT
     updateValues();
+    if (developmentCount == 12) {
+      gameEnd(); //to show that no longer can level up
+    }
   }
 
   //Chat History
@@ -762,9 +773,6 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
       "That's such a nice reminder, CAS! If only you were this nice at my wedding...",
       "POL"
     );
-    if (userInfo.level == 13) {
-      gameEnd(); //to show that no longer can level up
-    }
   }
 
   function resetGame() {
@@ -811,6 +819,14 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
         userInfo.level += 1;
         userInfo.favor += 1;
         levelUp();
+        if (userInfo.favor > 1 && developmentCount < 12) {
+          if (alertIntervalCount == 3) {
+            alert("Do you want to develop your city? Try /develop /[grid]");
+            alertIntervalCount = 1;
+          } else {
+            alertIntervalCount += 1;
+          }
+        }
         userInfo.greenpoints += roundNearest5(20 / userInfo.level);
 
         if (userInfo.level % 4 == 0) {
@@ -926,6 +942,16 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
   }
 
   updateOverlay();
+  // Update developmentCount upon loading
+  developmentCount =
+    userInfo.roadLevel -
+    2 +
+    (userInfo.factoryLevel - 2) +
+    (userInfo.officesLevel - 2) +
+    (userInfo.landfillLevel - 2) +
+    (userInfo.coastLevel - 2) +
+    (userInfo.gasstationLevel - 2);
+
   sayText("CAS is online", "CAS");
   sayText("POL is online", "POL");
 }
