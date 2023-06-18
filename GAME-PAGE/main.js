@@ -352,6 +352,10 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
           "Pro Tip: Pressing the up arrow allows you to view your command history.",
           "POL"
         );
+        sayText(
+          "If you ever need an in-depth tutorial of the game, you can use the command [/tutorial] for more information. Our president, Mr. Nosae, will guide you through the game and provide helpful tips and insights.",
+          "CAS"
+        );
         break;
       case "/q":
         window.isQuestionAnswered = false;
@@ -678,6 +682,9 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
         } else {
           sayText(nofavorsText, "POL");
         }
+        break;
+      case "/tutorial":
+        window.open("https://youtu.be/1M4iZHjBWB4");
         break;
       case "":
         break;
