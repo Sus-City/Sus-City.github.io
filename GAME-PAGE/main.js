@@ -347,10 +347,6 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
           "POL"
         );
         sayText(
-          "Also, to view the developments in 3D after you've developed them, simply type [/3D] and insert the name of the development",
-          "CAS"
-        );
-        sayText(
           "Pro Tip: Pressing the up arrow allows you to view your command history.",
           "POL"
         );
@@ -675,14 +671,6 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
           sayText(nofavorsText, "POL");
         }
         break;
-      case "/3D /coast":
-        if (userInfo.coastLevel >= 2) {
-          window.location.href =
-            localStorage.getItem("URL") + "/GAME-PAGE/3D/raincollection.html";
-        } else {
-          notAvailable();
-        }
-        break;
       case "":
         break;
       default:
@@ -762,13 +750,6 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
     sayText("YOU BEST MIND THAT TONGUE OF YOURS, YOU ROGUISH RASCAL!", "POL");
     sayText("Must you outdo me every time???", "CAS");
     sayText("Yes, yes CAS I must.", "POL");
-  }
-
-  function notAvailable() {
-    sayText(
-      "Unlock the development before you can view the 3D version!",
-      "CAS"
-    );
   }
 
   function levelUp() {
