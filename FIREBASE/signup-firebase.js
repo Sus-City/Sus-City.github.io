@@ -166,6 +166,7 @@ function signUp(email, password) {
                     gasstationLevel: 2,
                     shopItems: [""],
                   };
+                  window.open("https://youtu.be/1M4iZHjBWB4")
                   set(ref(db, "users/" + user.uid), defaultUser).then(() => {
                     navigateGame(user.uid, defaultUser);
                   });
