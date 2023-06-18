@@ -781,7 +781,7 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
       "That's such a nice reminder, CAS! If only you were this nice at my wedding...",
       "POL"
     );
-    if (userInfo.level == 12) {
+    if (userInfo.level == 13) {
       gameEnd(); //to show that no longer can level up
     }
   }
