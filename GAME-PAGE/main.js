@@ -771,7 +771,6 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
     // Update Values
     userInfo.level = 0;
     userInfo.favor = 0;
-    userInfo.greenpoints = 0;
     userInfo.levelProgress = 0;
     terminalTextInput.value = "";
 
