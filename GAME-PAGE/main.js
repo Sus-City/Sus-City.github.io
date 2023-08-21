@@ -7,19 +7,20 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-database.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-app.js";
 import profanities from "./profanities.js";
+import firebaseConfig from "../FIREBASE/firebase-config.js";
 
 export let userInfo = JSON.parse(localStorage.getItem("user"));
 export function save(location) {
   console.log("Start Saving");
 
   localStorage.setItem("user", JSON.stringify(userInfo));
-  axios({
-    method: "get",
-    url: decodeURIComponent(
-      "https%3A%2F%2Fstorage-api-qazw.onrender.com%2Fconfig"
-    ),
-  }).then((response) => {
-    initializeApp(response.data);
+  // axios({
+  //   method: "get",
+  //   url: decodeURIComponent(
+  //     "https%3A%2F%2Fstorage-api-qazw.onrender.com%2Fconfig"
+  //   ),
+  // }).then((response) => {
+    initializeApp(firebaseConfig);
     set(
       ref(getDatabase(), "users/" + localStorage.getItem("UID")),
       userInfo
@@ -34,7 +35,7 @@ export function save(location) {
         window.location.pathname = "/GAME-PAGE/main.html";
       }
     });
-  });
+  // });
 }
 
 async function getAllQuestions() {
@@ -340,22 +341,16 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
     switch (terminalInput) {
       case "/help":
         //display all the commands
+
         sayText(
-          "To receive a question, enter: [/q]. To answer questions? Simple! Respective to the option you choose, enter: [/1, /2, /3 or /4].",
+          "If you ever need an in-depth tutorial of the game, you can use the command [/tutorial] for more information. Our president, Mr. Nosae, will guide you through the game and provide helpful tips and insights.",
           "CAS"
-        );
-        sayText(
-          "Your final command is the [/develop] command! Everytime you level up, you receive enough SUS points to implement an environmental measure in an area. For example, simply enter [/develop /road] if you want to develop the road! The six areas you can develop are the road, factory, offices, coast, landfill and gasstation.",
-          "POL"
         );
         sayText(
           "Pro Tip: Pressing the up arrow allows you to view your command history.",
           "POL"
         );
-        sayText(
-          "If you ever need an in-depth tutorial of the game, you can use the command [/tutorial] for more information. Our president, Mr. Nosae, will guide you through the game and provide helpful tips and insights.",
-          "CAS"
-        );
+
         break;
       case "/q":
         window.isQuestionAnswered = false;
@@ -409,8 +404,45 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
           checkForCorrectAns(terminalInput, window.randomQn);
         else dontUnderstand();
         break;
-      case "/develop /road":
+
+      case "/develop":
+
+        console.log("/develop")
+        const terms = ["road", "factory", "offices", "coast", "landfill", "gasstation"];
+
+        // Future update
+        // if (userInfo.roadLevel === 4) {
+        //   const indexToRemove = terms.indexOf("road");
+        
+        //   if (indexToRemove !== -1) {
+        //     terms.splice(indexToRemove, 1);
+        //   }
+        // }
+
+
+        const lastTerm = terms.pop(); // Remove and get the last term
+        const slashedModifiedTerms = terms.map(term => ` /${term}`);
+        const modifiedTerms = terms.map(term => `${term}`); // Removed "/" from here
+
+
+        
+        sayText(
+          `The six areas you can develop are ${modifiedTerms.join(", ")}, and ${lastTerm}.`,
+          "POL"
+        );
+        sayText(
+          `The six areas you can develop are${slashedModifiedTerms.join(",")}, and /${lastTerm}.`,
+          "CAS"
+        );
+      break;
+
+      case "/road":
+
+
+        console.log("/road")
         if (userInfo.favor > 0 && userInfo.roadLevel != 4) {
+          window.isDevelopActivate= false;
+          
           switch (userInfo.roadLevel) {
             case 2:
               sayText(
@@ -457,7 +489,8 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
           sayText(nofavorsText, "POL");
         }
         break;
-      case "/develop /factory":
+      
+      case "/factory":
         if (userInfo.favor > 0 && userInfo.factoryLevel != 4) {
           switch (userInfo.factoryLevel) {
             case 2:
@@ -497,7 +530,7 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
           sayText(nofavorsText, "POL");
         }
         break;
-      case "/develop /offices":
+      case "/offices":
         if (userInfo.favor > 0 && userInfo.officesLevel != 4) {
           switch (userInfo.officesLevel) {
             case 2:
@@ -541,7 +574,7 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
           sayText(nofavorsText, "POL");
         }
         break;
-      case "/develop /coast":
+      case "/coast":
         if (userInfo.favor > 0 && userInfo.coastLevel != 4) {
           //DISPLAY TEXT
           switch (userInfo.coastLevel) {
@@ -587,7 +620,7 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
           sayText(nofavorsText, "POL");
         }
         break;
-      case "/develop /landfill":
+      case "/landfill":
         if (userInfo.favor > 0 && userInfo.landfillLevel != 4) {
           //DISPLAY TEXT
           switch (userInfo.landfillLevel) {
@@ -631,7 +664,7 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
           sayText(nofavorsText, "POL");
         }
         break;
-      case "/develop /gasstation":
+      case "/gasstation":
         if (userInfo.favor > 0 && userInfo.gasstationLevel != 4) {
           switch (userInfo.gasstationLevel) {
             case 2:
@@ -772,13 +805,13 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
 
   function levelUp() {
     sayText(
-      "Hey hey, guess who got enough Sus Points, and can now develop a little special something? You! Go on, type /develop /[grid] to develop one of the grids...",
-      "POL"
+      "Hey hey, guess who got enough Sus Points, and can now develop a little special something? You! Go on, type /develop, choose a grid from the selections, then /(grid name) to develop one of the grids...",
+      "CAS"
     );
-    sayText("Enter /help if you forgot the grid.", "CAS");
+    sayText("Enter /help if you forgot the grid.", "POL");
     sayText(
-      "That's such a nice reminder, CAS! If only you were this nice at my wedding...",
-      "POL"
+      "That's such a nice reminder, POL! If only you were this nice at my wedding...",
+      "CAS"
     );
   }
 
@@ -828,7 +861,7 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
         levelUp();
         if (userInfo.favor > 1 && developmentCount < 12) {
           if (alertIntervalCount == 3) {
-            alert("Do you want to develop your city? Try /develop /[grid]");
+            alert("Do you want to develop your city? Try /develop, choosing a grid from the selection, then /(grid name)!");
             alertIntervalCount = 1;
           } else {
             alertIntervalCount += 1;

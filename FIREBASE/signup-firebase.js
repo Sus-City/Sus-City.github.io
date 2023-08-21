@@ -13,6 +13,7 @@ import {
   update,
 } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-database.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-app.js";
+import firebaseConfig from './firebase-config';
 
 //Get inputs from HTML
 const submitBtn = document.querySelector("#submit_btn");
@@ -120,9 +121,7 @@ function signUp(email, password) {
   showLoading();
   axios({
     method: "get",
-    url: decodeURIComponent(
-      "https%3A%2F%2Fstorage-api-qazw.onrender.com%2Fconfig"
-    ),
+    url: "https://storage-api-qazw.onrender.com/config",
   })
     .then(function (response) {
       const app = initializeApp(response.data);
