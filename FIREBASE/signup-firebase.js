@@ -13,7 +13,7 @@ import {
   update,
 } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-database.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-app.js";
-import firebaseConfig from './firebase-config';
+//import firebaseConfig from './firebase-config';
 
 //Get inputs from HTML
 const submitBtn = document.querySelector("#submit_btn");
