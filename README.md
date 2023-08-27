@@ -24,4 +24,4 @@ Ready to embark on this exciting journey of urban planning and sustainability? J
 
 Click on Pineapple Man!!!
 [![Join Sus-City](https://sus-city.github.io/DEVELOPMENT-PROJ-SERVE/SHOP-DISPLAY-PINEAPPLE-MAN.png)](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
-Or just- just sign-up. [Sign-Up Page](https://sus-city.github.io/SIGNUP-PAGE/signup.html).
+Or just sign-up. [Sign-Up Page](https://sus-city.github.io/SIGNUP-PAGE/signup.html).
