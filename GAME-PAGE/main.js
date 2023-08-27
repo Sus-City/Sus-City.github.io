@@ -7,7 +7,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-database.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-app.js";
 import profanities from "./profanities.js";
-import firebaseConfig from "../FIREBASE/firebase-config.js";
+import { firebaseConfig } from "../FIREBASE/signup-firebase.js";
 
 export let userInfo = JSON.parse(localStorage.getItem("user"));
 export function save(location) {
@@ -20,21 +20,21 @@ export function save(location) {
   //     "https%3A%2F%2Fstorage-api-qazw.onrender.com%2Fconfig"
   //   ),
   // }).then((response) => {
-    initializeApp(firebaseConfig);
-    set(
-      ref(getDatabase(), "users/" + localStorage.getItem("UID")),
-      userInfo
-    ).then(() => {
-      if (location == "signup") {
-        window.location.pathname = "/SIGNUP-PAGE/signup.html";
-      } else if (location == "shop") {
-        window.location.pathname = "/SHOP-PAGE/shop.html";
-        // window.location.href =
-        //   localStorage.getItem("URL") + "";
-      } else if (location == "game") {
-        window.location.pathname = "/GAME-PAGE/main.html";
-      }
-    });
+  initializeApp(firebaseConfig);
+  set(
+    ref(getDatabase(), "users/" + localStorage.getItem("UID")),
+    userInfo
+  ).then(() => {
+    if (location == "signup") {
+      window.location.pathname = "/SIGNUP-PAGE/signup.html";
+    } else if (location == "shop") {
+      window.location.pathname = "/SHOP-PAGE/shop.html";
+      // window.location.href =
+      //   localStorage.getItem("URL") + "";
+    } else if (location == "game") {
+      window.location.pathname = "/GAME-PAGE/main.html";
+    }
+  });
   // });
 }
 
@@ -406,43 +406,48 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
         break;
 
       case "/develop":
-
-        console.log("/develop")
-        const terms = ["road", "factory", "offices", "coast", "landfill", "gasstation"];
+        console.log("/develop");
+        const terms = [
+          "road",
+          "factory",
+          "offices",
+          "coast",
+          "landfill",
+          "gasstation",
+        ];
 
         // Future update
         // if (userInfo.roadLevel === 4) {
         //   const indexToRemove = terms.indexOf("road");
-        
+
         //   if (indexToRemove !== -1) {
         //     terms.splice(indexToRemove, 1);
         //   }
         // }
 
-
         const lastTerm = terms.pop(); // Remove and get the last term
-        const slashedModifiedTerms = terms.map(term => ` /${term}`);
-        const modifiedTerms = terms.map(term => `${term}`); // Removed "/" from here
+        const slashedModifiedTerms = terms.map((term) => ` /${term}`);
+        const modifiedTerms = terms.map((term) => `${term}`); // Removed "/" from here
 
-
-        
         sayText(
-          `The six areas you can develop are ${modifiedTerms.join(", ")}, and ${lastTerm}.`,
+          `The six areas you can develop are ${modifiedTerms.join(
+            ", "
+          )}, and ${lastTerm}.`,
           "POL"
         );
         sayText(
-          `The six areas you can develop are${slashedModifiedTerms.join(",")}, and /${lastTerm}.`,
+          `The six areas you can develop are${slashedModifiedTerms.join(
+            ","
+          )}, and /${lastTerm}.`,
           "CAS"
         );
-      break;
+        break;
 
       case "/road":
-
-
-        console.log("/road")
+        console.log("/road");
         if (userInfo.favor > 0 && userInfo.roadLevel != 4) {
-          window.isDevelopActivate= false;
-          
+          window.isDevelopActivate = false;
+
           switch (userInfo.roadLevel) {
             case 2:
               sayText(
@@ -489,7 +494,7 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
           sayText(nofavorsText, "POL");
         }
         break;
-      
+
       case "/factory":
         if (userInfo.favor > 0 && userInfo.factoryLevel != 4) {
           switch (userInfo.factoryLevel) {
@@ -861,7 +866,9 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
         levelUp();
         if (userInfo.favor > 1 && developmentCount < 12) {
           if (alertIntervalCount == 3) {
-            alert("Do you want to develop your city? Try /develop, choosing a grid from the selection, then /(grid name)!");
+            alert(
+              "Do you want to develop your city? Try /develop, choosing a grid from the selection, then /(grid name)!"
+            );
             alertIntervalCount = 1;
           } else {
             alertIntervalCount += 1;
