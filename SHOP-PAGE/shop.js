@@ -3,7 +3,17 @@ import { userInfo, save } from "../GAME-PAGE/main.js";
 //sound
 let buyingSound = new Audio("/SOUNDS/buyingitem.mp3");
 let bgmShop = new Audio("/SOUNDS/shopmusic.mp3");
+bgmShop.volume = 0.5;
+
 bgmShop.play();
+
+if (localStorage.getItem("mutePreference") === "false") {
+// Apply the muted state to the background music tracks
+
+bgmShop.muted = true;
+
+
+}
 let playSound = () => new Audio("/SOUNDS/menuclick.mp3").play();
 
 // Item information
