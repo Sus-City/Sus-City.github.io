@@ -954,6 +954,7 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
     bgm1.muted = true;
     bgm2.muted = true;
     bgm3.muted = true;
+    onloadMusic.muted = true;
 
     // Update the text/content of the mute button
     muteButton.classList.remove("fa-volume-high");
