@@ -22,4 +22,6 @@ Getting started with Sus-City is easy:
 
 Ready to embark on this exciting journey of urban planning and sustainability? Join our community today and be a part of creating cities that thrive while preserving our planet. 
 
-[![Join Sus-City](https://sus-city.github.io/DEVELOPMENT-PROJ-SERVE/SHOP-DISPLAY-PINEAPPLE-MAN.png)](https://sus-city.github.io/SIGNUP-PAGE/signup.html)
+Click on Pineapple Man!!!
+[![Join Sus-City](https://sus-city.github.io/DEVELOPMENT-PROJ-SERVE/SHOP-DISPLAY-PINEAPPLE-MAN.png)](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+Or just- just sign-up. [Sign-Up Page](https://sus-city.github.io/SIGNUP-PAGE/signup.html).
