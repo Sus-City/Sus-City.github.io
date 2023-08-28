@@ -29,6 +29,8 @@ export const firebaseConfig = {
 const submitBtn = document.querySelector("#submit_btn");
 const loading = document.getElementById("loading");
 const forgetBtn = document.getElementById("forget-link");
+const video = document.getElementById("video");
+const done = document.getElementById("done-btn");
 
 let email;
 
@@ -130,7 +132,6 @@ function dismissLoading() {
 
 function signUp(email, password) {
   console.log("Signing In");
-  showLoading();
   // axios({
   //   method: "get",
   //   url: "https://storage-api-qazw.onrender.com/config",
@@ -177,9 +178,22 @@ function signUp(email, password) {
                 gasstationLevel: 2,
                 shopItems: [""],
               };
-              window.open("https://youtu.be/1M4iZHjBWB4");
+              function showTutorial() {
+                video.classList.add("visible");
+                done.classList.add("visible");
+              }
               set(ref(db, "users/" + user.uid), defaultUser).then(() => {
-                navigateGame(user.uid, defaultUser);
+                if (confirm("Do you want a tutorial?")) {
+                  showTutorial();
+                  done.onclick = () => {
+                    video.classList.remove("visible");
+                    done.classList.remove("visible");
+                    showLoading();
+                    navigateGame(user.uid, defaultUser);
+                  };
+                } else {
+                  navigateGame(user.uid, defaultUser);
+                }
               });
             })
             .catch((error) => {
