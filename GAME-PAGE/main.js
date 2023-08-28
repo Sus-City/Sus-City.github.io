@@ -263,7 +263,7 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
       if (this.character == "CAS") {
         dialogue.style.color = "#44dcfa";
       } else if (this.character == "POL") {
-        dialogue.style.color = "red";
+        dialogue.style.color = "white";
       } else if (this.character == "QUESTION") {
         dialogue.style.color = "yellow";
       } else {
