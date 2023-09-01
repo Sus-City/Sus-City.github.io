@@ -344,22 +344,6 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
     saveLastAction();
   });
 
-  // shopBtn.addEventListener("click", () => {
-  //   save("shop");
-  //   console.log("shopBtn saving");
-  // });
-
-  // returnBtn.addEventListener("click", () => {
-  //   save("signup");
-  // });
-
-  // window.addEventListener("beforeunload", () => {
-  //   save("signup");
-  // }); // when the user is about to close the tab
-
-  // window.addEventListener("hashchange", () => {
-  //   save("signup");
-  // }); // when the url changes
 
   const noinnoText =
     "Nothing happened, just like the Lore dictated. Clearly, the humans have run out of innovation so they can no longer Develop this area.";
