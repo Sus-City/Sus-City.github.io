@@ -315,21 +315,51 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
 
   const returnBtn = document.getElementById("return");
 
-  shopBtn.addEventListener("click", () => {
-    save("shop");
-  });
+  let lastAction = "signup"; // Initialize lastAction with "signup"
 
+  // Function to save with the last known action
+  function saveLastAction() {
+    save(lastAction);
+  }
+
+  // Add a click event listener to the "return" button
   returnBtn.addEventListener("click", () => {
-    save("signup");
+    lastAction = "signup";
+    saveLastAction();
   });
 
-  window.addEventListener("beforeunload", () => {
-    save("signup");
-  }); // when the user is about to close the tab
+  // Add a click event listener to the "shop" button
+  shopBtn.addEventListener("click", () => {
+    lastAction = "shop";
+    saveLastAction();
+  });
 
+  // Add a beforeunload event listener
+  window.addEventListener("beforeunload", () => {
+    saveLastAction();
+  });
+
+  // Add a hashchange event listener
   window.addEventListener("hashchange", () => {
-    save("signup");
-  }); // when the url changes
+    saveLastAction();
+  });
+
+  // shopBtn.addEventListener("click", () => {
+  //   save("shop");
+  //   console.log("shopBtn saving");
+  // });
+
+  // returnBtn.addEventListener("click", () => {
+  //   save("signup");
+  // });
+
+  // window.addEventListener("beforeunload", () => {
+  //   save("signup");
+  // }); // when the user is about to close the tab
+
+  // window.addEventListener("hashchange", () => {
+  //   save("signup");
+  // }); // when the url changes
 
   const noinnoText =
     "Nothing happened, just like the Lore dictated. Clearly, the humans have run out of innovation so they can no longer Develop this area.";
@@ -939,6 +969,7 @@ if (window.location.pathname == "/GAME-PAGE/main.html") {
 
   shopBtn.addEventListener("click", () => {
     updateValues();
+    console.log("shopBtn updating values");
   });
 
   //ON LOAD
