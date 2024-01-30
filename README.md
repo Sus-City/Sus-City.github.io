@@ -1,6 +1,8 @@
-# Sus-City Urban Planning Game
+# Sus-City - Urban Planning Game
 
-Welcome to Sus-City, the urban planning game that's not only educational but also available for free! Dive into the world of urban development and sustainability while having fun. Join our community and contribute to creating better, more sustainable cities.
+Welcome to Sus-City's README.md, where urban planning meets excitement! Apologies for the initial simplicity in visuals... this format is quite - limited. 
+
+This is Sus-City, the urban planning game that's not only educational but also available for free! Dive into the world of urban development and sustainability while having fun. Join our community and contribute to creating better, more sustainable cities.
 
 ![Sus-City Banner](https://sus-city.github.io/BASE%20DEVELOPMENTS/BASE-0.png)
 ## About the Game
